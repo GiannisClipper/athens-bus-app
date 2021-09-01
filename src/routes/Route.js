@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
-// TODO:
-// import Stops from '../stops/Stops';
+import Stops from '../stops/Stops';
 
 const Route = props => {
 
@@ -26,8 +25,7 @@ const Route = props => {
 
         </TouchableOpacity>
 
-        {/* TODO:
-        { isOpen ? <Stops route={ route } /> : null } */}
+        { isOpen ? <Stops route={ route } /> : null }
         </>
     );
 }
