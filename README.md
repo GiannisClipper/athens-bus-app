@@ -22,6 +22,21 @@
 
 ../AthensBusApp/git commit -m "Initialize the project."
 
-git remote add origin https://github.com/GiannisClipper/AthensBusApp.git
+../AthensBusApp/git remote add origin https://github.com/GiannisClipper/AthensBusApp.git
 
-git push --set-upstream origin main
+../AthensBusApp/git push --set-upstream origin main
+
+
+-- Install sqlite
+
+../AthensBusApp/npm install react-native-sqlite-storage --save
+
+but if occured a problem like this:
+
+"npm WARN tsutils@3.21.0 requires a peer of typescript@>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta but none is installed. You must install peer dependencies yourself",
+
+first install typescript:
+
+../AthensBusApp/npm install typescript --save-dev
+
+../AthensBusApp/npm install react-native-sqlite-storage --save
