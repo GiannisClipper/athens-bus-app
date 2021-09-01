@@ -62,7 +62,7 @@ const useRequest = ( { uri, store, normalize, refreshTime } ) => {
 
     useEffect( () => {
         if ( refreshTime ) {  // milliseconds
-            console.log( 'request loop' )
+            // console.log( 'refresh request' )
             const intervalID = setInterval( () => setStatus( { toRequest: true } ), refreshTime );
             return () => clearInterval( intervalID );
         }

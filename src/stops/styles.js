@@ -3,6 +3,10 @@ import patterns from '../commons/stylePatterns';
 
 const styles = StyleSheet.create( {
 
+    list: {
+        ...patterns.list,
+    },
+
     row: {
         ...patterns.row,
     },

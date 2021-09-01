@@ -4,8 +4,7 @@ import styles from './styles';
 import AppNav from './AppNav';
 import Home from '../home/Home';
 import LineGroups from '../lines/LineGroups';
-// TODO:
-// import MyStops from '../stops/MyStops';
+import MyStops from '../stops/MyStops';
 
 const AppPages = () => {
 
@@ -17,15 +16,14 @@ const AppPages = () => {
 
     return (
         <>
-        <AppNav setPage={ setPage } />
+            <AppNav setPage={ setPage } />
 
-        <View style={ styles.main }>
-            { page === 'HOME' ? <Home />
-            : page === 'LINES' ? <LineGroups />
-            // TODO:
-            // : page === 'MySTOPS' ? <MyStops />
-            : null }
-        </View>
+            <View style={ styles.main }>
+                { page === 'HOME' ? <Home />
+                : page === 'LINES' ? <LineGroups />
+                : page === 'MySTOPS' ? <MyStops />
+                : null }
+            </View>
         </>
 
     );
