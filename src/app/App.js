@@ -1,14 +1,14 @@
 import React from 'react';
-import { Text } from 'react-native';
 import { StorageContextProvider } from './StorageContext';
 import { CacheContextProvider } from './CacheContext';
+import AppPages from './AppPages';
 
 const App = () => {
 
     return (
         <StorageContextProvider>
             <CacheContextProvider>
-                <Text>Under construction...</Text>
+                <AppPages />
             </CacheContextProvider>
         </StorageContextProvider>
     );
