@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { lineStyles as styles } from './styles';
-// TODO:
-// import Routes from './Routes';
+import Routes from '../routes/Routes';
 
 const Line = props => {
 
@@ -33,8 +32,8 @@ const Line = props => {
             </View>
 
         </TouchableOpacity>
-        {/* TODO:
-        { isOpen ? <Routes line={ line } /> : null } */}
+
+        { isOpen ? <Routes line={ line } /> : null }
         </>
     );
 }

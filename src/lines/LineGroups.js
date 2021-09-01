@@ -26,7 +26,8 @@ const LineGroups = () => {
     const { lines } = cache;
 
     const { status } = useRequest( {
-        uri: URI.GET_LINES,
+
+        uri: URI.LINES,
 
         normalize: data => {
             lines.groups = parseGroups( data );
@@ -57,7 +58,7 @@ const LineGroups = () => {
             </ScrollView>
 
         : status.hasError ?
-            <ErrorMessage error={ lines.error } />
+            <ErrorMessage>{ lines.error }</ErrorMessage>
 
         : null
     );
