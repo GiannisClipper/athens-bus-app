@@ -3,8 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import { StorageContext } from '../commons/StorageContext';
 import { CacheContext } from '../commons/CacheContext';
-// TODO:
-// import Arrivals from '../arrivals/Arrivals';
+import Arrivals from '../arrivals/Arrivals';
 
 const Stop = props => {
 
@@ -57,7 +56,6 @@ const Stop = props => {
 
         </TouchableOpacity>
 
-        {/* TODO:
         { isOpen 
             ? 
             <Arrivals 
@@ -68,7 +66,7 @@ const Stop = props => {
             /> 
             : 
             null 
-        } */}
+        }
         </>
     );
 }

@@ -32,6 +32,18 @@ const patterns = {
         // borderColor: 'steelblue',
     },
 
+    main: {
+        color: 'steelblue',
+        backgroundColor: 'powderblue',
+        flex: 10,
+        justifyContent: 'space-evenly',
+        alignItems: 'center',  
+    },
+
+    list: {
+        width: '100%',
+    },
+
     row: {
         flex: 1,
         flexDirection: 'row',

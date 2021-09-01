@@ -4,7 +4,7 @@ import patterns from '../commons/stylePatterns';
 const lineGroupStyles = StyleSheet.create( {
 
     list: {
-        width: '100%',
+        ...patterns.list,
     },
 
     row: {

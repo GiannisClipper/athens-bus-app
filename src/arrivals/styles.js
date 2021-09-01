@@ -7,6 +7,10 @@ const styles = StyleSheet.create( {
         ...patterns.main,
     },
 
+    list: {
+        ...patterns.list,
+    },
+
     navPanel: {
         ...patterns.navPanel,
     },
@@ -21,6 +25,25 @@ const styles = StyleSheet.create( {
     },
     navSeparator: {
         ...patterns.navSeparator,
+    },
+
+    row: {
+        ...patterns.row,
+        borderTopWidth: 1,
+        borderTopColor: 'skyblue',
+    },
+    rowIcon: {
+        ...patterns.rowIcon,
+    },
+    rowIconText: {
+        ...patterns.rowIconText,
+        fontSize: 16,
+    },
+    rowDescr: {
+        ...patterns.rowDescr,
+    },
+    rowDescrText: {
+        ...patterns.rowDescrText,
     },
 
 } );
