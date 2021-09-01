@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import styles from './styles';
 import AppNav from './AppNav';
+import Home from '../home/Home';
 // TODO:
-// import Home from '../home/Home';
 // import LineGroups from '../lines/LineGroups';
 // import MyStops from '../stops/MyStops';
 
@@ -20,11 +20,11 @@ const AppPages = () => {
         <AppNav setPage={ setPage } />
 
         <View style={ styles.main }>
-            {/* TODO:
             { page === 'HOME' ? <Home />
-            : page === 'LINES' ? <LineGroups />
-            : page === 'MySTOPS' ? <MyStops />
-            : null } */}
+            // TODO:
+            // : page === 'LINES' ? <LineGroups />
+            // : page === 'MySTOPS' ? <MyStops />
+            : null }
         </View>
         </>
 
