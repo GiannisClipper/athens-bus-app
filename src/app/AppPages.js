@@ -3,8 +3,8 @@ import { View } from 'react-native';
 import styles from './styles';
 import AppNav from './AppNav';
 import Home from '../home/Home';
+import LineGroups from '../lines/LineGroups';
 // TODO:
-// import LineGroups from '../lines/LineGroups';
 // import MyStops from '../stops/MyStops';
 
 const AppPages = () => {
@@ -21,8 +21,8 @@ const AppPages = () => {
 
         <View style={ styles.main }>
             { page === 'HOME' ? <Home />
+            : page === 'LINES' ? <LineGroups />
             // TODO:
-            // : page === 'LINES' ? <LineGroups />
             // : page === 'MySTOPS' ? <MyStops />
             : null }
         </View>

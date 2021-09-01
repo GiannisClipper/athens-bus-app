@@ -1,4 +1,5 @@
 const patterns = {
+
     navPanel: {
         flex: 1,
         flexDirection: 'row',
@@ -30,6 +31,32 @@ const patterns = {
         // borderBottomWidth: 4,
         // borderColor: 'steelblue',
     },
+
+    row: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        padding: 8,
+    },
+    rowIcon: {
+        width: 34,
+        height: 34,
+        borderRadius: 50,
+        justifyContent: 'center',
+    },
+    rowIconText: {
+        fontSize: 13,
+        textAlign: 'center',
+    },
+    rowDescr: {
+        justifyContent: 'center',
+        flex: 0.9,
+    },
+    rowDescrText: {
+        fontSize: 13,
+        color: 'steelblue',
+    }
+
 }
 
 export default patterns;

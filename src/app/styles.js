@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import patterns from './stylePatterns';
+import patterns from '../commons/stylePatterns';
 
 const styles = StyleSheet.create( {
 
@@ -26,6 +26,7 @@ const styles = StyleSheet.create( {
     navSeparator: {
         ...patterns.navSeparator,
     },
+
 } );
 
 export default styles;
