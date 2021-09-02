@@ -5,7 +5,7 @@ import useRequest from '../_abstract/useRequest';
 import { URI } from '../_commons/constants';
 import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
 import ArrivalsNav from './ArrivalsNav';
-// import Stop from './Stop';
+import { SimpleStop } from '../stops/Stop';
 import Arrival from './Arrival';
 
 const Arrivals = props => {
@@ -69,10 +69,11 @@ const Arrivals = props => {
 
             : arrivalsStatus.hasData && routesStatus.hasData ?
                 <ScrollView style={ styles.list }>
-                    {/* <Stop 
+                    <SimpleStop 
                         key={ -1 } 
                         stop={ stop } 
-                    /> */}
+                    />
+
                     { arrivals.data.map( ( arrival, i ) => (
                         <Arrival
                             key={ i }

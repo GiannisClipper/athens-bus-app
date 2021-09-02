@@ -71,4 +71,24 @@ const Stop = props => {
     );
 }
 
-export default Stop;
+const SimpleStop = props => {
+
+    const { stop } = props;
+
+    return (
+        <View style={ styles.row }>
+
+            <View style={ styles.rowIcon }>
+                <Text style={ styles.rowIconText }>&#9995;&#127996;</Text>
+            </View>
+
+            <View style={ styles.rowDescr }>
+                <Text style={ styles.rowDescrText }>{ `${ stop.StopDescr } (${ stop.StopCode })` }</Text>
+            </View>
+
+        </View>
+    );
+}
+
+export default { Stop, SimpleStop };
+export { Stop, SimpleStop };

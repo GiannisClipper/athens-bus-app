@@ -3,7 +3,7 @@ import { ScrollView } from 'react-native';
 import styles from './styles';
 import { CacheContext } from '../_commons/CacheContext';
 import { InfoMessage } from '../_commons/Messages';
-import Stop from './Stop';
+import { Stop } from './Stop';
 
 const MyStops = props => {
 

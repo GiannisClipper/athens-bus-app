@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useRequest from '../_abstract/useRequest';
 import { URI } from '../_commons/constants';
 import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
-import Stop from './Stop';
+import { Stop } from './Stop';
 
 const Stops = props => {
 
