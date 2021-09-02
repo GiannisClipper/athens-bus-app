@@ -1,5 +1,5 @@
 import React, { createContext, useRef, useEffect } from 'react';
-import useStorage from '../core/useStorage';
+import useStorage from '../_abstract/useStorage';
 
 const StorageContext = createContext();
 

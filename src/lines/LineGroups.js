@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { ScrollView } from 'react-native';
 import { lineGroupStyles as styles } from './styles';
 import { CacheContext } from '../commons/CacheContext';
-import useRequest from '../core/useRequest';
+import useRequest from '../_abstract/useRequest';
 import { URI } from '../commons/constants';
 import { WorkingIndicator, ErrorMessage } from '../commons/Messages';
 import LineGroup from './LineGroup';

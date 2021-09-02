@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import useRequest from '../core/useRequest';
+import useRequest from '../_abstract/useRequest';
 import { URI } from '../commons/constants';
 import { WorkingIndicator, ErrorMessage } from '../commons/Messages';
 import Stop from './Stop';

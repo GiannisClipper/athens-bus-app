@@ -1,5 +1,5 @@
 import React from 'react';
-import Nav from '../core/Nav';
+import Nav from '../_abstract/Nav';
 import styles from './styles';
 
 const NavPanel = Nav.Panel( { style: styles.navPanel } );

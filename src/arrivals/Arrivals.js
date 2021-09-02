@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, View, ScrollView } from 'react-native';
 import styles from './styles';
-import useRequest from '../core/useRequest';
+import useRequest from '../_abstract/useRequest';
 import { URI } from '../commons/constants';
 import { WorkingIndicator, ErrorMessage } from '../commons/Messages';
 import ArrivalsNav from './ArrivalsNav';
