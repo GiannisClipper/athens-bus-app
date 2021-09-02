@@ -11,6 +11,8 @@ const LineGroup= props => {
 
     const onPress = () => setIsOpen( ! isOpen );
 
+    const isMatch = line => line.LineID.substr( 0, 1 ) === group;
+
     useEffect( () => console.log( 'Rendering LineGroup:' + group ) );
 
     return (
@@ -18,7 +20,7 @@ const LineGroup= props => {
         <TouchableOpacity style={ styles.row } onPress={ onPress }>
 
             <View style={ styles.rowIcon }>
-                <Text style={ styles.rowIconText }>{ group } </Text>
+                <Text style={ styles.rowIconText }>{ group }</Text>
             </View>
 
             <View style={ styles.rowDescr }>
@@ -26,7 +28,7 @@ const LineGroup= props => {
 
         </TouchableOpacity>
 
-        { isOpen ? <Lines lines={ lines } group={ group } /> : null }
+        { isOpen ? <Lines lines={ lines } isMatch={ isMatch } /> : null }
         </>
     );
 }

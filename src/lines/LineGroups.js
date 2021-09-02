@@ -5,6 +5,7 @@ import { CacheContext } from '../_commons/CacheContext';
 import useRequest from '../_abstract/useRequest';
 import { URI } from '../_commons/constants';
 import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
+import LineSearch from './LineSearch';
 import LineGroup from './LineGroup';
 
 //const styles = lineGroupStyles;
@@ -48,6 +49,11 @@ const LineGroups = () => {
 
         : status.hasData ?
             <ScrollView style={ styles.list }>
+                <LineSearch
+                    key={ -1 }
+                    lines={ lines }
+                />
+
                 { lines.groups.map( ( group, i ) => (
                     <LineGroup 
                         key={ i }

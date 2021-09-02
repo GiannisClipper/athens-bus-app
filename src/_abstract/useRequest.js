@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 const request = async ( { uri, onSuccess, onError } ) => {
 
-    alert( 'Request data from API!' )
+    // alert( 'Request data from API!' )
 
     try {
         const response = await fetch( uri );

@@ -3,11 +3,11 @@ import Line from './Line';
 
 const Lines= props => {
 
-    const { lines, group } = props;
+    const { lines, isMatch } = props;
 
     return (
         <>
-        { lines.data.filter( line => line.LineID.substr( 0, 1 ) === group ).map( ( line, i ) => (
+        { lines.data.filter( line => isMatch( line ) ).map( ( line, i ) => (
             <Line 
                 key={ i }
                 line={ line }
