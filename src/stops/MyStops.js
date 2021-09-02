@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { ScrollView } from 'react-native';
 import styles from './styles';
-import { CacheContext } from '../commons/CacheContext';
-import { InfoMessage } from '../commons/Messages';
+import { CacheContext } from '../_commons/CacheContext';
+import { InfoMessage } from '../_commons/Messages';
 import Stop from './Stop';
 
 const MyStops = props => {

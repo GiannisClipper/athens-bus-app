@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
-import { StorageContext } from '../commons/StorageContext';
-import { CacheContext } from '../commons/CacheContext';
+import { StorageContext } from '../_commons/StorageContext';
+import { CacheContext } from '../_commons/CacheContext';
 import Arrivals from '../arrivals/Arrivals';
 
 const Stop = props => {

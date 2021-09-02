@@ -1,6 +1,6 @@
 import React from 'react';
-import { StorageContextProvider } from '../commons/StorageContext';
-import { CacheContextProvider } from '../commons/CacheContext';
+import { StorageContextProvider } from '../_commons/StorageContext';
+import { CacheContextProvider } from '../_commons/CacheContext';
 import AppPages from './AppPages';
 
 const App = () => {

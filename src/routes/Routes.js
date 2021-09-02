@@ -1,7 +1,7 @@
 import React from 'react';
 import useRequest from '../_abstract/useRequest';
-import { URI } from '../commons/constants';
-import { WorkingIndicator, ErrorMessage } from '../commons/Messages';
+import { URI } from '../_commons/constants';
+import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
 import Route from './Route';
 
 const Routes = props => {

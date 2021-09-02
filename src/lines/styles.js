@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import patterns from '../commons/stylePatterns';
+import patterns from '../_commons/stylePatterns';
 
 const lineGroupStyles = StyleSheet.create( {
 

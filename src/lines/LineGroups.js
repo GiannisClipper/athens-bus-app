@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { ScrollView } from 'react-native';
 import { lineGroupStyles as styles } from './styles';
-import { CacheContext } from '../commons/CacheContext';
+import { CacheContext } from '../_commons/CacheContext';
 import useRequest from '../_abstract/useRequest';
-import { URI } from '../commons/constants';
-import { WorkingIndicator, ErrorMessage } from '../commons/Messages';
+import { URI } from '../_commons/constants';
+import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
 import LineGroup from './LineGroup';
 
 //const styles = lineGroupStyles;
