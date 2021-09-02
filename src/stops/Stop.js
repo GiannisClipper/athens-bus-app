@@ -20,12 +20,13 @@ const Stop = props => {
     const [ isOpen, setIsOpen ] = useState( false );
 
     const onPress = () => {
-        const newIsOpen = ! isOpen;
-        if ( newIsOpen ) {
-            // clear cache to always request the current values
-            stop.arrivals = {};
+        if ( ! isOpen && stop.routes.error ) { 
+            stop.routes = {};  // clear cache in case of error to request again
         }
-        setIsOpen( newIsOpen );
+        if ( ! isOpen ) { 
+            stop.arrivals = {};  // clear cache due to always request up to date values
+        }
+        setIsOpen( ! isOpen );
     }
 
     const closeArrivals= () => {

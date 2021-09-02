@@ -9,7 +9,12 @@ const Line = props => {
 
     const [ isOpen, setIsOpen ] = useState( false );
 
-    const onPress = () => setIsOpen( ! isOpen );
+    const onPress = () => {
+        if ( ! isOpen && line.routes.error ) { 
+            line.routes = {};  // clear cache in case of error to request again
+        }
+        setIsOpen( ! isOpen );
+    }
 
     // ID's of yellow lines (trolley) starting with a number and have 1 or 2 chars length
 

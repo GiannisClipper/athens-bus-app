@@ -13,7 +13,18 @@ const Arrivals = props => {
     const { stop, closeArrivals, isMyStop, toggleMyStop } = props;
     const { arrivals, routes } = stop;
 
-    const [ isVisible, setIsVisible ] = useState( true );
+    const routesRequest = useRequest( {
+
+        uri: URI.ROUTES_OF_STOP + stop.StopCode,
+
+        normalize: data => data.map( row => ( {
+            RouteCode: row.RouteCode,
+            LineID: row.LineID,
+            RouteDescr: row.RouteDescr,
+        } ) ),
+
+        store: routes,
+    } );
 
     const arrivalsRequest = useRequest( {
 
@@ -38,24 +49,11 @@ const Arrivals = props => {
         refreshTime: 20000  // milliseconds
     } );
 
-    const routesRequest = useRequest( {
-
-        uri: URI.ROUTES_OF_STOP + stop.StopCode,
-
-        normalize: data => data.map( row => ( {
-            RouteCode: row.RouteCode,
-            LineID: row.LineID,
-            RouteDescr: row.RouteDescr,
-        } ) ),
-
-        store: routes,
-    } );
-
-    const arrivalsStatus = arrivalsRequest.status;
     const routesStatus = routesRequest.status;
+    const arrivalsStatus = arrivalsRequest.status;
 
     return (
-        <Modal animationType={ 'fade' } isVisible={ isVisible }>
+        <Modal animationType={ 'fade' } isVisible={ true }>
             <ArrivalsNav 
                 closeArrivals={ closeArrivals }
                 isMyStop={ isMyStop }
@@ -82,6 +80,7 @@ const Arrivals = props => {
                         />
                     ) ) } 
                 </ScrollView>
+
             : arrivalsStatus.hasError || routesStatus.hasError ?
                 <ErrorMessage>{ arrivals.error + ' ' + routes.error }</ErrorMessage>
 

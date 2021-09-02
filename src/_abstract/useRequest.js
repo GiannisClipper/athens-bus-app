@@ -29,9 +29,11 @@ const useRequest = ( { uri, store, normalize, refreshTime } ) => {
 
     const [ status, setStatus ] = useState( {
         toRequest: Object.keys( store ).length === 0,
-        hasData: store.data,
-        hasError: store.error,
+        hasData: store.data ? true : false,
+        hasError: store.error ? true : false,
     } );
+
+    // console.log( 'status, store', status, store )
 
     useEffect( async () => {
 

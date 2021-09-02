@@ -9,7 +9,12 @@ const Route = props => {
 
     const [ isOpen, setIsOpen ] = useState( false );
 
-    const onPress = () => setIsOpen( ! isOpen );
+    const onPress = () => {
+        if ( ! isOpen && route.stops.error ) { 
+            route.stops = {};  // clear cache in case of error to request again
+        }
+        setIsOpen( ! isOpen );
+    }
 
     return (
         <>
