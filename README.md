@@ -40,3 +40,11 @@ first install typescript:
 ../AthensBusApp/npm install typescript --save-dev
 
 ../AthensBusApp/npm install react-native-sqlite-storage --save
+
+
+-- Change app's icon (for android)
+
+Create the icon here: http://romannurik.github.io/AndroidAssetStudio/icons-launcher.html#foreground.type=image&foreground.space.trim=1&foreground.space.pad=0.25&foreColor=rgba%2896%2C%20125%2C%20139%2C%200%29&backColor=rgb%28255%2C%20255%2C%20255%29&crop=0&backgroundShape=square&effects=none&name=ic_launcher
+
+Download the created icon as a zip file and copy the files from the minmap-* directories to ../AthensBusApp/android/app/src/main/res/minmap-* directories
+
