@@ -2,18 +2,31 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create( {
 
-    homeTitleText: {
+    box: {
+        backgroundColor: 'skyblue',
+        padding: 20,
+        // alignItems: 'center',
+    },
+    nameBox: {
+        alignSelf: 'center',
+    },
+    bigText: {
         color: 'steelblue',
         fontSize: 20,
-        textAlign: 'center',
+        // textAlign: 'center',
     },
-    homeSubTitleText: {
+    smallText: {
         color: 'steelblue',
         fontSize: 12,
         textAlign: 'center',
     },
-    homeSeparator: {
-        borderWidth: 1,
+    verySmallText: {
+        color: 'steelblue',
+        fontSize: 8,
+        // textAlign: 'center',
+    },
+    separator: {
+        borderTopWidth: 1,
         borderColor: 'steelblue',
         margin: 20,
     },

@@ -1,18 +1,28 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { StyledView, StyledText } from '../_abstract/Styled';
 import styles from './styles';
+
+const Box = StyledView( { style: styles.box } );
+const NameBox = StyledView( { style: styles.nameBox } );
+const BigText = StyledText( { style: styles.bigText } );
+const SmallText = StyledText( { style: styles.smallText } );
+const VerySmallText = StyledText( { style: styles.verySmallText } );
+const Separator = StyledView( { style: styles.separator } );
 
 const Home = () => {
 
     return (
-        <View>
-            <Text style={ styles.homeTitleText }>ATHENS BUS</Text>
-            <View style={ styles.homeSeparator }/>
-            <Text style={ styles.homeSubTitleText }>Application developed by GiannisClipper</Text>
-            <Text style={ styles.homeSubTitleText }>for practicing and demonstration purposes,</Text>
-            <Text style={ styles.homeSubTitleText }>powered by OASA telematics API</Text>
-            <Text style={ styles.homeSubTitleText }></Text>
-        </View>
+        <Box>
+            <NameBox>
+                <BigText>ATHENS BUS</BigText>
+                <VerySmallText>1.0.0 beta</VerySmallText>
+            </NameBox>
+            <Separator />
+            <SmallText>Application developed by GiannisClipper</SmallText>
+            <SmallText>for practicing and demonstration purposes,</SmallText>
+            <SmallText>powered by OASA telematics API</SmallText>
+            <SmallText></SmallText>
+        </Box>
     );
 }
 
