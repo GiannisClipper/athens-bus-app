@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ScrollView } from 'react-native';
+import { StyledScrollView } from '../_abstract/Styled';
 import { lineGroupStyles as styles } from './styles';
 import { CacheContext } from '../_commons/CacheContext';
 import useRequest from '../_abstract/useRequest';
@@ -8,7 +8,7 @@ import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
 import LineSearch from './LineSearch';
 import LineGroup from './LineGroup';
 
-//const styles = lineGroupStyles;
+const List = StyledScrollView( { style: styles.list } );
 
 const parseGroups = data => {
     const groups = {};
@@ -48,7 +48,7 @@ const LineGroups = () => {
             <WorkingIndicator />
 
         : status.hasData ?
-            <ScrollView style={ styles.list }>
+            <List style={ styles.list }>
                 <LineSearch
                     key={ -1 }
                     lines={ lines }
@@ -61,7 +61,7 @@ const LineGroups = () => {
                         group={ group }
                     />
                 ) ) }
-            </ScrollView>
+            </List>
 
         : status.hasError ?
             <ErrorMessage>{ lines.error }</ErrorMessage>

@@ -3,12 +3,8 @@ import patterns from '../_commons/stylePatterns';
 
 const styles = StyleSheet.create( {
 
-    main: {
-        ...patterns.main,
-    },
-
-    navPanel: {
-        ...patterns.navPanel,
+    nav: {
+        ...patterns.nav,
     },
     navItem: {
         ...patterns.navItem,
@@ -21,6 +17,10 @@ const styles = StyleSheet.create( {
     },
     navSeparator: {
         ...patterns.navSeparator,
+    },
+
+    main: {
+        ...patterns.main,
     },
 
 } );

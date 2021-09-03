@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { ScrollView } from 'react-native';
+import { StyledScrollView } from '../_abstract/Styled';
 import styles from './styles';
 import { CacheContext } from '../_commons/CacheContext';
 import { InfoMessage } from '../_commons/Messages';
 import { Stop } from './Stop';
+
+const List = StyledScrollView( { style: styles.list } );
 
 const MyStops = props => {
 
@@ -21,7 +23,7 @@ const MyStops = props => {
             <InfoMessage>{ myStops.info }</InfoMessage>
 
         : myStops.data ?
-            <ScrollView style={ styles.list }>
+            <List style={ styles.list }>
             { myStops.data.map( ( stop, i ) => (
                 <Stop 
                     key={ i }
@@ -29,7 +31,7 @@ const MyStops = props => {
                     setRerender={ setRerender }
                 />
             ) ) } 
-            </ScrollView>
+            </List>
 
         : null
     );

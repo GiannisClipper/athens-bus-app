@@ -2,17 +2,8 @@ import { StyleSheet } from 'react-native';
 import patterns from '../_commons/stylePatterns';
 
 const styles = StyleSheet.create( {
-
-    main: {
-        ...patterns.main,
-    },
-
-    list: {
-        ...patterns.list,
-    },
-
-    navPanel: {
-        ...patterns.navPanel,
+    nav: {
+        ...patterns.nav,
     },
     navItem: {
         ...patterns.navItem,
@@ -25,6 +16,14 @@ const styles = StyleSheet.create( {
     },
     navSeparator: {
         ...patterns.navSeparator,
+    },
+
+    main: {
+        ...patterns.main,
+    },
+
+    list: {
+        ...patterns.list,
     },
 
     row: {

@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StyledView, StyledTouchableOpacity, StyledText, StyledTextInput } from '../_abstract/Styled';
 import { lineGroupStyles as styles } from './styles';
 import Lines from './Lines';
+
+const Row = StyledTouchableOpacity( { style: styles.row } );
+const RowIcon = StyledView( { style: styles.rowIcon } );
+const RowIconText = StyledText( { style: styles.rowIconText } );
+const RowDescr = StyledView( { style: styles.rowDescr } );
+const RowDescrTextInput = StyledTextInput( { style: styles.rowDescrText } );
 
 const LineSearch= props => {
 
@@ -19,23 +25,22 @@ const LineSearch= props => {
 
     return (
         <>
-        <TouchableOpacity style={ styles.row } onPress={ onPress }>
+        <Row onPress={ onPress }>
 
-            <View style={ styles.rowIcon }>
-                <Text style={ styles.rowIconText }> ? </Text>
-            </View>
+            <RowIcon>
+                <RowIconText> ? </RowIconText>
+            </RowIcon>
 
-            <View style={ styles.rowDescr }>
-                <TextInput  
-                    style={ styles.rowDescrText }
-                    placeholder="to search..."  
+            <RowDescr>
+                <RowDescrTextInput
+                    placeholder="to search..."
                     onFocus ={ () => setIsOpen( true ) }
                     onChangeText={ setSearchText }
                     onFocus ={ () => setIsOpen( true ) }
                 />  
-            </View>
+            </RowDescr>
 
-        </TouchableOpacity>
+        </Row>
 
         { isOpen ? <Lines lines={ lines } isMatch={ isMatch } /> : null }
         </>

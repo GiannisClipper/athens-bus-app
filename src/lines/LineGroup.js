@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { StyledView, StyledTouchableOpacity, StyledText } from '../_abstract/Styled';
 import { lineGroupStyles as styles } from './styles';
 import Lines from './Lines';
+
+const Row = StyledTouchableOpacity( { style: styles.row } );
+const RowIcon = StyledView( { style: styles.rowIcon } );
+const RowIconText = StyledText( { style: styles.rowIconText } );
+const RowDescr = StyledView( { style: styles.rowDescr } );
 
 const LineGroup= props => {
 
@@ -17,16 +22,15 @@ const LineGroup= props => {
 
     return (
         <>
-        <TouchableOpacity style={ styles.row } onPress={ onPress }>
+        <Row onPress={ onPress }>
 
-            <View style={ styles.rowIcon }>
-                <Text style={ styles.rowIconText }>{ group }</Text>
-            </View>
+            <RowIcon>
+                <RowIconText>{ group }</RowIconText>
+            </RowIcon>
 
-            <View style={ styles.rowDescr }>
-            </View>
+            <RowDescr />
 
-        </TouchableOpacity>
+        </Row>
 
         { isOpen ? <Lines lines={ lines } isMatch={ isMatch } /> : null }
         </>

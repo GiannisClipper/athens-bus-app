@@ -1,6 +1,6 @@
 const patterns = {
 
-    navPanel: {
+    nav: {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
@@ -65,9 +65,10 @@ const patterns = {
         flex: 0.9,
     },
     rowDescrText: {
+        padding: 0,
         fontSize: 13,
         color: 'steelblue',
-    }
+    },
 
 }
 

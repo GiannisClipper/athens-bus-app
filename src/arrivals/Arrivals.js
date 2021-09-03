@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { Modal, View, ScrollView } from 'react-native';
+import React from 'react';
+import { Modal } from 'react-native';
 import styles from './styles';
+import { StyledView, StyledScrollView } from '../_abstract/Styled';
+import ArrivalsNav from './ArrivalsNav';
+import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
+import { SimpleStop as ArrivalsStop } from '../stops/Stop';
+import Arrival from './Arrival';
 import useRequest from '../_abstract/useRequest';
 import { URI } from '../_commons/constants';
-import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
-import ArrivalsNav from './ArrivalsNav';
-import { SimpleStop } from '../stops/Stop';
-import Arrival from './Arrival';
+
+const Main = StyledView( { style: styles.main } );
+const List = StyledScrollView( { style: styles.list } );
 
 const Arrivals = props => {
 
@@ -60,14 +64,14 @@ const Arrivals = props => {
                 toggleMyStop={ toggleMyStop } 
             />
 
-            <View style={ styles.main }>
+            <Main>
  
             { arrivalsStatus.isRequesting || routesStatus.isRequesting ?
                 <WorkingIndicator />
 
             : arrivalsStatus.hasData && routesStatus.hasData ?
-                <ScrollView style={ styles.list }>
-                    <SimpleStop 
+                <List style={ styles.list }>
+                    <ArrivalsStop 
                         key={ -1 } 
                         stop={ stop } 
                     />
@@ -79,14 +83,14 @@ const Arrivals = props => {
                             routes={ routes }
                         />
                     ) ) } 
-                </ScrollView>
+                </List>
 
             : arrivalsStatus.hasError || routesStatus.hasError ?
                 <ErrorMessage>{ arrivals.error + ' ' + routes.error }</ErrorMessage>
 
             : null }
 
-            </View>
+            </Main>
         </Modal>
     );
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { StyledView, StyledTouchableOpacity, StyledText } from '../_abstract/Styled';
 import styles from './styles';
 
-const NavPanel = StyledView( { style: styles.navPanel } );
+const Nav = StyledView( { style: styles.nav } );
 const NavItem = StyledTouchableOpacity( { style: styles.navItem } );
 const NavItemIcon = StyledText( { style: styles.navItemIcon } );
 const NavItemText = StyledText( { style: styles.navItemText } );
@@ -13,7 +13,7 @@ const AppNav = props => {
     const { setPage } = props;
 
     return (
-        <NavPanel>
+        <Nav>
 
             <NavItem onPress={ () => setPage( 'HOME' ) }>
                 <NavItemIcon>&#8962;</NavItemIcon> 
@@ -35,7 +35,7 @@ const AppNav = props => {
                 <NavItemText>MySTOPS</NavItemText>
             </NavItem>
 
-        </NavPanel>
+        </Nav>
     );
 }
 

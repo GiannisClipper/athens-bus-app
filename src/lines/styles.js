@@ -23,6 +23,9 @@ const lineGroupStyles = StyleSheet.create( {
     rowDescr: {
         ...patterns.rowDescr,
     },
+    rowDescrText: {
+        ...patterns.rowDescrText,
+    },
 
 } );
 

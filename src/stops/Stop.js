@@ -1,9 +1,15 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { StyledView, StyledTouchableOpacity, StyledText } from '../_abstract/Styled';
 import styles from './styles';
 import { StorageContext } from '../_commons/StorageContext';
 import { CacheContext } from '../_commons/CacheContext';
 import Arrivals from '../arrivals/Arrivals';
+
+const Row = StyledTouchableOpacity( { style: styles.row } );
+const RowIcon = StyledView( { style: styles.rowIcon } );
+const RowIconText = StyledText( { style: styles.rowIconText } );
+const RowDescr = StyledView( { style: styles.rowDescr } );
+const RowDescrText = StyledText( { style: styles.rowDescrText } );
 
 const Stop = props => {
 
@@ -45,17 +51,17 @@ const Stop = props => {
 
     return (
         <>
-        <TouchableOpacity style={ styles.row } onPress={ onPress }>
+        <Row onPress={ onPress }>
 
-            <View style={ styles.rowIcon }>
-                <Text style={ styles.rowIconText }>&#9995;&#127996;</Text>
-            </View>
+            <RowIcon>
+                <RowIconText>&#9995;&#127996;</RowIconText>
+            </RowIcon>
 
-            <View style={ styles.rowDescr }>
-                <Text style={ styles.rowDescrText }>{ `${ stop.StopDescr } (${ stop.StopCode })` }</Text>
-            </View>
+            <RowDescr>
+                <RowDescrText>{ `${ stop.StopDescr } (${ stop.StopCode })` }</RowDescrText>
+            </RowDescr>
 
-        </TouchableOpacity>
+        </Row>
 
         { isOpen 
             ? 
@@ -77,17 +83,17 @@ const SimpleStop = props => {
     const { stop } = props;
 
     return (
-        <View style={ styles.row }>
+        <Row>
 
-            <View style={ styles.rowIcon }>
-                <Text style={ styles.rowIconText }>&#9995;&#127996;</Text>
-            </View>
+            <RowIcon>
+                <RowIconText>&#9995;&#127996;</RowIconText>
+            </RowIcon>
 
-            <View style={ styles.rowDescr }>
-                <Text style={ styles.rowDescrText }>{ `${ stop.StopDescr } (${ stop.StopCode })` }</Text>
-            </View>
+            <RowDescr>
+                <RowDescrText>{ `${ stop.StopDescr } (${ stop.StopCode })` }</RowDescrText>
+            </RowDescr>
 
-        </View>
+        </Row>
     );
 }
 

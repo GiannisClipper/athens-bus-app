@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { StyledView, StyledTouchableOpacity, StyledText } from '../_abstract/Styled';
 import { lineStyles as styles } from './styles';
 import Routes from '../routes/Routes';
+
+const Row = StyledTouchableOpacity( { style: styles.row } );
+const RowDescr = StyledView( { style: styles.rowDescr } );
+const RowDescrText = StyledText( { style: styles.rowDescrText } );
 
 const Line = props => {
 
@@ -24,19 +28,22 @@ const Line = props => {
 
     const Yellow_Blue = isYellow( line.LineID ) ? 'Yellow' : 'Blue';
 
+    const RowIcon = StyledView( { style: styles[ `rowIcon${ Yellow_Blue }` ] } );
+    const RowIconText = StyledText( { style: styles[ `rowIconText${ Yellow_Blue }` ] } );
+
     return (
         <>
-        <TouchableOpacity style={ styles.row } onPress={ onPress }>
+        <Row onPress={ onPress }>
 
-            <View style={ styles[ `rowIcon${ Yellow_Blue }` ] }>
-                <Text style={ styles[ `rowIconText${ Yellow_Blue }` ] }>{ line.LineID }</Text>
-            </View>
+            <RowIcon>
+                <RowIconText>{ line.LineID }</RowIconText>
+            </RowIcon>
 
-            <View style={ styles.rowDescr }>
-                <Text style={ styles.rowDescrText }>{ line.LineDescr }</Text>
-            </View>
+            <RowDescr>
+                <RowDescrText>{ line.LineDescr }</RowDescrText>
+            </RowDescr>
 
-        </TouchableOpacity>
+        </Row>
 
         { isOpen ? <Routes line={ line } /> : null }
         </>
