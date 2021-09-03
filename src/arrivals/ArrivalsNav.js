@@ -1,12 +1,12 @@
 import React from 'react';
-import Nav from '../_abstract/Nav';
+import { StyledView, StyledTouchableOpacity, StyledText } from '../_abstract/Styled';
 import styles from './styles';
 
-const NavPanel = Nav.Panel( { style: styles.navPanel } );
-const NavItem = Nav.Item( { style: styles.navItem } );
-const NavItemIcon = Nav.ItemIcon( { style: styles.navItemIcon } );
-const NavItemText = Nav.ItemText( { style: styles.navItemText } );
-const NavSeparator = Nav.Separator( { style: styles.NavSeparator } );
+const NavPanel = StyledView( { style: styles.navPanel } );
+const NavItem = StyledTouchableOpacity( { style: styles.navItem } );
+const NavItemIcon = StyledText( { style: styles.navItemIcon } );
+const NavItemText = StyledText( { style: styles.navItemText } );
+const NavSeparator = StyledView( { style: styles.NavSeparator } );
 
 const ArrivalsNav = props => {
 
