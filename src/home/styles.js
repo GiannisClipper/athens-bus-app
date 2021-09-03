@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create( {
+const pattern = {
 
     box: {
-        backgroundColor: 'skyblue',
-        padding: 20,
-        // alignItems: 'center',
+        borderWidth: 1,
+        borderColor: 'steelblue',
+        // backgroundColor: 'skyblue',
     },
     nameBox: {
         alignSelf: 'center',
@@ -13,7 +13,6 @@ const styles = StyleSheet.create( {
     bigText: {
         color: 'steelblue',
         fontSize: 20,
-        // textAlign: 'center',
     },
     smallText: {
         color: 'steelblue',
@@ -23,14 +22,34 @@ const styles = StyleSheet.create( {
     verySmallText: {
         color: 'steelblue',
         fontSize: 8,
-        // textAlign: 'center',
     },
     separator: {
         borderTopWidth: 1,
         borderColor: 'steelblue',
-        margin: 20,
+        margin: 25,
     },
 
-} );
+};
 
-export default styles;
+const portrait = { 
+    ...pattern,
+    box: {
+        ...pattern.box,
+        paddingVertical: 100,
+        paddingHorizontal: 20,
+    },
+};
+
+const landscape = { 
+    ...pattern,
+    box: {
+        ...pattern.box,
+        paddingVertical: 30,
+        paddingHorizontal: 80,
+    },
+};
+
+const portraitStyles = StyleSheet.create( portrait );
+const landscapeStyles = StyleSheet.create( landscape );
+
+export { portraitStyles, landscapeStyles };
