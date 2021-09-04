@@ -21,7 +21,7 @@ const pattern = {
     },
     verySmallText: {
         color: 'steelblue',
-        fontSize: 8,
+        fontSize: 9,
     },
     separator: {
         borderTopWidth: 1,
@@ -44,8 +44,8 @@ const landscape = {
     ...pattern,
     box: {
         ...pattern.box,
-        paddingVertical: 30,
-        paddingHorizontal: 80,
+        paddingVertical: 20,
+        paddingHorizontal: 100,
     },
 };
 
