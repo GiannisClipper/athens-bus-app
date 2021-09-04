@@ -51,6 +51,8 @@ Download the created icon as a zip file and copy the files from the minmap-* dir
 
 -- Build a Release APK
 
+First could set the version in ../AthensBusApp/android/app/build.gradle (ex. versionCode 1, versionName "1.0.0")
+
 ../AthensBusApp/android>./gradlew assembleRelease
 
 Generated APK: ../AthensBusApp/android/app/build/outputs/apk/app-release.apk
