@@ -3,8 +3,8 @@ import { StyleSheet } from 'react-native';
 const pattern = {
 
     box: {
-        borderWidth: 1,
-        borderColor: 'steelblue',
+        borderWidth: 2,
+        borderColor: 'skyblue',
         // backgroundColor: 'skyblue',
     },
     nameBox: {

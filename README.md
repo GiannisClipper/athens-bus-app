@@ -48,3 +48,9 @@ Create the icon here: http://romannurik.github.io/AndroidAssetStudio/icons-launc
 
 Download the created icon as a zip file and copy the files from the minmap-* directories to ../AthensBusApp/android/app/src/main/res/minmap-* directories
 
+
+-- Build a Release APK
+
+../AthensBusApp/android>./gradlew assembleRelease
+
+Generated APK: ../AthensBusApp/android/app/build/outputs/apk/app-release.apk
