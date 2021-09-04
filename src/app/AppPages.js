@@ -9,9 +9,9 @@ import MyStops from '../stops/MyStops';
 
 const AppPages = () => {
 
-    const [ state, setState ] = useState( { page: 'HOME' } );
-    const { page } = state;
-    const setPage = page => setState( { page } );
+    const [ state, setState ] = useState( { isMounted: false, page: 'HOME' } );
+    const { isMounted, page } = state;
+    const setPage = page => setState( { isMounted: state.page === page, page } );
 
     const { cache } = useContext( CacheContext );
     const { lines } = cache;
@@ -20,6 +20,12 @@ const AppPages = () => {
         Object.keys( lines ).forEach( key => delete lines[ key ] ); // clear cache in case of error to request again
     }
 
+    useEffect( () => {
+        if ( isMounted ) {
+            setState( { ...state, isMounted: false } );
+        }
+    }, [ state ] );
+
     // useEffect( () => console.log( 'Rendering AppPages.' ) );
 
     return (
@@ -27,7 +33,8 @@ const AppPages = () => {
             <AppNav setPage={ setPage } />
 
             <View style={ styles.main }>
-                { page === 'HOME' ? <Home />
+                { isMounted ? null // to unmount firstly a page when is already mounted
+                : page === 'HOME' ? <Home />
                 : page === 'LINES' ? <LineGroups />
                 : page === 'MySTOPS' ? <MyStops />
                 : null }
