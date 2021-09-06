@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Athens Bus App.</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class='list'>
+        <div class='row'>
+            <div class='text language'>
+                [ <a href="./demo_en.html"> in english </a> ]
+            </div>
+        </div>
+
+        <div class='row'>
+            <div class='text header'>
+                <img src="./icon.png" width='40' />
+                Athens Bus App. (1.0.0-beta)
+            </div>
+        </div>
+
+        <div class='row'>
+            <div class='item'>
+                <img src="./screenshot_1.png" width="384px" />
+            </div>
+            <div class='item'>
+                <div class='text'>
+                    Αντικείμενο αυτής της mobile εφαρμογής είναι η πληροφόρηση για τις αναμενόμενες αφίξεις στις στάσεις των λεωφορείων και των τρόλεϊ της Αθήνας.
+                </div>
+                <div class='text'>
+                    Η ανάπτυξη της εφαρμογής έγινε από τον GiannisClipper, ο κώδικας είναι γραμμένος σε React Native και τα δεδομένα προέρχονται από το OASA telematics API.
+                </div>
+                <div class='text'>
+                    Πρόκειται για μια ανεξάρτητη πρωτοβουλία, που δεν σχετίζεται με τον Oργανισμό Aστικών Συγκοινωνιών Αθηνών, με σκοπό την εξάσκηση και την παρουσίαση προγραμματιστικών ικανοτήτων.
+                </div>
+            </div>
+        </div>
+
+        <div class='row'>
+            <div class='item'>
+                <img src="./screenshot_2.png" width="384px" />
+            </div>
+            <div class='item'>
+                <div class='text'>
+                    Στο κυρίως μενού της εφαρμογής υπάρχουν τρεις επιλογές:
+                </div>
+                <div class='text'>
+                    Η επιλογή 'HOME' εμφανίζει την αρχική οθόνη με ένα μικρό εισαγωγικό κείμενο. 
+                </div>
+                <div class='text'>
+                    Η επιλογή 'LINES' εμφανίζει λίστες με τις λεωφορειακές γραμμές, τις δραδρομές ανά γραμμή, τις στάσεις ανά διαδρομή και τις αναμενόμενες αφίξεις ανά στάση.
+                </div>
+                <div class='text'>
+                     Η επιλογή 'MySTOPS' εμφανίζει λίστες με τις αγαπημένες στάσεις που έχει ορίσει ο χρήστης και τις αναμενόμενες αφίξεις για κάθε μία από αυτές τις στάσεις.
+                </div>
+            </div>
+        </div>
+
+        <div class='row'>
+            <div class='item'>
+                <img src="./screenshot_3.png" width="384px" />
+            </div>
+            <div class='item'>
+                <div class='text'>
+                    Η επιλογή 'LINES' εμφανίζει τις λεωφορειακές γραμμές ομαδοποιημένες σύμφωνα με το αρχικό ψηφίο του αριθμού τους ή σύμφωνα με την αναζήτηση που μπορεί να κάνει ο χρήστης πληκτρολογώντας μέρος του αριθμού ή της περιγραφής τους.
+                </div>
+                <div class='text'>
+                    Για κάθε γραμμή εμφανίζεται ο αριθμός της και η περιγραφή της, το μπλε χρώμα στον αριθμό δηλώνει τις γραμμές των λεωφορείων ενώ το κίτρινο τις γραμμές των τρόλεϊ.
+                </div>
+            </div>
+        </div>
+
+        <div class='row'>
+            <div class='item'>
+                <img src="./screenshot_4.png" width="384px" />
+            </div>
+            <div class='item'>
+                <div class='text'>
+                    Στη συνέχεια με βάση τις επιλογές του χρήστη, μπορούν να εμφανιστούν οι διαδρομές για κάθε γραμμή, οι στάσεις για κάθε διαδρομή και οι αναμενόμενες αφίξεις για κάθε στάση.
+                </div>
+            </div>
+        </div>
+
+        <div class='row'>
+            <div class='item'>
+                <img src="./screenshot_5.png" width="384px" />
+            </div>
+            <div class='item'>
+                <div class='text'>
+                    Στη λίστα με τις αναμενόμενες αφίξεις για κάποια στάση υπάρχει ένα ειδικότερο μενού.
+                </div>
+                <div class='text'>
+                    Η επιλογή 'CLOSE' οδηγεί στην προηγούμενη οθόνη ενώ η επιλογή 'MySTOP' χρησιμοποιείται για τον χαρακτηρισμό ή τον αποχαρακτηρισμό μιας στάσης ως αγαπημένης.
+                </div>
+                <div class='text'>
+                    Επιπλέον σε αυτή τη λίστα, οι αφίξεις και οι χρόνοι αναμονής ανανεώνονται αυτόματα κάθε 20 δευτερόλεπτα.
+                </div>
+            </div>
+        </div>
+
+        <div class='row'>
+            <div class='item'>
+                <img src="./screenshot_6.png" width="384px" />
+            </div>
+            <div class='item'>
+                <div class='text'>
+                    Η επιλογή 'MySTOPS' προσφέρει άμεση πρόσβαση στις στάσεις που έχουν επιλεγεί ως αγαπημένες από τον χρήστη καθώς και στις λίστες με τις αναμενόμενες αφίξεις για κάθε μία από αυτές.
+                </div>
+            </div>
+        </div>
+
+        <div class='row'>
+            <div class='text footer'>
+                ~ Ευχαριστώ για το χρόνο σας, Αθήνα 6 Σεπτ. 2021, GiannisClipper ~
+            </div>
+        </div>
+    </div>
+</body>
+</html>
