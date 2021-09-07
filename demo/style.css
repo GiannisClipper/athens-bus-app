@@ -1,16 +1,8 @@
-a:link {
+a {
     text-decoration: none;
-}
-a:visited {
-    text-decoration: none;
+    color: inherit; 
 }
 
-a:hover {
-    text-decoration: underline;
-}
-a:active {
-    text-decoration: underline;
-}
 body{
     width: 100%;
     background: #FFF9CE;
@@ -18,8 +10,10 @@ body{
     flex-direction: row;
     justify-content: center;
 }
+
 .list {
 }
+
 .row {
     margin: 16px;
     display: flex;
@@ -27,10 +21,12 @@ body{
     justify-content: space-evenly;
     flex-wrap: wrap-reverse;
 }
+
 .item {
     margin: 8px;
     width: 384px;
 }
+
 .text {
     padding: 0px 2px 16px 2px;
     font-family: 'Verdana', sans-serif;
@@ -40,12 +36,21 @@ body{
     line-height: 1.5;
     text-indent: 16px;
 }
+
+.text.download {
+    /* width: calc( 384px * 2 ); */
+    font-size: 11px;
+    text-align: left;
+    padding-bottom: 0;
+}
+
 .text.language {
-    width: calc( 384px * 2 );
+    /* width: calc( 384px * 2 ); */
     font-size: 11px;
     text-align: right;
     padding-bottom: 0;
 }
+
 .text.header {
     width: 384px;
     border: 2px dashed skyblue;
@@ -57,9 +62,11 @@ body{
     line-height: 1;
     margin-bottom: 8px;
 }
+
 .text.header > img {
     vertical-align: sub;
 }
+
 .text.footer {
     font-size: 11px;
     text-indent: 0px;
