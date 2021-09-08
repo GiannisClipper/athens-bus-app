@@ -6,8 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
-- Syntax of the short introductory note.
-- Rename 'Close' choice in arrivals page menu to 'Back'.
+- The syntax of the short introductory note.
+- Rename Close to Back in arrivals page menu.
 
 ## [1.0.0-beta] - 2021-09-06
 
