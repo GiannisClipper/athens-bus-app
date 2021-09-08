@@ -5,9 +5,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1-beta] - 2021-09-08
+
 ### Changed
 - The syntax of the short introductory note.
 - Rename Close to Back in arrivals page menu.
+
+### Fixed
+- Replaced http with https, while since Android 10 not allowed simple http requests.
 
 ## [1.0.0-beta] - 2021-09-06
 
