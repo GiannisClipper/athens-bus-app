@@ -20,16 +20,16 @@ const Home = () => {
         <Box>
             <NameBox>
                 <BigText>ATHENS BUS</BigText>
-                <VerySmallText>1.0.0-beta</VerySmallText>
+                <VerySmallText>1.0.1-beta</VerySmallText>
             </NameBox>
             <Separator />
-            <SmallText>An application developed by GiannisClipper,</SmallText>
+            <SmallText>Application developed by GiannisClipper,</SmallText>
             <SmallText>code written in React Native and data</SmallText>
             <SmallText>powered by OASA telematics API.</SmallText>
             <SmallText></SmallText>
-            <SmallText>An independent initiutive for practicing and</SmallText>
-            <SmallText>demonstration purposes, not associated</SmallText>
-            <SmallText>with OASA organization.</SmallText>
+            <SmallText>An indypendent initiative, not associated</SmallText>
+            <SmallText>with OASA organization, for practicing</SmallText>
+            <SmallText>and demonstration purposes.</SmallText>
         </Box>
     );
 }

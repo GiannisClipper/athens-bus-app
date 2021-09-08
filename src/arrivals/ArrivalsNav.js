@@ -16,8 +16,8 @@ const ArrivalsNav = props => {
         <Nav>
 
             <NavItem onPress={ closeArrivals }>
-                <NavItemIcon>&#8630;</NavItemIcon> 
-                <NavItemText>CLOSE</NavItemText>
+                <NavItemIcon>&#8882;</NavItemIcon> 
+                <NavItemText>BACK</NavItemText>
             </NavItem>
 
             <NavSeparator />
