@@ -56,3 +56,12 @@ First could set the version in ../AthensBusApp/android/app/build.gradle (ex. ver
 ../AthensBusApp/android>./gradlew assembleRelease
 
 Generated APK: ../AthensBusApp/android/app/build/outputs/apk/app-release.apk
+
+
+-- HTTP request limitation (https://stackoverflow.com/questions/63045011/i-can-not-get-http-request-to-work-on-android-10-api-29-or-api-30-it-does-work)
+
+Since Android 10 doesn't allow you to access external URL which is note secured with https://.
+Now you have 2 solutions to overcome this issue:
+Install SSL on your web server domain to make it https:// (recommended)
+Add android:usesCleartextTraffic="true" in your manifest inside <application> tag
+NOTE: If you go for 2nd option and upload your signed APK to play store it may get rejected due to security issues.
