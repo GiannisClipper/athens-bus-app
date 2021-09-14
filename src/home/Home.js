@@ -17,10 +17,10 @@ const Home = () => {
     const Separator = StyledView( { style: styles.separator } );
 
     return (
-        <Box>
+        <Box testID='box'>
             <NameBox>
-                <BigText>ATHENS BUS</BigText>
-                <VerySmallText>1.0.2-beta</VerySmallText>
+                <BigText testID='title'>ATHENS BUS</BigText>
+                <VerySmallText testID='version'>1.0.2-beta</VerySmallText>
             </NameBox>
             <Separator />
             <SmallText>Application developed by GiannisClipper,</SmallText>
