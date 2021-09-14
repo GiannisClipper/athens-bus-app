@@ -20,7 +20,7 @@ const Home = () => {
         <Box>
             <NameBox>
                 <BigText>ATHENS BUS</BigText>
-                <VerySmallText>1.0.1-beta</VerySmallText>
+                <VerySmallText>1.0.2-beta</VerySmallText>
             </NameBox>
             <Separator />
             <SmallText>Application developed by GiannisClipper,</SmallText>

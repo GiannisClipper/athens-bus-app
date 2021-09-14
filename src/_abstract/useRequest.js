@@ -1,39 +1,34 @@
 import { useEffect, useState } from 'react';
 
-const request = async ( { uri, onSuccess, onError } ) => {
+const fetch = require( 'node-fetch' );
 
-    // alert( 'Request data from API!' )
+const customFetch = uri => {
 
-    try {
-        const response = await fetch( uri );
-    
-        if ( response.ok ) { // if HTTP-status is 200-299
-            const data = await response.json();
-            console.log( `Data (${ uri }): ` + JSON.stringify( data ) );
-            onSuccess( data );
+    return fetch( uri )
 
-        } else {
-            const error = await response.json();
-            console.log( `Error (${ uri }): ` + JSON.stringify( error ) );
-            onError( error );
-        }
+        .then( async res => {
 
-    } catch( error ) {
-        console.log( `Error (${ uri }): ` + JSON.stringify( error ) );
-        onError( error );
-    }
+            if ( ! res.ok ) { // res.ok is true when http status is between 200-299
+                const txt = await res.text();
+                throw { message: txt };
+            }
 
+            const obj = await res.json();
+            return obj;
+        } )
+
+        .catch( err => { throw err } );
 }
 
-const useRequest = ( { uri, store, normalize, refreshTime } ) => {
+const useRequest = ( { fetchFunc, uri, store, normalize, refreshTime } ) => {
+
+    fetchFunc = fetchFunc || customFetch;
 
     const [ status, setStatus ] = useState( {
         toRequest: Object.keys( store ).length === 0,
         hasData: store.data ? true : false,
         hasError: store.error ? true : false,
     } );
-
-    // console.log( 'status, store', status, store )
 
     useEffect( async () => {
 
@@ -43,21 +38,21 @@ const useRequest = ( { uri, store, normalize, refreshTime } ) => {
 
             normalize = normalize || ( data => data );
 
-            await request( {
-                uri,
-
-                onSuccess: data => {
+            fetchFunc( uri )
+    
+                .then( data => {
+                    console.log( `Data (${ uri }): ` + JSON.stringify( data ) );
                     store.data = normalize( data );
                     store.error = null;
                     setStatus( { hasData: true } );
-                },
-
-                onError: error => {
+                } )
+    
+                .catch( error => {
+                    console.log( `Error (${ uri }): ` + JSON.stringify( error ) );
                     store.data = null;
                     store.error = JSON.stringify( error );
                     setStatus( { hasError: true } );
-                }
-            } );
+                } )
         }
 
     } );
@@ -74,3 +69,4 @@ const useRequest = ( { uri, store, normalize, refreshTime } ) => {
 }
 
 export default useRequest;
+export { customFetch, useRequest };
