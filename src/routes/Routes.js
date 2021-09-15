@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 import useRequest from '../_abstract/useRequest';
 import { URI } from '../_commons/constants';
 import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
@@ -26,23 +27,27 @@ const Routes = props => {
     } );
  
     return (
-        status.isRequesting ?
-            <WorkingIndicator />
+        <View testID='routes'>
 
-        : status.hasData ?
-            <>
-            { routes.data.map( ( route, i ) => (
-                <Route 
-                    key={ i }
-                    route={ route }
-                />
-            ) ) } 
-            </>
+            { status.isRequesting ?
+                <WorkingIndicator />
 
-        : status.hasError ?
-            <ErrorMessage>{ routes.error }</ErrorMessage>
+            : status.hasData ?
+                <>
+                { routes.data.map( ( route, i ) => (
+                    <Route 
+                        key={ i }
+                        route={ route }
+                    />
+                ) ) } 
+                </>
 
-        : null
+            : status.hasError ?
+                <ErrorMessage>{ routes.error }</ErrorMessage>
+
+            : null }
+
+        </View>
     );
 }
 

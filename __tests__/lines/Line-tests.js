@@ -1,5 +1,5 @@
 import 'react-native';import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react-native';
+import { render, fireEvent } from '@testing-library/react-native';
 import Line from '../../src/lines/Line';
 import { act } from 'react-test-renderer';
 
@@ -27,7 +27,7 @@ describe('<Line />', () => {
         rendered = render( <Line line={ line } /> );
     } );
 
-    test( 'rendered line data', () => {
+    test( 'render component', () => {
         const { queryByText } = rendered;
 
         const lineID = queryByText( line.LineID );
@@ -37,7 +37,7 @@ describe('<Line />', () => {
         expect( lineDescr ).not.toBeNull();
     } );
 
-    test( 'rendered bus LineID with blue background', () => {
+    test( 'bus LineID should have blue background', () => {
         const { rerender, queryByTestId } = rendered;
 
         line.LineID = '900';
@@ -48,7 +48,7 @@ describe('<Line />', () => {
         expect( icon.props.style.backgroundColor ).toBe( 'blue' );
     } );
 
-    test( 'rendered trolley LineID with yellow background', () => {
+    test( 'trolley LineID should have yellow background', () => {
         const { rerender, queryByTestId } = rendered;
 
         line.LineID = '20';
@@ -59,20 +59,24 @@ describe('<Line />', () => {
         expect( icon.props.style.backgroundColor ).toBe( 'yellow' );
     } );
 
-    test( 'pressed and rendered activity indicator ', async () => {
+    test( 'when is pressed should toggle Routes component', async () => {
         const { queryByTestId } = rendered;
 
         const row = queryByTestId( 'line-row' );
         expect( row ).not.toBeNull();
 
-        let indicator = queryByTestId( 'activity-indicator' );
-        expect( indicator ).toBeNull();
+        let routes = queryByTestId( 'routes' );
+        expect( routes ).toBeNull();
 
         act( () => fireEvent.press( row ) );
 
-        indicator = queryByTestId( 'activity-indicator' );
-        expect( indicator ).not.toBeNull();
-        expect( indicator.props.size ).toBe( 'large' );
+        routes = queryByTestId( 'routes' );
+        expect( routes ).not.toBeNull();
+
+        act( () => fireEvent.press( row ) );
+
+        routes = queryByTestId( 'routes' );
+        expect( routes ).toBeNull();
     } );
 
 } );

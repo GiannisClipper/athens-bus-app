@@ -11,7 +11,6 @@ const ErrorMessage = StyledText( { style: styles.errorMessage } );
 
 const WorkingIndicator = () => (
     <ActivityIndicator 
-        testID='activity-indicator'
         color={ styles.workingIndicator.color } 
         size='large'
     />
