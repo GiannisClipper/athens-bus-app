@@ -8,6 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Refactor useRequest.
 
+### Added
+- useRequest tests.
+- Home tests.
+- Line tests.
+- LineSearch tests.
+- Lines tests.
+- LineGroup tests.
+- LineGroups tests.
+
 ## [1.0.1-beta] - 2021-09-08
 
 ### Changed

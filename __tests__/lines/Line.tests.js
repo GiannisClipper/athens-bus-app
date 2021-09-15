@@ -9,7 +9,7 @@ jest.mock( '../../src/_abstract/useRequest', () => {
     return {
         __esModule: true,
         default: useRequest,
-        useRequest: jest.fn(() => ( { isRequesting: true } ) ),
+        useRequest,
     };
 } );
 
