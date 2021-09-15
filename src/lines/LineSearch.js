@@ -21,11 +21,14 @@ const LineSearch= props => {
 
     const isMatch = line => searchText !== '' && ( line.LineID.includes( searchText ) || line.LineDescr.includes( searchText ) );
 
-    useEffect( () => console.log( 'Rendering LineSearch' ) );
+    // useEffect( () => console.log( 'Rendering LineSearch' ) );
 
     return (
         <>
-        <Row onPress={ onPress }>
+        <Row
+            testID='search-row' 
+            onPress={ onPress }
+        >
 
             <RowIcon>
                 <RowIconText> ? </RowIconText>
@@ -34,6 +37,7 @@ const LineSearch= props => {
             <RowDescr>
                 <RowDescrTextInput
                     placeholder="to search..."
+                    value={ searchText }
                     onFocus ={ () => setIsOpen( true ) }
                     onChangeText={ setSearchText }
                     onFocus ={ () => setIsOpen( true ) }
