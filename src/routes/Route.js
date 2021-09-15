@@ -24,7 +24,10 @@ const Route = props => {
 
     return (
         <>
-        <Row onPress={ onPress }>
+        <Row 
+            testID='route-row'
+            onPress={ onPress }
+        >
 
             <RowIcon>
                 <RowIconText>&#8679;</RowIconText>

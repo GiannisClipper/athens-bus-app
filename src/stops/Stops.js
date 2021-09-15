@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
 import useRequest from '../_abstract/useRequest';
 import { URI } from '../_commons/constants';
 import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
@@ -25,7 +26,9 @@ const Stops = props => {
     } );
     
     return (
-        status.isRequesting ?
+        <View testID='stops'>
+
+        { status.isRequesting ?
             <WorkingIndicator />
 
         : status.hasData ?
@@ -41,7 +44,9 @@ const Stops = props => {
         : status.hasError ?
             <ErrorMessage>{ stops.error }</ErrorMessage>
 
-        : null
+        : null }
+
+        </View>
     );
 }
 
