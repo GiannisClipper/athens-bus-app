@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { View } from 'react-native';
 import { StyledScrollView } from '../_abstract/Styled';
 import { lineGroupStyles as styles } from './styles';
 import { CacheContext } from '../_commons/CacheContext';
@@ -44,7 +45,9 @@ const LineGroups = () => {
     } );
     
     return (
-        status.isRequesting ?
+        <View testID='groups'>
+
+        { status.isRequesting ?
             <WorkingIndicator />
 
         : status.hasData ?
@@ -66,7 +69,9 @@ const LineGroups = () => {
         : status.hasError ?
             <ErrorMessage>{ lines.error }</ErrorMessage>
 
-        : null
+        : null }
+
+        </View>
     );
 }
 
