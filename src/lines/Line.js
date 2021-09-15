@@ -33,9 +33,9 @@ const Line = props => {
 
     return (
         <>
-        <Row onPress={ onPress }>
+        <Row testID='line-row' onPress={ onPress }>
 
-            <RowIcon>
+            <RowIcon testID='line-icon'>
                 <RowIconText>{ line.LineID }</RowIconText>
             </RowIcon>
 

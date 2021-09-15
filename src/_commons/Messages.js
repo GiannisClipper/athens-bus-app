@@ -9,6 +9,12 @@ const WarningMessage = StyledText( { style: styles.warningMessage } );
 
 const ErrorMessage = StyledText( { style: styles.errorMessage } );
 
-const WorkingIndicator = () => <ActivityIndicator size="large" color={ styles.workingIndicator.color } />
+const WorkingIndicator = () => (
+    <ActivityIndicator 
+        testID='activity-indicator'
+        color={ styles.workingIndicator.color } 
+        size='large'
+    />
+);
 
 export { InfoMessage, WarningMessage, ErrorMessage, WorkingIndicator };
