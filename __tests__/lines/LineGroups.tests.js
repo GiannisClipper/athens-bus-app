@@ -3,34 +3,38 @@ import 'react-native';
 import { render } from '@testing-library/react-native';
 import { CacheContext } from '../../src/_commons/CacheContext';
 import LineGroups from '../../src/lines/LineGroups';
-//import { useRequestMock } from '../mock';
-
-jest.mock( '../../src/_abstract/useRequest', () => {
-    const useRequest = jest.fn( () => ( { status: { hasData: true  } } ) );
-    return {
-        __esModule: true,
-        default: useRequest,
-        useRequest,
-    };
-} );
 
 describe('<LineGroups />', () => {
 
-    let rendered;
+    const DATA = [];
+    const ERROR = 'An error message...';
+    const GROUPS = [ '0', '1' ];
 
-    beforeEach( () => {
-        rendered = render( 
-            <CacheContext.Provider value={ { cache: { lines: { data: [], groups: [ '0', '1' ] }, myStops: {} } } } >
+    test( 'render component with data', () => {        
+        const rendered = render( 
+            <CacheContext.Provider value={ { cache: { lines: { data: DATA, error: null, groups: GROUPS } } } } >
                 <LineGroups />
             </CacheContext.Provider>
         );
-    } );
 
-    test( 'render component', () => {
         const { queryByTestId, queryAllByTestId } = rendered;
 
         expect( queryByTestId( 'groups' ) ).not.toBeNull();
         expect( queryByTestId( 'search-row' ) ).not.toBeNull();
         expect( queryAllByTestId( 'group-row' ).length ).toBe( 2 );
+    } );
+
+    test( 'render component with error', () => {        
+        const rendered = render( 
+            <CacheContext.Provider value={ { cache: { lines: { data: null, error: ERROR } } } } >
+                <LineGroups />
+            </CacheContext.Provider>
+        );
+
+        const { queryByTestId, queryAllByTestId, queryByText } = rendered;
+    
+        expect( queryByTestId( 'groups' ) ).not.toBeNull();
+        expect( queryAllByTestId( 'group-row' ).length ).toBe( 0 );
+        expect( queryByText( ERROR ) ).not.toBeNull();
     } );
 } );

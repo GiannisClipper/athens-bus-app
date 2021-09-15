@@ -3,45 +3,38 @@ import { render, fireEvent } from '@testing-library/react-native';
 import Line from '../../src/lines/Line';
 import { act } from 'react-test-renderer';
 
-// to replace the process of actual useRequest with the following code:
 jest.mock( '../../src/_abstract/useRequest', () => {
-    const useRequest = jest.fn( () => ( { status: { isRequesting: true  } } ) );
-    return {
-        __esModule: true,
-        default: useRequest,
-        useRequest,
-    };
+    const useRequest = jest.fn( () => ( { status: { isRequesting: true } } ) );
+    return { __esModule: true, default: useRequest, useRequest };
 } );
 
 describe('<Line />', () => {
 
-    const line = {
-        LineID: 'The ID of the line',
-        LineDescr: 'the description of the line',
+    const LINE = {
+        LineID: 'An ID of a line',
+        LineDescr: 'A description of a line',
         routes: {},
     }
 
     let rendered;
 
     beforeEach( () => {
-        rendered = render( <Line line={ line } /> );
+        rendered = render( <Line line={ LINE } /> );
     } );
 
     test( 'render component', () => {
-        const { queryByText } = rendered;
+        const { queryByTestId, queryByText } = rendered;
 
-        const lineID = queryByText( line.LineID );
-        expect( lineID ).not.toBeNull();
-
-        const lineDescr = queryByText( line.LineDescr );
-        expect( lineDescr ).not.toBeNull();
+        expect( queryByTestId( 'line-row' ) ).not.toBeNull();
+        expect( queryByText( LINE.LineID ) ).not.toBeNull();
+        expect( queryByText( LINE.LineDescr ) ).not.toBeNull();
     } );
 
     test( 'bus LineID should have blue background', () => {
         const { rerender, queryByTestId } = rendered;
 
-        line.LineID = '900';
-        rerender( <Line line={ line } /> );
+        LINE.LineID = '900';
+        rerender( <Line line={ LINE } /> );
 
         const icon = queryByTestId( 'line-icon' );
         expect( icon ).not.toBeNull();
@@ -51,8 +44,8 @@ describe('<Line />', () => {
     test( 'trolley LineID should have yellow background', () => {
         const { rerender, queryByTestId } = rendered;
 
-        line.LineID = '20';
-        rerender( <Line line={ line } /> );
+        LINE.LineID = '20';
+        rerender( <Line line={ LINE } /> );
 
         const icon = queryByTestId( 'line-icon' );
         expect( icon ).not.toBeNull();
@@ -65,18 +58,15 @@ describe('<Line />', () => {
         const row = queryByTestId( 'line-row' );
         expect( row ).not.toBeNull();
 
-        let routes = queryByTestId( 'routes' );
-        expect( routes ).toBeNull();
+        expect( queryByTestId( 'routes' ) ).toBeNull();
 
         act( () => fireEvent.press( row ) );
 
-        routes = queryByTestId( 'routes' );
-        expect( routes ).not.toBeNull();
+        expect( queryByTestId( 'routes' ) ).not.toBeNull();
 
         act( () => fireEvent.press( row ) );
 
-        routes = queryByTestId( 'routes' );
-        expect( routes ).toBeNull();
+        expect( queryByTestId( 'routes' ) ).toBeNull();
     } );
 
 } );
