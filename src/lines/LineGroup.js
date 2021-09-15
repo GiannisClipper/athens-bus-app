@@ -22,7 +22,10 @@ const LineGroup= props => {
 
     return (
         <>
-        <Row onPress={ onPress }>
+        <Row 
+            testID='group-row'
+            onPress={ onPress }
+        >
 
             <RowIcon>
                 <RowIconText>{ group }</RowIconText>
