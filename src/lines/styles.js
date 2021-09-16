@@ -3,6 +3,10 @@ import patterns from '../_commons/stylePatterns';
 
 const lineGroupStyles = StyleSheet.create( {
 
+    main: {
+        ...patterns.main,
+    },
+
     list: {
         ...patterns.list,
     },

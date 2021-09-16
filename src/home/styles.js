@@ -1,6 +1,11 @@
 import { StyleSheet } from 'react-native';
+import patterns from '../_commons/stylePatterns';
 
 const pattern = {
+
+    main: {
+        ...patterns.main,
+    },
 
     box: {
         borderWidth: 2,

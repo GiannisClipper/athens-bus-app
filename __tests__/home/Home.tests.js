@@ -27,7 +27,7 @@ describe('<Home />', () => {
     test( 'rendered subtitle', () => {
         const subtitle = queryByTestId( 'home-subtitle' );
         expect( subtitle ).not.toBeNull();
-        expect( subtitle.props.children ).toBe( '1.0.2-beta' );
+        expect( subtitle.props.children ).toBe( '1.1.0-beta' );
     } );
 
 } );

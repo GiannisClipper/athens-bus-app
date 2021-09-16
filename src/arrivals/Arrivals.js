@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, View } from 'react-native';
+import { Modal } from 'react-native';
 import styles from './styles';
 import { StyledView, StyledScrollView } from '../_abstract/Styled';
 import ArrivalsNav from './ArrivalsNav';
@@ -64,15 +64,13 @@ const Arrivals = props => {
                 toggleMyStop={ toggleMyStop } 
             />
 
-            <Main>
+            <Main testID='arrivals'>
  
-                <View testID='arrivals'>
-
                 { arrivalsStatus.isRequesting || routesStatus.isRequesting ?
                     <WorkingIndicator />
 
                 : arrivalsStatus.hasData && routesStatus.hasData ?
-                    <List style={ styles.list }>
+                    <List>
                         <ArrivalsStop 
                             key={ -1 } 
                             stop={ stop } 
@@ -91,8 +89,6 @@ const Arrivals = props => {
                     <ErrorMessage>{ arrivals.error + ' ' + routes.error }</ErrorMessage>
 
                 : null }
-
-                </View>
 
             </Main>
         </Modal>

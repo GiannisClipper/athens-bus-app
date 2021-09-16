@@ -1,6 +1,4 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { View } from 'react-native';
-import styles from './styles';
 import { CacheContext } from '../_commons/CacheContext';
 import AppNav from './AppNav';
 import Home from '../home/Home';
@@ -32,13 +30,11 @@ const AppPages = () => {
         <>
             <AppNav setPage={ setPage } />
 
-            <View style={ styles.main }>
-                { isMounted ? null // to unmount firstly a page when is already mounted
-                : page === 'HOME' ? <Home />
-                : page === 'LINES' ? <LineGroups />
-                : page === 'MySTOPS' ? <MyStops />
-                : null }
-            </View>
+            { isMounted ? null // to unmount firstly a page when is already mounted
+            : page === 'HOME' ? <Home />
+            : page === 'LINES' ? <LineGroups />
+            : page === 'MySTOPS' ? <MyStops />
+            : null }
         </>
 
     );

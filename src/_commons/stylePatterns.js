@@ -37,7 +37,8 @@ const patterns = {
         backgroundColor: 'powderblue',
         flex: 10,
         justifyContent: 'space-evenly',
-        alignItems: 'center',  
+        alignItems: 'center',
+        width: '100%',
     },
 
     list: {

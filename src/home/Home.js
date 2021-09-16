@@ -9,6 +9,7 @@ const Home = () => {
 
     const styles = orientation === 'PORTRAIT' ? portraitStyles : landscapeStyles;
 
+    const Main = StyledView( { style: styles.main } );
     const Box = StyledView( { style: styles.box } );
     const NameBox = StyledView( { style: styles.nameBox } );
     const BigText = StyledText( { style: styles.bigText } );
@@ -17,20 +18,22 @@ const Home = () => {
     const Separator = StyledView( { style: styles.separator } );
 
     return (
-        <Box testID='home-box'>
-            <NameBox>
-                <BigText testID='home-title'>ATHENS BUS</BigText>
-                <VerySmallText testID='home-subtitle'>1.0.2-beta</VerySmallText>
-            </NameBox>
-            <Separator />
-            <SmallText>Application developed by GiannisClipper,</SmallText>
-            <SmallText>code written in React Native and data</SmallText>
-            <SmallText>powered by OASA telematics API.</SmallText>
-            <SmallText></SmallText>
-            <SmallText>An indypendent initiative, not associated</SmallText>
-            <SmallText>with OASA organization, for practicing</SmallText>
-            <SmallText>and demonstration purposes.</SmallText>
-        </Box>
+        <Main>
+            <Box testID='home-box'>
+                <NameBox>
+                    <BigText testID='home-title'>ATHENS BUS</BigText>
+                    <VerySmallText testID='home-subtitle'>1.1.0-beta</VerySmallText>
+                </NameBox>
+                <Separator />
+                <SmallText>Application developed by GiannisClipper,</SmallText>
+                <SmallText>code written in React Native and data</SmallText>
+                <SmallText>powered by OASA telematics API.</SmallText>
+                <SmallText></SmallText>
+                <SmallText>An indypendent initiative, not associated</SmallText>
+                <SmallText>with OASA organization, for practicing</SmallText>
+                <SmallText>and demonstration purposes.</SmallText>
+            </Box>
+        </Main>
     );
 }
 
