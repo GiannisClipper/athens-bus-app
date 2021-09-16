@@ -13,7 +13,7 @@ const ArrivalsNav = props => {
     const { closeArrivals, isMyStop, toggleMyStop } = props;
 
     return (
-        <Nav>
+        <Nav testID='arrivals-nav'>
 
             <NavItem onPress={ closeArrivals }>
                 <NavItemIcon>&#8882;</NavItemIcon> 

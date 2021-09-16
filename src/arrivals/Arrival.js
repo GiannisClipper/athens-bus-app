@@ -13,8 +13,10 @@ const Arrival = props => {
     const RouteDescr = result.length > 0 ? result[ 0 ].RouteDescr : arrival.RouteCode;
 
     return (
-        <>
-        <View style={ styles.row }>
+        <View 
+            testID='arrival-row'
+            style={ styles.row }
+        >
 
             <View style={ styles.rowIcon }>
                 <Text style={ styles.rowIconText }>{ minutes }</Text>
@@ -25,7 +27,6 @@ const Arrival = props => {
             </View>
 
         </View>
-        </>
     );
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal } from 'react-native';
+import { Modal, View } from 'react-native';
 import styles from './styles';
 import { StyledView, StyledScrollView } from '../_abstract/Styled';
 import ArrivalsNav from './ArrivalsNav';
@@ -66,29 +66,33 @@ const Arrivals = props => {
 
             <Main>
  
-            { arrivalsStatus.isRequesting || routesStatus.isRequesting ?
-                <WorkingIndicator />
+                <View testID='arrivals'>
 
-            : arrivalsStatus.hasData && routesStatus.hasData ?
-                <List style={ styles.list }>
-                    <ArrivalsStop 
-                        key={ -1 } 
-                        stop={ stop } 
-                    />
+                { arrivalsStatus.isRequesting || routesStatus.isRequesting ?
+                    <WorkingIndicator />
 
-                    { arrivals.data.map( ( arrival, i ) => (
-                        <Arrival
-                            key={ i }
-                            arrival={ arrival }
-                            routes={ routes }
+                : arrivalsStatus.hasData && routesStatus.hasData ?
+                    <List style={ styles.list }>
+                        <ArrivalsStop 
+                            key={ -1 } 
+                            stop={ stop } 
                         />
-                    ) ) } 
-                </List>
 
-            : arrivalsStatus.hasError || routesStatus.hasError ?
-                <ErrorMessage>{ arrivals.error + ' ' + routes.error }</ErrorMessage>
+                        { arrivals.data.map( ( arrival, i ) => (
+                            <Arrival
+                                key={ i }
+                                arrival={ arrival }
+                                routes={ routes }
+                            />
+                        ) ) } 
+                    </List>
 
-            : null }
+                : arrivalsStatus.hasError || routesStatus.hasError ?
+                    <ErrorMessage>{ arrivals.error + ' ' + routes.error }</ErrorMessage>
+
+                : null }
+
+                </View>
 
             </Main>
         </Modal>
