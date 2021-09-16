@@ -1,4 +1,4 @@
-import 'react-native';import React from 'react';
+import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 import Route from '../../src/routes/Route';
 import { act } from 'react-test-renderer';
@@ -8,12 +8,12 @@ jest.mock( '../../src/_abstract/useRequest', () => {
     return { __esModule: true, default: useRequest, useRequest };
 } );
 
-describe('<Route />', () => {
+describe( '<Route />', () => {
 
     const ROUTE = {
         RouteDescr: 'A description of a route',
         stops: {},
-    }
+    };
 
     let rendered;
 

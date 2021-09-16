@@ -10,7 +10,7 @@ describe('<LineGroups />', () => {
     const ERROR = 'An error message...';
     const GROUPS = [ '0', '1' ];
 
-    test( 'render component with data', () => {        
+    test( 'render component with data', () => {  
         const rendered = render( 
             <CacheContext.Provider value={ { cache: { lines: { data: DATA, error: null, groups: GROUPS } } } } >
                 <LineGroups />

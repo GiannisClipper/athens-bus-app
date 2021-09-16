@@ -3,7 +3,7 @@ import 'react-native';
 import { render } from '@testing-library/react-native';
 import Routes from '../../src/routes/Routes';
 
-describe('<Routes />', () => {
+describe( '<Routes />', () => {
 
     const DATA = [
         { routeDescr: 'First route descrption' },
@@ -13,10 +13,7 @@ describe('<Routes />', () => {
     const ERROR = 'An error message...';
 
     test( 'render component with data', () => {
-        const rendered = render( 
-            <Routes line={ { routes: { data: DATA, error: null } } } />
-        );
-
+        const rendered = render( <Routes line={ { routes: { data: DATA, error: null } } } /> );
         const { queryByTestId, queryAllByTestId } = rendered;
 
         expect( queryByTestId( 'routes' ) ).not.toBeNull();
@@ -24,10 +21,7 @@ describe('<Routes />', () => {
     } );
 
     test( 'render component with error', () => {        
-        const rendered = render( 
-            <Routes line={ { routes: { data: null, error: ERROR } } } />
-        );
-
+        const rendered = render( <Routes line={ { routes: { data: null, error: ERROR } } } /> );
         const { queryByTestId, queryAllByTestId, queryByText } = rendered;
     
         expect( queryByTestId( 'routes' ) ).not.toBeNull();
