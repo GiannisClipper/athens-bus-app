@@ -51,7 +51,10 @@ const Stop = props => {
 
     return (
         <>
-        <Row onPress={ onPress }>
+        <Row 
+            testID='stop-row'
+            onPress={ onPress }
+        >
 
             <RowIcon>
                 <RowIconText>&#9995;&#127996;</RowIconText>
@@ -97,5 +100,5 @@ const SimpleStop = props => {
     );
 }
 
-export default { Stop, SimpleStop };
+export default Stop;
 export { Stop, SimpleStop };

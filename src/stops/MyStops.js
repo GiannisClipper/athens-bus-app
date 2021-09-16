@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { View } from 'react-native';
 import { StyledScrollView } from '../_abstract/Styled';
 import styles from './styles';
 import { CacheContext } from '../_commons/CacheContext';
@@ -19,7 +20,9 @@ const MyStops = props => {
     }, [ myStops.data ] );
 
     return ( 
-        myStops.info ?
+        <View testID='stops'>
+
+        { myStops.info ?
             <InfoMessage>{ myStops.info }</InfoMessage>
 
         : myStops.data ?
@@ -33,7 +36,9 @@ const MyStops = props => {
             ) ) } 
             </List>
 
-        : null
+        : null }
+
+        </View>
     );
 }
 
