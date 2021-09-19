@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Refactor useRequest.
+- Replaced the custom app navigation with a drawer navigator.
 
 ### Added
 - Tests (useRequest, Home, ../lines, ../routes, ../stops, ../arrivals).

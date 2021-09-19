@@ -22,7 +22,7 @@ const Home = () => {
             <Box testID='home-box'>
                 <NameBox>
                     <BigText testID='home-title'>ATHENS BUS</BigText>
-                    <VerySmallText testID='home-subtitle'>1.1.0-beta</VerySmallText>
+                    <VerySmallText testID='home-subtitle'>2.0.0-beta</VerySmallText>
                 </NameBox>
                 <Separator />
                 <SmallText>Application developed by GiannisClipper,</SmallText>

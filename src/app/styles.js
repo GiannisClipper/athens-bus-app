@@ -3,22 +3,6 @@ import patterns from '../_commons/stylePatterns';
 
 const styles = StyleSheet.create( {
 
-    nav: {
-        ...patterns.nav,
-    },
-    navItem: {
-        ...patterns.navItem,
-    },
-    navItemIcon: {
-        ...patterns.navItemIcon,
-    },
-    navItemText: {
-        ...patterns.navItemText,
-    },
-    navSeparator: {
-        ...patterns.navSeparator,
-    },
-
     main: {
         ...patterns.main,
     },

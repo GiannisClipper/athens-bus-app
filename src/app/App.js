@@ -1,14 +1,14 @@
 import React from 'react';
 import { StorageContextProvider } from '../_commons/StorageContext';
 import { CacheContextProvider } from '../_commons/CacheContext';
-import AppPages from './AppPages';
+import AppDrawerNav from './AppDrawerNav';
 
 const App = () => {
 
     return (
         <StorageContextProvider>
             <CacheContextProvider>
-                <AppPages />
+                <AppDrawerNav />
             </CacheContextProvider>
         </StorageContextProvider>
     );
