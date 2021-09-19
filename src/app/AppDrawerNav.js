@@ -19,7 +19,32 @@ const AppDrawerNav = () => {
 
     return (
         <NavigationContainer>
-            <Drawer.Navigator initialRouteName='Home'>
+            <Drawer.Navigator
+                initialRouteName='Home'
+
+                screenOptions={ { 
+                    drawerStyle: {
+                        backgroundColor: 'skyblue',
+                        width: '44%',
+                    },
+
+                    drawerLabelStyle: {
+                        color: 'steelblue',
+                        fontWeight: '600'
+                    },
+
+                    headerStyle: {
+                        backgroundColor: 'steelblue',
+                    },
+
+                    headerTintColor: 'skyblue',
+
+                    headerTitleStyle: {
+                        color: 'skyblue',
+                    },
+
+                } }
+            >
                 <Drawer.Screen name='Home' component={ Home } />
                 <Drawer.Screen name='Lines' component={ LineGroups } />
                 <Drawer.Screen 

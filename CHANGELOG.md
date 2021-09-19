@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Refactor useRequest.
-- Replaced the custom app navigation with a drawer navigator.
+- Replace custom app navigation with drawer navigator.
 
 ### Added
 - Tests (useRequest, Home, ../lines, ../routes, ../stops, ../arrivals).
@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rename Close to Back in arrivals page menu.
 
 ### Fixed
-- Replaced http with https, while since Android 10 not allowed simple http requests.
+- Replace http with https, while since Android 10 not allowed simple http requests.
 
 ## [1.0.0-beta] - 2021-09-06
 
