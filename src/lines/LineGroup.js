@@ -10,7 +10,7 @@ const RowDescr = StyledView( { style: styles.rowDescr } );
 
 const LineGroup= props => {
 
-    const { lines, group } = props;
+    const { lines, group, navigation  } = props;
 
     const [ isOpen, setIsOpen ] = useState( false );
 
@@ -35,7 +35,7 @@ const LineGroup= props => {
 
         </Row>
 
-        { isOpen ? <Lines lines={ lines } isMatch={ isMatch } /> : null }
+        { isOpen ? <Lines lines={ lines } isMatch={ isMatch } navigation={ navigation } /> : null }
         </>
     );
 }

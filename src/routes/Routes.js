@@ -7,7 +7,7 @@ import Route from './Route';
 
 const Routes = props => {
 
-    const { line } = props;
+    const { line, navigation } = props;
     const { routes } = line;
 
     const { status } = useRequest( {
@@ -16,6 +16,7 @@ const Routes = props => {
 
         normalize: data => data
             .map( row => ( {
+                LineID: line.LineID,
                 RouteCode: row.RouteCode,
                 RouteDescr: row.RouteDescr,
                 RouteType: row.RouteType,
@@ -38,6 +39,7 @@ const Routes = props => {
                     <Route 
                         key={ i }
                         route={ route }
+                        navigation={ navigation }
                     />
                 ) ) } 
                 </>

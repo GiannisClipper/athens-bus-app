@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyledView, StyledTouchableOpacity, StyledText } from '../_abstract/Styled';
 import styles from './styles';
-import Stops from '../stops/Stops';
 
 const Row = StyledTouchableOpacity( { style: styles.row } );
 const RowIcon = StyledView( { style: styles.rowIcon } );
@@ -11,7 +10,7 @@ const RowDescrText = StyledText( { style: styles.rowDescrText } );
 
 const Route = props => {
 
-    const { route } = props;
+    const { route, navigation } = props;
 
     const [ isOpen, setIsOpen ] = useState( false );
 
@@ -20,6 +19,7 @@ const Route = props => {
             route.stops = {};  // clear cache in case of error to request again
         }
         setIsOpen( ! isOpen );
+        navigation.navigate( 'RouteNav', { route } );
     }
 
     return (
@@ -39,7 +39,7 @@ const Route = props => {
 
         </Row>
 
-        { isOpen ? <Stops route={ route } /> : null }
+        {/* { isOpen ? <Stops route={ route } /> : null } */}
         </>
     );
 }

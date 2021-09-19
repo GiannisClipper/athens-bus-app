@@ -3,12 +3,12 @@ import { CacheContext } from '../_commons/CacheContext';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Home from '../home/Home';
-import LineGroups from '../lines/LineGroups';
+import LinesNav from '../lines/LinesNav';
 import MyStops from '../stops/MyStops';
 
 const Drawer = createDrawerNavigator();
 
-const AppDrawerNav = () => {
+const AppNav = () => {
 
     const { cache } = useContext( CacheContext );
     const { lines } = cache;
@@ -46,7 +46,7 @@ const AppDrawerNav = () => {
                 } }
             >
                 <Drawer.Screen name='Home' component={ Home } />
-                <Drawer.Screen name='Lines' component={ LineGroups } />
+                <Drawer.Screen name='Lines' component={ LinesNav } />
                 <Drawer.Screen 
                     name='MyStops' 
                     component={ MyStops }
@@ -56,4 +56,4 @@ const AppDrawerNav = () => {
     );
 };
 
-export default AppDrawerNav;
+export default AppNav;
