@@ -11,7 +11,8 @@ const List = StyledScrollView( { style: styles.list } );
 
 const Stops = props => {
 
-    const route = props.busRoute;
+    const { data, linesNavigation } = props;
+    const { route } = data;
     const { stops } = route;
 
     const { status } = useRequest( {
@@ -41,6 +42,7 @@ const Stops = props => {
                 <Stop 
                     key={ i }
                     stop={ stop }
+                    linesNavigation={ linesNavigation }
                 />
             ) ) } 
             </List>

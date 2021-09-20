@@ -1,10 +1,7 @@
 import React from 'react';
-import { Modal } from 'react-native';
 import styles from './styles';
 import { StyledView, StyledScrollView } from '../_abstract/Styled';
-import ArrivalsNav from './ArrivalsNav';
 import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
-import { SimpleStop as ArrivalsStop } from '../stops/Stop';
 import Arrival from './Arrival';
 import useRequest from '../_abstract/useRequest';
 import { URI } from '../_commons/constants';
@@ -14,7 +11,7 @@ const List = StyledScrollView( { style: styles.list } );
 
 const Arrivals = props => {
 
-    const { stop, closeArrivals, isMyStop, toggleMyStop } = props;
+    const { stop } = props;
     const { arrivals, routes } = stop;
 
     const routesRequest = useRequest( {
@@ -57,41 +54,28 @@ const Arrivals = props => {
     const arrivalsStatus = arrivalsRequest.status;
 
     return (
-        <Modal animationType={ 'fade' } isVisible={ true }>
-            <ArrivalsNav 
-                closeArrivals={ closeArrivals }
-                isMyStop={ isMyStop }
-                toggleMyStop={ toggleMyStop } 
-            />
+        <Main testID='arrivals'>
 
-            <Main testID='arrivals'>
- 
-                { arrivalsStatus.isRequesting || routesStatus.isRequesting ?
-                    <WorkingIndicator />
+            { arrivalsStatus.isRequesting || routesStatus.isRequesting ?
+                <WorkingIndicator />
 
-                : arrivalsStatus.hasData && routesStatus.hasData ?
-                    <List>
-                        <ArrivalsStop 
-                            key={ -1 } 
-                            stop={ stop } 
+            : arrivalsStatus.hasData && routesStatus.hasData ?
+                <List>
+                    { arrivals.data.map( ( arrival, i ) => (
+                        <Arrival
+                            key={ i }
+                            arrival={ arrival }
+                            routes={ routes }
                         />
+                    ) ) } 
+                </List>
 
-                        { arrivals.data.map( ( arrival, i ) => (
-                            <Arrival
-                                key={ i }
-                                arrival={ arrival }
-                                routes={ routes }
-                            />
-                        ) ) } 
-                    </List>
+            : arrivalsStatus.hasError || routesStatus.hasError ?
+                <ErrorMessage>{ arrivals.error + ' ' + routes.error }</ErrorMessage>
 
-                : arrivalsStatus.hasError || routesStatus.hasError ?
-                    <ErrorMessage>{ arrivals.error + ' ' + routes.error }</ErrorMessage>
+            : null }
 
-                : null }
-
-            </Main>
-        </Modal>
+        </Main>
     );
 }
 

@@ -1,57 +1,54 @@
 import React from 'react';
 import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Stops from '../stops/Stops';
+import Arrivals from '../arrivals/Arrivals';
 import Home from '../home/Home';
 
 const Tab = createBottomTabNavigator();
 
-const RouteNav = props => {
+const StopNav = props => {
 
     const { navigation } = props;
-    const { route } = props.route.params;
-    // navigation.navigate() passes the parameters to the component throught 
-    //`props.route.params`, so here `props.route` refers to a navigation property,
-    // while `props.route.params.route` refers to application data, a bus route
+    const { stop } = props.route.params;
+    // navigation.navigate() passes the parameters to the component throught `props.route.params`
 
     navigation.setOptions( { 
-        title: `[ ${ route.LineID } ]   ${ route.RouteDescr }` 
+        title: `[ ${ stop.StopCode } ]   ${ stop.StopDescr }` 
     } );
 
     return (
         <>
         <Tab.Navigator 
-            initialRouteName='Stops' 
+            initialRouteName='Arrivals' 
             screenOptions={ { headerShown: false } }
         >
             <Tab.Screen 
-                name='Stops'
-                // component={ Stops }
+                name='Arrivals'
+                // component={ Arrivals }
                 options={ {
-                    tabBarIcon: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } }>&#9995;&#127996;</Text> ),
-                    tabBarLabel: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } }>Stops</Text> ),
+                    tabBarIcon: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } }>[]]</Text> ),
+                    tabBarLabel: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } }>Arrivals</Text> ),
                 } }
             >
                 { props => (
-                    <Stops
+                    <Arrivals
                         { ...props }
-                        linesNavigation={ navigation }
-                        data={ { route } }
+                        stop={ stop }
                     /> 
                 ) }
             </Tab.Screen>
 
             <Tab.Screen 
-                name='RouteSchedule' 
+                name='StopRoutes' 
                 component={ Home } 
                 options={ {
                     tabBarIcon: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } } >[]</Text> ),
-                    tabBarLabel: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } }>Schedule</Text> ),
+                    tabBarLabel: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } }>Routes</Text> ),
                 } }
             />
 
             <Tab.Screen 
-                name='RouteMap' 
+                name='StopMap' 
                 component={ Home } 
                 options={ {
                     tabBarIcon: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } } >[]</Text> ),
@@ -63,4 +60,4 @@ const RouteNav = props => {
     );
 }
 
-export default RouteNav;
+export default StopNav;

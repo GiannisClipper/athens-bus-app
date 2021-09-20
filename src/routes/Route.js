@@ -12,14 +12,15 @@ const Route = props => {
 
     const { route, navigation } = props;
 
-    const [ isOpen, setIsOpen ] = useState( false );
-
     const onPress = () => {
-        if ( ! isOpen && route.stops.error ) { 
+        if ( route.stops.error ) { 
             route.stops = {};  // clear cache in case of error to request again
         }
-        setIsOpen( ! isOpen );
-        navigation.navigate( 'RouteNav', { route } );
+
+        navigation.navigate( 'RouteNav', { route } );  
+        // navigation.navigate() passes the parameters to the component throught 
+        //`props.route.params`, so here `props.route` refers to a navigation property,
+        // while `props.route.params.route` refers to application data, a bus route
     }
 
     return (
@@ -38,8 +39,6 @@ const Route = props => {
             </RowDescr>
 
         </Row>
-
-        {/* { isOpen ? <Stops route={ route } /> : null } */}
         </>
     );
 }
