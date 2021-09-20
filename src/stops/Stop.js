@@ -1,9 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
 import { StyledView, StyledTouchableOpacity, StyledText } from '../_abstract/Styled';
 import styles from './styles';
-import { StorageContext } from '../_commons/StorageContext';
-import { CacheContext } from '../_commons/CacheContext';
-import Arrivals from '../arrivals/Arrivals';
 
 const Row = StyledTouchableOpacity( { style: styles.row } );
 const RowIcon = StyledView( { style: styles.rowIcon } );
@@ -13,15 +10,7 @@ const RowDescrText = StyledText( { style: styles.rowDescrText } );
 
 const Stop = props => {
 
-    const { stop, setRerender, linesNavigation } = props;
-
-    const { setMyStops } = useContext( StorageContext );
-    const { cache, createMyStop, deleteMyStop } = useContext( CacheContext );
-    const { myStops } = cache;
-
-    const [ isMyStop, setIsMyStop ] = useState( 
-        myStops.data.map( myStop => myStop.StopCode ).includes( stop.StopCode )
-    );
+    const { stop, linesNavigation } = props;
 
     const onPress = () => {
         if ( stop.routes.error ) { 
@@ -32,20 +21,6 @@ const Stop = props => {
         linesNavigation.navigate( 'StopNav', { stop } );  
         // navigation.navigate() passes the parameters to the component throught `props.route.params`
     }
-
-    const closeArrivals= () => {
-        setIsOpen( false );
-        if ( setRerender ) {
-            setRerender();
-        }
-    };
-
-    const toggleMyStop = () => {
-        const newIsMyStop = ! isMyStop;
-        newIsMyStop ? createMyStop( stop ) : deleteMyStop( stop );
-        setMyStops( myStops.data );
-        setIsMyStop( ! isMyStop )
-    };
 
     return (
         <>

@@ -43,7 +43,9 @@ const LinesNav = ( { navigation } ) => {
             <Stack.Screen 
                 name='StopNav'
                 component={ StopNav }
-                options={ { headerShown: true } }
+                options={ { 
+                    headerShown: true,
+                } }
             />
         </Stack.Navigator>
     );
