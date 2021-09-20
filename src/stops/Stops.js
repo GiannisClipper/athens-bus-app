@@ -4,7 +4,7 @@ import { StyledView, StyledScrollView } from '../_abstract/Styled';
 import useRequest from '../_abstract/useRequest';
 import { URI } from '../_commons/constants';
 import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
-import { Stop } from './Stop';
+import Stop from './Stop';
 
 const Main = StyledView( { style: styles.main } );
 const List = StyledScrollView( { style: styles.list } );

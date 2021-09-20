@@ -3,7 +3,7 @@ import { StyledView, StyledScrollView } from '../_abstract/Styled';
 import styles from './styles';
 import { CacheContext } from '../_commons/CacheContext';
 import { InfoMessage } from '../_commons/Messages';
-import { Stop } from './Stop';
+import Stop from './Stop';
 
 const Main = StyledView( { style: styles.main } );
 const List = StyledScrollView( { style: styles.list } );

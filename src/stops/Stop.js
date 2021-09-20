@@ -39,39 +39,8 @@ const Stop = props => {
 
         </Row>
 
-        {/* { isOpen 
-            ? 
-            <Arrivals 
-                stop={ stop } 
-                closeArrivals={ closeArrivals } 
-                isMyStop={ isMyStop }
-                toggleMyStop={ toggleMyStop }
-            /> 
-            : 
-            null 
-        } */}
         </>
     );
 }
 
-const SimpleStop = props => {
-
-    const { stop } = props;
-
-    return (
-        <Row>
-
-            <RowIcon>
-                <RowIconText>&#9995;&#127996;</RowIconText>
-            </RowIcon>
-
-            <RowDescr>
-                <RowDescrText>{ `${ stop.StopDescr } (${ stop.StopCode })` }</RowDescrText>
-            </RowDescr>
-
-        </Row>
-    );
-}
-
 export default Stop;
-export { Stop, SimpleStop };

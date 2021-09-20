@@ -14,7 +14,7 @@ const StopNav = props => {
     // navigation.navigate() passes the parameters to the component throught `props.route.params`
 
     navigation.setOptions( { 
-        title: `[ ${ stop.StopCode } ]   ${ stop.StopDescr }`,
+        title: `${ stop.StopDescr } (${ stop.StopCode })`,
         headerRight: () => <MyStopSelector stop={ stop } />,
     } );
 
