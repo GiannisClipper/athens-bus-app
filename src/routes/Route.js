@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { StyledView, StyledTouchableOpacity, StyledText } from '../_abstract/Styled';
 import styles from './styles';
 
@@ -10,14 +10,14 @@ const RowDescrText = StyledText( { style: styles.rowDescrText } );
 
 const Route = props => {
 
-    const { route, navigation } = props;
+    const { route, routeNavNavigation } = props;
 
     const onPress = () => {
         if ( route.stops.error ) { 
             route.stops = {};  // clear cache in case of error to request again
         }
 
-        navigation.navigate( 'RouteNav', { route } );  
+        routeNavNavigation.navigate( 'RouteNav', { route } );  
         // navigation.navigate() passes the parameters to the component throught 
         //`props.route.params`, so here `props.route` refers to a navigation property,
         // while `props.route.params.route` refers to application data, a bus route

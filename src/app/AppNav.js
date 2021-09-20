@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Home from '../home/Home';
 import LinesNav from '../lines/LinesNav';
-import MyStops from '../stops/MyStops';
+import MyNav from '../my/MyNav';
 
 const Drawer = createDrawerNavigator();
 
@@ -45,12 +45,21 @@ const AppNav = () => {
 
                 } }
             >
-                <Drawer.Screen name='Home' component={ Home } />
-                <Drawer.Screen name='Lines' component={ LinesNav } />
                 <Drawer.Screen 
-                    name='MyStops' 
-                    component={ MyStops }
-                / >
+                    name='Home' 
+                    component={ Home } 
+                />
+
+                <Drawer.Screen 
+                    name='Lines' 
+                   component={ LinesNav } 
+                />
+
+                <Drawer.Screen 
+                    name='Favourites' 
+                    component={ MyNav } 
+                />
+
             </Drawer.Navigator>
         </NavigationContainer>
     );

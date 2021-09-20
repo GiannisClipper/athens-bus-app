@@ -39,7 +39,7 @@ const Routes = props => {
                     <Route 
                         key={ i }
                         route={ route }
-                        navigation={ navigation }
+                        routeNavNavigation={ navigation }
                     />
                 ) ) } 
                 </>

@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Arrivals from '../arrivals/Arrivals';
 import Home from '../home/Home';
-import MyStopSelector from './MyStopSelector';
+import MyStopSelector from '../my/MyStopSelector';
 
 const Tab = createBottomTabNavigator();
 

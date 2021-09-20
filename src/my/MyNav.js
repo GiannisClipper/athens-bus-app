@@ -1,19 +1,21 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LineGroups from '../lines/LineGroups';
+import MyListsNav from './MyListsNav';
 import RouteNav from '../routes/RouteNav';
 import StopNav from '../stops/StopNav';
 
 const Stack = createNativeStackNavigator();
 
-const LinesNav = props => {
+const MyNav = ( props ) => {
+
+    const { navigation } = props;
 
     return (
         <Stack.Navigator 
-            initialRouteName='LineGroups' 
+            initialRouteName='MyListsNav' 
 
             screenOptions={ { 
-                headerShown: false,
+                headerShown: false ,
                 headerStyle: {
                     backgroundColor: 'powderblue',
                 },
@@ -26,8 +28,8 @@ const LinesNav = props => {
         >
 
             <Stack.Screen 
-                name='LineGroups' 
-                component={ LineGroups } 
+                name='MyListsNav' 
+                component={ MyListsNav } 
                 options={ { headerShown: false } } 
             />
 
@@ -49,4 +51,4 @@ const LinesNav = props => {
     );
 }
 
-export default LinesNav;
+export default MyNav;

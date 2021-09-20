@@ -1,32 +1,17 @@
-import React, { createContext, useContext, useRef, useEffect } from 'react';
-import { StorageContext } from './StorageContext';
+import React, { createContext, useRef } from 'react';
 
 const CacheContext = createContext();
 
 const CacheContextProvider = props => {
 
-    const { storage, getMyStops } = useContext( StorageContext );
-
-    const cache = useRef( { lines: {}, myStops: {} } );
-
-    function createMyStop( stop ) {
-        cache.current.myStops.data.push( stop );
-    }
-
-    function deleteMyStop( stop ) {
-        cache.current.myStops.data = cache.current.myStops.data.filter( myStop => myStop.StopCode !== stop.StopCode );
-    }
-
-    useEffect( async () => {
-        if ( storage ) {
-            cache.current.myStops.data = await getMyStops();
-        }
-    }, [ storage ] );
+    const cache = useRef( { 
+        lines: {}, 
+    } );
 
     // useEffect( () => console.log( 'CacheContext rendering.' ) );
 
     return (
-        <CacheContext.Provider value={ { cache: cache.current, createMyStop, deleteMyStop } }>
+        <CacheContext.Provider value={ { cache: cache.current } }>
             { props.children }
         </CacheContext.Provider>
     )

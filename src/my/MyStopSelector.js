@@ -1,22 +1,18 @@
 import React, { useContext, useState } from 'react';
 import { Text } from 'react-native';
-import { StorageContext } from '../_commons/StorageContext';
-import { CacheContext } from '../_commons/CacheContext';
+import { MyContext } from '../_commons/MyContext';
 
 const MyStopSelector = ( { stop } ) => {
-    const { setMyStops } = useContext( StorageContext );
-    const { cache, createMyStop, deleteMyStop } = useContext( CacheContext );
-    const { myStops } = cache;
+    const { myStops, createMyStop, deleteMyStop } = useContext( MyContext );
+    console.log( 'myStops', myStops );
 
     const [ isMyStop, setIsMyStop ] = useState( 
-        myStops.data.map( myStop => myStop.StopCode ).includes( stop.StopCode )
+        myStops.map( myStop => myStop.StopCode ).includes( stop.StopCode )
     );
 
     const toggleMyStop = () => {
         const newIsMyStop = ! isMyStop;
         newIsMyStop ? createMyStop( stop ) : deleteMyStop( stop );
-        setMyStops( myStops.data );
-        console.log( 'myStops.data',myStops.data )
         setIsMyStop( newIsMyStop );
     }
 

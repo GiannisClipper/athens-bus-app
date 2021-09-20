@@ -1,6 +1,7 @@
 import React from 'react';
 import { StorageContextProvider } from '../_commons/StorageContext';
 import { CacheContextProvider } from '../_commons/CacheContext';
+import { MyContextProvider } from '../_commons/MyContext';
 import AppNav from './AppNav';
 
 const App = () => {
@@ -8,7 +9,9 @@ const App = () => {
     return (
         <StorageContextProvider>
             <CacheContextProvider>
-                <AppNav />
+                <MyContextProvider>
+                    <AppNav />
+                </MyContextProvider>
             </CacheContextProvider>
         </StorageContextProvider>
     );

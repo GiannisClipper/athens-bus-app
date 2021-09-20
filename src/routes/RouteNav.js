@@ -1,8 +1,10 @@
 import React from 'react';
 import { Text } from 'react-native';
+// import { NavigationActions } from 'react-navigation';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Stops from '../stops/Stops';
 import Home from '../home/Home';
+import MyRouteSelector from '../my/MyRouteSelector';
 
 const Tab = createBottomTabNavigator();
 
@@ -10,13 +12,20 @@ const RouteNav = props => {
 
     const { navigation } = props;
     const { route } = props.route.params;
-    // navigation.navigate() passes the parameters to the component throught 
-    //`props.route.params`, so here `props.route` refers to a navigation property,
+    // navigation.navigate() passes the parameters to the component throught `props.route.params`
+    // so here `props.route` refers to a navigation property
     // while `props.route.params.route` refers to application data, a bus route
 
     navigation.setOptions( { 
-        title: `[ ${ route.LineID } ]   ${ route.RouteDescr }` 
+        title: `[ ${ route.LineID } ]   ${ route.RouteDescr }`,
+        headerRight: () => <MyRouteSelector route={ route } />,
     } );
+
+    // const backAction = NavigationActions.back( {
+    //     key: 'RouteNav',
+    // } );
+
+    // props.navigation.dispatch( backAction );
 
     return (
         <>
@@ -35,7 +44,7 @@ const RouteNav = props => {
                 { props => (
                     <Stops
                         { ...props }
-                        linesNavigation={ navigation }
+                        stopNavNavigation={ navigation }
                         data={ { route } }
                     /> 
                 ) }

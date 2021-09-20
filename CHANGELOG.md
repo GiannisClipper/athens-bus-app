@@ -7,10 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Refactor useRequest.
-- Replace custom app navigation with drawer navigator.
+- Replace custom navigation with @react-navigation (drawer, stack and tab navigators).
+- Update favourite stops feature
 
 ### Added
 - Tests (useRequest, Home, ../lines, ../routes, ../stops, ../arrivals).
+- Add favourite routes feature
 
 ## [1.0.1-beta] - 2021-09-08
 
