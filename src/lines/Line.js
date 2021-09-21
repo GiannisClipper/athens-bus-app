@@ -9,7 +9,7 @@ const RowDescrText = StyledText( { style: styles.rowDescrText } );
 
 const Line = props => {
 
-    const { line, navigation } = props;
+    const { line } = props;
 
     const [ isOpen, setIsOpen ] = useState( false );
 
@@ -45,7 +45,7 @@ const Line = props => {
 
         </Row>
 
-        { isOpen ? <Routes line={ line } navigation={ navigation } /> : null }
+        { isOpen ? <Routes line={ line } /> : null }
         </>
     );
 }

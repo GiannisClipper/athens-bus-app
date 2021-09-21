@@ -22,7 +22,7 @@ const parseGroups = data => {
     return Object.keys( groups );
 }
 
-const LineGroups = ( { navigation, route } ) => {
+const LineGroups = () => {
 
     const { cache } = useContext( CacheContext );
     const { lines } = cache;
@@ -62,7 +62,6 @@ const LineGroups = ( { navigation, route } ) => {
                         key={ i }
                         lines={ lines }
                         group={ group }
-                        navigation={ navigation }
                     />
                 ) ) }
             </List>

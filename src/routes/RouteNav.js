@@ -16,30 +16,22 @@ const RouteNav = props => {
     // so here `props.route` refers to a navigation property
     // while `props.route.params.route` refers to application data, a bus route
 
-    // const onPressBack = () => navigation.reset( {
-    //     index: 0,
-    //     routes: [ { name: 'LineGroups' } ]
-    // } );
-
     useEffect( () => {
         navigation.setOptions( { 
             title: `[ ${ route.LineID } ]   ${ route.RouteDescr }`,
             headerRight: () => <MyRouteSelector route={ route } />,
-            // headerLeft: () => <Text onPress={ onPressBack } >Back</Text>,
         } )
     }, [] );
-
-    // const backAction = NavigationActions.back( {
-    //     key: 'RouteNav',
-    // } );
-
-    // props.navigation.dispatch( backAction );
 
     return (
         <>
         <Tab.Navigator 
             initialRouteName='Stops' 
-            screenOptions={ { headerShown: false } }
+            screenOptions={ { 
+                headerShown: false,
+                tabBarItemStyle: {
+                },
+            } }
         >
             <Tab.Screen 
                 name='Stops'
@@ -47,6 +39,8 @@ const RouteNav = props => {
                 options={ {
                     tabBarIcon: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } }>&#9995;&#127996;</Text> ),
                     tabBarLabel: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } }>Stops</Text> ),
+                    tabBarActiveBackgroundColor: 'powderblue',
+                    tabBarInactiveBackgroundColor: 'skyblue',
                 } }
             >
                 { props => (
@@ -64,6 +58,8 @@ const RouteNav = props => {
                 options={ {
                     tabBarIcon: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } } >[]</Text> ),
                     tabBarLabel: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } }>Schedule</Text> ),
+                    tabBarActiveBackgroundColor: 'powderblue',
+                    tabBarInactiveBackgroundColor: 'skyblue',
                 } }
             />
 
@@ -73,6 +69,8 @@ const RouteNav = props => {
                 options={ {
                     tabBarIcon: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } } >[]</Text> ),
                     tabBarLabel: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } }>Map</Text> ),
+                    tabBarActiveBackgroundColor: 'powderblue',
+                    tabBarInactiveBackgroundColor: 'skyblue',
                 } }
             />
         </Tab.Navigator>

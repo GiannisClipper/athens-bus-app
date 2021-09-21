@@ -15,8 +15,13 @@ const styles = {
     },
 
     header: {
-        backgroundColor: 'steelblue',
-        color: 'skyblue',
+        view: {
+            backgroundColor: 'steelblue',
+        },
+        text: {
+            color: 'skyblue',
+            fontWeight: '600',
+        }    
     },
 
     item: {
@@ -110,9 +115,9 @@ const AppNav = () => {
 
                 screenOptions={ { 
                     drawerStyle: styles.drawer,
-                    headerStyle: styles.header,
-                    headerTintColor: styles.header.color,
-                    headerTitleStyle: styles.header.color,
+                    headerStyle: styles.header.view,
+                    headerTintColor: styles.header.text,
+                    headerTitleStyle: styles.header.text,
                 } }
             > 
 

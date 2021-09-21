@@ -1,5 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import useRequest from '../_abstract/useRequest';
 import { URI } from '../_commons/constants';
 import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
@@ -7,8 +8,10 @@ import Route from './Route';
 
 const Routes = props => {
 
-    const { line, navigation } = props;
+    const { line } = props;
     const { routes } = line;
+
+    const navigation = useNavigation();
 
     const { status } = useRequest( {
 
