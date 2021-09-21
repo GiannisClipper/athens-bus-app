@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text } from 'react-native';
 // import { NavigationActions } from 'react-navigation';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -16,10 +16,18 @@ const RouteNav = props => {
     // so here `props.route` refers to a navigation property
     // while `props.route.params.route` refers to application data, a bus route
 
-    navigation.setOptions( { 
-        title: `[ ${ route.LineID } ]   ${ route.RouteDescr }`,
-        headerRight: () => <MyRouteSelector route={ route } />,
-    } );
+    // const onPressBack = () => navigation.reset( {
+    //     index: 0,
+    //     routes: [ { name: 'LineGroups' } ]
+    // } );
+
+    useEffect( () => {
+        navigation.setOptions( { 
+            title: `[ ${ route.LineID } ]   ${ route.RouteDescr }`,
+            headerRight: () => <MyRouteSelector route={ route } />,
+            // headerLeft: () => <Text onPress={ onPressBack } >Back</Text>,
+        } )
+    }, [] );
 
     // const backAction = NavigationActions.back( {
     //     key: 'RouteNav',

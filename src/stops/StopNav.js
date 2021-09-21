@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Arrivals from '../arrivals/Arrivals';
@@ -13,10 +13,12 @@ const StopNav = props => {
     const { stop } = props.route.params;
     // navigation.navigate() passes the parameters to the component throught `props.route.params`
 
-    navigation.setOptions( { 
-        title: `${ stop.StopDescr } (${ stop.StopCode })`,
-        headerRight: () => <MyStopSelector stop={ stop } />,
-    } );
+    useEffect( () => {
+        navigation.setOptions( { 
+            title: `${ stop.StopDescr } (${ stop.StopCode })`,
+            headerRight: () => <MyStopSelector stop={ stop } />,
+        } );
+    }, [] );
 
     return (
         <>

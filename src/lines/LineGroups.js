@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from 'react';
-// import { useIsFocused } from '@react-navigation/native';
 import { StyledView, StyledScrollView } from '../_abstract/Styled';
 import { lineGroupStyles as styles } from './styles';
 import { CacheContext } from '../_commons/CacheContext';
@@ -23,13 +22,7 @@ const parseGroups = data => {
     return Object.keys( groups );
 }
 
-const LineGroups = ( { navigation } ) => {
-
-    // const isFocused = useIsFocused();
-
-    // useEffect( () => {
-    //     alert( 'isFocused' )
-    // } , [ isFocused ] )
+const LineGroups = ( { navigation, route } ) => {
 
     const { cache } = useContext( CacheContext );
     const { lines } = cache;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LineGroups from '../lines/LineGroups';
 import RouteNav from '../routes/RouteNav';
@@ -7,6 +7,8 @@ import StopNav from '../stops/StopNav';
 const Stack = createNativeStackNavigator();
 
 const LinesNav = props => {
+
+    const { navigation } = props;
 
     return (
         <Stack.Navigator 
