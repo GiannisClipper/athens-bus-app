@@ -2,6 +2,7 @@ import React, { useContext, useRef, useEffect } from 'react';
 import { CacheContext } from '../_commons/CacheContext';
 import { NavigationContainer, CommonActions } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
+import { navigationRef } from '../_commons/RootNavigation';
 import Home from '../home/Home';
 import LinesNav from '../lines/LinesNav';
 import MyNav from '../my/MyNav';
@@ -106,7 +107,7 @@ const AppNav = () => {
     }
 
     return (
-        <NavigationContainer>
+        <NavigationContainer ref={ navigationRef }>
             <Drawer.Navigator
     
                 drawerContent={ props => <CustomDrawerContent { ...props } /> }

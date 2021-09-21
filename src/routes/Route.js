@@ -1,4 +1,5 @@
 import React from 'react';
+import * as RootNavigation from '../_commons/RootNavigation';
 import { StyledView, StyledTouchableOpacity, StyledText } from '../_abstract/Styled';
 import styles from './styles';
 
@@ -13,11 +14,11 @@ const Route = props => {
     const { route, routeNavNavigation } = props;
 
     const onPress = () => {
-        if ( route.stops.error ) { 
+        if ( route.stops && route.stops.error ) { 
             route.stops = {};  // clear cache in case of error to request again
         }
 
-        routeNavNavigation.navigate( 'RouteNav', { route } );  
+        RootNavigation.navigate( 'RouteNav', { route } );  
         // navigation.navigate() passes the parameters to the component throught 
         //`props.route.params`, so here `props.route` refers to a navigation property,
         // while `props.route.params.route` refers to application data, a bus route
@@ -35,7 +36,7 @@ const Route = props => {
             </RowIcon>
 
             <RowDescr>
-                <RowDescrText>{ route.RouteDescr }</RowDescrText>
+                <RowDescrText>{ `[${ route.LineID }]   ${ route.RouteDescr }` }</RowDescrText>
             </RowDescr>
 
         </Row>

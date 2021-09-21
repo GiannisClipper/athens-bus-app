@@ -19,9 +19,10 @@ const Arrivals = props => {
         uri: URI.ROUTES_OF_STOP + stop.StopCode,
 
         normalize: data => data.map( row => ( {
-            RouteCode: row.RouteCode,
             LineID: row.LineID,
+            RouteCode: row.RouteCode,
             RouteDescr: row.RouteDescr,
+            RouteType: row.RouteType,
         } ) ),
 
         store: routes,

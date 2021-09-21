@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { StyledView, StyledScrollView } from '../_abstract/Styled';
 import styles from './styles';
 import { MyContext } from '../_commons/MyContext';

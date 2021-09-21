@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Arrivals from '../arrivals/Arrivals';
+import StopRoutes from './StopRoutes';
 import Home from '../home/Home';
 import MyStopSelector from '../my/MyStopSelector';
 
@@ -43,13 +44,20 @@ const StopNav = props => {
             </Tab.Screen>
 
             <Tab.Screen 
-                name='StopRoutes' 
-                component={ Home } 
+                name='StopRoutes'
+                // component={ StopRoutes }
                 options={ {
                     tabBarIcon: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } } >[]</Text> ),
                     tabBarLabel: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } }>Routes</Text> ),
                 } }
-            />
+                >
+                { props => (
+                    <StopRoutes
+                        { ...props }
+                        stop={ stop }
+                    /> 
+                ) }
+            </Tab.Screen>
 
             <Tab.Screen 
                 name='StopMap' 
