@@ -3,6 +3,14 @@ import patterns from '../_commons/stylePatterns';
 
 const styles = StyleSheet.create( {
 
+    main: {
+        ...patterns.main,
+    },
+
+    list: {
+        ...patterns.list,
+    },
+
     row: {
         ...patterns.row,
         borderTopWidth: 1,
