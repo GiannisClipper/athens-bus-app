@@ -18,33 +18,22 @@ const MyListsNav = props => {
         >
             <Tab.Screen 
                 name='MyStops'
+                component={ MyStops } 
                 options={ {
                     tabBarIcon: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } }>&#9995;&#127996;</Text> ),
                     tabBarLabel: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } }>Stops</Text> ),
                 } }
-            >
-                { props => 
-                    <MyStops
-                        { ...props }
-                        stopNavNavigation={ navigation }
-                    /> 
-                }
-            </Tab.Screen>
+            />
 
             <Tab.Screen 
                 name='MyRoutes' 
+                component={ MyRoutes } 
                 options={ {
                     tabBarIcon: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } } >[]</Text> ),
                     tabBarLabel: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } }>Routes</Text> ),
                 } }
-            >
-                { props => 
-                    <MyRoutes
-                        { ...props }
-                        routeNavNavigation={ navigation }
-                    /> 
-                }
-            </Tab.Screen>
+            />
+
         </Tab.Navigator>
         </>
     );

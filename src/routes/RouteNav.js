@@ -46,7 +46,6 @@ const RouteNav = props => {
                 { props => (
                     <Stops
                         { ...props }
-                        stopNavNavigation={ navigation }
                         data={ { route } }
                     /> 
                 ) }

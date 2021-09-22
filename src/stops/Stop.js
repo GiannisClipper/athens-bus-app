@@ -1,4 +1,5 @@
 import React from 'react';
+import * as RootNavigation from '../_commons/RootNavigation';
 import { StyledView, StyledTouchableOpacity, StyledText } from '../_abstract/Styled';
 import styles from './styles';
 
@@ -10,7 +11,7 @@ const RowDescrText = StyledText( { style: styles.rowDescrText } );
 
 const Stop = props => {
 
-    const { stop, stopNavNavigation } = props;
+    const { stop } = props;
 
     const onPress = () => {
         if ( stop.routes.error ) { 
@@ -18,7 +19,7 @@ const Stop = props => {
         }
         stop.arrivals = {};  // clear cache due to always request up to date values
 
-        stopNavNavigation.navigate( 'StopNav', { stop } );  
+        RootNavigation.navigate( 'StopNav', { stop } );  
         // navigation.navigate() passes the parameters to the component throught `props.route.params`
     }
 

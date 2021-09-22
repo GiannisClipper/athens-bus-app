@@ -10,7 +10,6 @@ const List = StyledScrollView( { style: styles.list } );
 
 const MyStops = props => {
 
-    const { stopNavNavigation } = props;
     const { myStops } = useContext( MyContext );
 
     return ( 
@@ -25,7 +24,6 @@ const MyStops = props => {
                     <Stop 
                         key={ i }
                         stop={ stop }
-                        stopNavNavigation={ stopNavNavigation }
                     />
                 ) ) } 
             </List>

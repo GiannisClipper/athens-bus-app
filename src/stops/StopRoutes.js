@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useEffect } from 'react';
 import styles from './styles';
 import { StyledView, StyledScrollView } from '../_abstract/Styled';
 import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
@@ -18,17 +18,22 @@ const StopRoutes = props => {
 
         uri: URI.ROUTES_OF_STOP + stop.StopCode,
 
-        normalize: data => data.map( row => ( {
-            LineID: row.LineID,
-            RouteCode: row.RouteCode,
-            RouteDescr: row.RouteDescr,
-            RouteType: row.RouteType,
-            stops: {},
-            schedule: {},
-        } ) ),
+        normalize: data => data
+            .filter( row => row.hidden === '0' )
+            .map( row => ( {
+                LineID: row.LineID,
+                RouteCode: row.RouteCode,
+                RouteDescr: row.RouteDescr,
+                RouteType: row.RouteType,
+                stops: {},
+                schedule: {},
+            } ) )
+            .sort( ( row1, row2 ) => row1.LineID < row2.LineID ? -1 : 1 ),
 
         store: routes,
     } );
+
+    useEffect( () => console.log( 'StopRoutes', routes.data ) );
 
     return ( 
         <Main testID='routes'>

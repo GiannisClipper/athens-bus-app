@@ -18,12 +18,17 @@ const Arrivals = props => {
 
         uri: URI.ROUTES_OF_STOP + stop.StopCode,
 
-        normalize: data => data.map( row => ( {
-            LineID: row.LineID,
-            RouteCode: row.RouteCode,
-            RouteDescr: row.RouteDescr,
-            RouteType: row.RouteType,
-        } ) ),
+        normalize: data => data
+            .filter( row => row.hidden === '0' )
+            .map( row => ( {
+                LineID: row.LineID,
+                RouteCode: row.RouteCode,
+                RouteDescr: row.RouteDescr,
+                RouteType: row.RouteType,
+                stops: {},
+                schedule: {},
+            } ) )
+            .sort( ( row1, row2 ) => row1.LineID < row2.LineID ? -1 : 1 ),
 
         store: routes,
     } );
