@@ -24,6 +24,7 @@ const Routes = props => {
                 RouteDescr: row.RouteDescr,
                 RouteType: row.RouteType,
                 stops: {},
+                schedule: {},
             } ) )
             .sort( ( row1, row2 ) => row1.RouteType < row2.RouteType ? -1 : 1 ),
 

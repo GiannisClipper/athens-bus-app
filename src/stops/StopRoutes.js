@@ -23,6 +23,8 @@ const StopRoutes = props => {
             RouteCode: row.RouteCode,
             RouteDescr: row.RouteDescr,
             RouteType: row.RouteType,
+            stops: {},
+            schedule: {},
         } ) ),
 
         store: routes,
@@ -35,7 +37,7 @@ const StopRoutes = props => {
                 <WorkingIndicator />
 
             : status.hasData ?
-                <>
+                <List>
                 { routes.data.map( ( route, i ) => (
                     <Route 
                         key={ i }
@@ -43,7 +45,7 @@ const StopRoutes = props => {
                         // routeNavNavigation={ navigation }
                     />
                 ) ) } 
-                </>
+                </List>
 
             : status.hasError ?
                 <ErrorMessage>{ routes.error }</ErrorMessage>

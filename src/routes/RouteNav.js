@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Text } from 'react-native';
-// import { NavigationActions } from 'react-navigation';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Stops from '../stops/Stops';
+import RouteSchedule from './RouteSchedule';
 import Home from '../home/Home';
 import MyRouteSelector from '../my/MyRouteSelector';
 
@@ -54,14 +54,21 @@ const RouteNav = props => {
 
             <Tab.Screen 
                 name='RouteSchedule' 
-                component={ Home } 
+                // component={ RouteSchedule } 
                 options={ {
                     tabBarIcon: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } } >[]</Text> ),
                     tabBarLabel: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } }>Schedule</Text> ),
                     tabBarActiveBackgroundColor: 'powderblue',
                     tabBarInactiveBackgroundColor: 'skyblue',
                 } }
-            />
+            >
+                { props => (
+                    <RouteSchedule
+                        { ...props }
+                        data={ { route } }
+                    /> 
+                ) }
+            </Tab.Screen>
 
             <Tab.Screen 
                 name='RouteMap' 
