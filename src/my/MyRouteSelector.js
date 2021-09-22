@@ -4,7 +4,7 @@ import { MyContext } from '../_commons/MyContext';
 
 const MyRouteSelector = ( { route } ) => {
     const { myRoutes, createMyRoute, deleteMyRoute } = useContext( MyContext );
-    console.log( 'myRoutes', myRoutes );
+    // console.log( 'myRoutes', myRoutes );
 
     const [ isMyRoute, setIsMyRoute ] = useState( 
         myRoutes.map( myRoute => myRoute.RouteCode ).includes( route.RouteCode )

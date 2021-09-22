@@ -9,6 +9,36 @@ import { URI } from '../_commons/constants';
 const Main = StyledView( { style: styles.main } );
 const List = StyledScrollView( { style: styles.list } );
 
+const normalizeStopRoutes = data => {
+
+    data = data.filter( row => row.hidden === '0' );
+
+    const checksums = [];
+    data = data.filter( row => {
+        const checksum = row.RouteCode + row.RouteDescr;
+        const exists = checksums.includes( checksum );
+        if ( ! exists ) {
+            checksums.push( checksum );
+        }
+        // console.log( 'checksums', checksums )
+        return ! exists;
+    } );
+
+    data = data.map( row => ( {
+        LineID: row.LineID,
+        LineDescr: row.LineDescr,
+        RouteCode: row.RouteCode,
+        RouteDescr: row.RouteDescr,
+        RouteType: row.RouteType,
+        stops: {},
+        schedule: {},
+    } ) );
+
+    data = data.sort( ( row1, row2 ) => row1.LineID < row2.LineID ? -1 : 1 );
+
+    return data;
+}
+
 const StopRoutes = props => {
 
     const { stop } = props;
@@ -18,17 +48,7 @@ const StopRoutes = props => {
 
         uri: URI.ROUTES_OF_STOP + stop.StopCode,
 
-        normalize: data => data
-            .filter( row => row.hidden === '0' )
-            .map( row => ( {
-                LineID: row.LineID,
-                RouteCode: row.RouteCode,
-                RouteDescr: row.RouteDescr,
-                RouteType: row.RouteType,
-                stops: {},
-                schedule: {},
-            } ) )
-            .sort( ( row1, row2 ) => row1.LineID < row2.LineID ? -1 : 1 ),
+        normalize: normalizeStopRoutes,
 
         store: routes,
     } );
@@ -47,7 +67,6 @@ const StopRoutes = props => {
                     <Route 
                         key={ i }
                         route={ route }
-                        // routeNavNavigation={ navigation }
                     />
                 ) ) } 
                 </List>
@@ -62,3 +81,4 @@ const StopRoutes = props => {
 }
 
 export default StopRoutes;
+export { StopRoutes, normalizeStopRoutes };

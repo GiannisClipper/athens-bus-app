@@ -11,7 +11,7 @@ const RowDescrText = StyledText( { style: styles.rowDescrText } );
 
 const Route = props => {
 
-    const { route, routeNavNavigation } = props;
+    const { route } = props;
 
     const onPress = () => {
         if ( route.stops && route.stops.error ) { 
@@ -38,6 +38,10 @@ const Route = props => {
 
             <RowDescr>
                 <RowDescrText>{ `[${ route.LineID }]   ${ route.RouteDescr }` }</RowDescrText>
+            </RowDescr>
+
+            <RowDescr>
+                <RowDescrText>{ `(${ route.RouteCode }) ${ route.LineDescr }` }</RowDescrText>
             </RowDescr>
 
         </Row>

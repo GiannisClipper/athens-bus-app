@@ -3,6 +3,7 @@ import styles from './styles';
 import { StyledView, StyledScrollView } from '../_abstract/Styled';
 import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
 import Arrival from './Arrival';
+import { normalizeStopRoutes } from '../stops/StopRoutes';
 import useRequest from '../_abstract/useRequest';
 import { URI } from '../_commons/constants';
 
@@ -15,8 +16,6 @@ const Arrivals = props => {
     const { arrivals, routes } = stop;
 
     const [ refreshTime, setRefreshTime ] = useState( null );
-
-    const onFocus = 
 
     useEffect( () => {
         const unsubscribe = navigation.addListener( 'focus', () => {
@@ -38,17 +37,7 @@ const Arrivals = props => {
 
         uri: URI.ROUTES_OF_STOP + stop.StopCode,
 
-        normalize: data => data
-            .filter( row => row.hidden === '0' )
-            .map( row => ( {
-                LineID: row.LineID,
-                RouteCode: row.RouteCode,
-                RouteDescr: row.RouteDescr,
-                RouteType: row.RouteType,
-                stops: {},
-                schedule: {},
-            } ) )
-            .sort( ( row1, row2 ) => row1.LineID < row2.LineID ? -1 : 1 ),
+        normalize: normalizeStopRoutes,
 
         store: routes,
     } );

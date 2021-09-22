@@ -4,7 +4,7 @@ import { MyContext } from '../_commons/MyContext';
 
 const MyStopSelector = ( { stop } ) => {
     const { myStops, createMyStop, deleteMyStop } = useContext( MyContext );
-    console.log( 'myStops', myStops );
+    // console.log( 'myStops', myStops );
 
     const [ isMyStop, setIsMyStop ] = useState( 
         myStops.map( myStop => myStop.StopCode ).includes( stop.StopCode )

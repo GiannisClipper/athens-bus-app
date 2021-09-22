@@ -43,7 +43,6 @@ const Routes = props => {
                     <Route 
                         key={ i }
                         route={ route }
-                        routeNavNavigation={ navigation }
                     />
                 ) ) } 
                 </>

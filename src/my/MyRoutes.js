@@ -10,7 +10,6 @@ const List = StyledScrollView( { style: styles.list } );
 
 const MyRoutes = props => {
 
-    const { routeNavNavigation } = props;
     const { myRoutes } = useContext( MyContext );
 
     return ( 
@@ -25,7 +24,6 @@ const MyRoutes = props => {
                 <Route 
                     key={ i }
                     route={ route }
-                    routeNavNavigation={ routeNavNavigation }
                 />
             ) ) } 
             </List>

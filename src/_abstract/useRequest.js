@@ -82,7 +82,7 @@ const useRequest = ( { fetchFunc, uri, store, normalize, refreshTime } ) => {
             return () => clearInterval( interval.id );
         }
     
-        console.log( refreshTime, interval );
+        // console.log( refreshTime, interval );
 
     }, [ refreshTime ] );
 
