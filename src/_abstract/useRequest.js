@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { InternalSymbolName } from 'typescript';
 
 const fetch = require( 'node-fetch' );
 
@@ -57,13 +58,33 @@ const useRequest = ( { fetchFunc, uri, store, normalize, refreshTime } ) => {
 
     } );
 
+    const intervalRef = useRef( { id: null, hasCleared: false } );
+
     useEffect( () => {
-        if ( refreshTime ) {  // milliseconds
-            // console.log( 'refresh request' )
-            const intervalID = setInterval( () => setStatus( { toRequest: true } ), refreshTime );
-            return () => clearInterval( intervalID );
+        const interval = intervalRef.current;
+
+        if ( interval.id ) {
+            clearInterval( interval.id );
+            interval.id = null;
+            interval.hasCleared = true;
+            // console.log( 'SET INTERVAL OFF', interval )
         }
-    }, [] );
+
+        if ( refreshTime && interval.hasCleared ) {
+            setStatus( { toRequest: true } );
+            interval.hasCleared = false;
+            // console.log( 'FORCE REQUEST BEFORE INTERVAL', interval )
+        }
+
+        if ( refreshTime ) {
+            interval.id = setInterval( () => setStatus( { toRequest: true } ), refreshTime );
+            // console.log( 'SET INTERVAL ON', interval.id )
+            return () => clearInterval( interval.id );
+        }
+    
+        console.log( refreshTime, interval );
+
+    }, [ refreshTime ] );
 
     return { status };
 }

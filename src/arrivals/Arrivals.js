@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './styles';
 import { StyledView, StyledScrollView } from '../_abstract/Styled';
 import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
@@ -11,8 +11,28 @@ const List = StyledScrollView( { style: styles.list } );
 
 const Arrivals = props => {
 
-    const { stop } = props;
+    const { navigation, stop } = props;
     const { arrivals, routes } = stop;
+
+    const [ refreshTime, setRefreshTime ] = useState( null );
+
+    const onFocus = 
+
+    useEffect( () => {
+        const unsubscribe = navigation.addListener( 'focus', () => {
+            setRefreshTime( 20000 );
+            // console.log( 'setRefreshTime( 20000 )', routes )
+        } );
+        return unsubscribe;
+    }, [ navigation ]);
+
+    useEffect( () => {
+        const unsubscribe = navigation.addListener( 'blur', () => {
+            setRefreshTime( null );
+            // console.log( 'setRefreshTime( null )' )
+        } );
+        return unsubscribe;
+    }, [ navigation ]);
 
     const routesRequest = useRequest( {
 
@@ -53,7 +73,8 @@ const Arrivals = props => {
 
         store: arrivals,
 
-        refreshTime: 20000  // milliseconds
+        refreshTime,  // 20000 milliseconds
+
     } );
 
     const routesStatus = routesRequest.status;
