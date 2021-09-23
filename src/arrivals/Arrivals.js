@@ -40,6 +40,7 @@ const Arrivals = props => {
         normalize: normalizeStopRoutes,
 
         store: routes,
+
     } );
 
     const arrivalsRequest = useRequest( {
@@ -63,7 +64,7 @@ const Arrivals = props => {
         store: arrivals,
 
         refreshTime,  // 20000 milliseconds
-
+    
     } );
 
     const routesStatus = routesRequest.status;
