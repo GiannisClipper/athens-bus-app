@@ -1,11 +1,12 @@
 import React from 'react';
 import * as RootNavigation from '../_commons/RootNavigation';
 import { StyledView, StyledTouchableOpacity, StyledText } from '../_abstract/Styled';
+import { RouteIcon } from '../_commons/Icons';
+import stylePatterns from '../_commons/stylePatterns';
 import styles from './styles';
 
 const Row = StyledTouchableOpacity( { style: styles.row } );
 const RowIcon = StyledView( { style: styles.rowIcon } );
-const RowIconText = StyledText( { style: styles.rowIconText } );
 const RowDescr = StyledView( { style: styles.rowDescr } );
 const RowDescrText = StyledText( { style: styles.rowDescrText } );
 
@@ -33,15 +34,11 @@ const Route = props => {
         >
 
             <RowIcon>
-                <RowIconText>&#8679;</RowIconText>
+                <RouteIcon { ...stylePatterns.tab.item.icon } />
             </RowIcon>
 
             <RowDescr>
-                <RowDescrText>{ `[${ route.LineID }]   ${ route.RouteDescr }` }</RowDescrText>
-            </RowDescr>
-
-            <RowDescr>
-                <RowDescrText>{ `(${ route.RouteCode }) ${ route.LineDescr }` }</RowDescrText>
+                <RowDescrText>{ `[${ route.LineID }]   ${ route.RouteDescr } ${ route.LineDescr || '' }` }</RowDescrText>
             </RowDescr>
 
         </Row>

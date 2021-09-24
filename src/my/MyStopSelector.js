@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
-import { Text } from 'react-native';
 import { MyContext } from '../_commons/MyContext';
+import stylePatterns from '../_commons/stylePatterns';
+import { MySelectedIcon, MyDeselectedIcon } from '../_commons/Icons';
 
 const MyStopSelector = ( { stop } ) => {
     const { myStops, createMyStop, deleteMyStop } = useContext( MyContext );
@@ -17,9 +18,9 @@ const MyStopSelector = ( { stop } ) => {
     }
 
     return (
-        isMyStop
-            ? <Text onPress={ toggleMyStop }>&#9745;</Text>
-            : <Text onPress={ toggleMyStop }>&#9744;</Text>
+       isMyStop
+            ? <MySelectedIcon { ...stylePatterns.tab.item.icon } onPress={ toggleMyStop } />
+            : <MyDeselectedIcon { ...stylePatterns.tab.item.icon } onPress={ toggleMyStop } />
     );
 }
 

@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import styles from './styles';
 import { StyledView, StyledScrollView } from '../_abstract/Styled';
-import { createUniqueList } from '../_abstract/uniqueList';
+import { createUniquesArr } from '../_abstract/uniquesArr';
 import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
 import Route from '../routes/Route';
 import useRequest from '../_abstract/useRequest';
 import { URI } from '../_commons/constants';
-import { sameListItemsFromTop } from '../_abstract/sameListItemsFromTop';
+import { arrNotEqualAt } from '../_abstract/arrNotEqualAt';
 
 const Main = StyledView( { style: styles.main } );
 const List = StyledScrollView( { style: styles.list } );
@@ -15,18 +15,17 @@ const normalizeStopRoutes = data => {
 
     data = data.filter( row => row.hidden === '0' );
 
-    // to avoid duplicated entries sometimes seem to be included in api responses
-    const uniqueRoutes = createUniqueList();
+    // avoid some duplicated entries included in api responses (distinguished only by MasterLineCode)
+    const uniqueRoutes = createUniquesArr();
     data = data.filter( row => uniqueRoutes.push( row.RouteCode + row.RouteDescr ) );
 
-    // to group all line descriptions by route code
-    const lineDescr = {};
-    data.forEach( row => lineDescr[ row.LineCode ] = {} );
-    data.forEach( row => lineDescr[ row.LineCode ][ row.RouteCode ] = row.LineDescr );
-
-    // { 
-    //     "1137": {
-    //         "2458": "ΕΥΓΕΝΕΙΑ-ΧΑΡΑΥΓΗ-ΠΕΙΡΑΙΑΣ Α (ΚΥΚΛΙΚΗ)", 
+    // group all line descriptions by route code
+    const linesDescr = {};
+    data.forEach( row => linesDescr[ row.LineCode ] = {} );
+    data.forEach( row => linesDescr[ row.LineCode ][ row.RouteCode ] = row.LineDescr );
+    // {     
+    //     "1137": {  // LineCode:
+    //         "2458": "ΕΥΓΕΝΕΙΑ-ΧΑΡΑΥΓΗ-ΠΕΙΡΑΙΑΣ Α (ΚΥΚΛΙΚΗ)",  // RouteCode: LineDescr
     //         "2646": "ΕΥΓΕΝΕΙΑ-ΧΑΡΑΥΓΗ-ΠΕΙΡΑΙΑΣ Α (ΚΥΚΛΙΚΗ)"
     //     }, 
     //     "1197": {
@@ -35,22 +34,34 @@ const normalizeStopRoutes = data => {
     //     }
     // }
 
-    console.log( 'LINE DESCRIPTIONS', lineDescr )
-    // to remove the common part of the line descriptions per route code
-    // Object.keys( lineDescr ).forEach( routeCode => {
-    //     lineDescr[ routeCode ] = lineDescr[ routeCode ].map( descrArr => {
-    //         descrArr = descrArr.map( descr => descr.split( ' ' ) );
-    //         const common = sameListItemsFromTop( descrArr );
-    //         descrArr = descrArr.map( descr => descr.splice( 0, common ) );
-    //         descrArr = descrArr.map( descr => descr.join( ' ' ) );
-    //     } );
-    // } );
+    // remove the common part of the line descriptions per line code 
+    // trying to extract more route details, but usually seems that not exists
+    Object.keys( linesDescr ).forEach( lineCode => {
+        const lineDescr = linesDescr[ lineCode ];
+        let descriptions = [];
+
+        Object.keys( lineDescr ).forEach( routeCode => {
+            const descr = lineDescr[ routeCode ];
+            descriptions.push( descr );
+        } );
+
+        descriptions = descriptions.map( descr => descr.split( ' ' ) );
+        const position = arrNotEqualAt( descriptions );
+
+        Object.keys( lineDescr ).forEach( routeCode => {
+            let descr = lineDescr[ routeCode ];
+            descr = descr.split( ' ' );
+            descr.splice( 0, position );
+            descr = descr.join( ' ' );
+            lineDescr[ routeCode ] = descr;
+        } );
+    } );
 
     data = data.map( row => ( {
         LineID: row.LineID,
-        // LineDescr: lineDescr( row.RouteCode ),
         RouteCode: row.RouteCode,
         RouteDescr: row.RouteDescr,
+        LineDescr: linesDescr[ row.LineCode ][ row.RouteCode ],
         RouteType: row.RouteType,
         stops: {},
         schedule: {},

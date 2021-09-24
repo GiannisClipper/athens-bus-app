@@ -1,11 +1,12 @@
 import React from 'react';
 import * as RootNavigation from '../_commons/RootNavigation';
 import { StyledView, StyledTouchableOpacity, StyledText } from '../_abstract/Styled';
+import { StopIcon } from '../_commons/Icons';
+import stylePatterns from '../_commons/stylePatterns';
 import styles from './styles';
 
 const Row = StyledTouchableOpacity( { style: styles.row } );
 const RowIcon = StyledView( { style: styles.rowIcon } );
-const RowIconText = StyledText( { style: styles.rowIconText } );
 const RowDescr = StyledView( { style: styles.rowDescr } );
 const RowDescrText = StyledText( { style: styles.rowDescrText } );
 
@@ -31,7 +32,7 @@ const Stop = props => {
         >
 
             <RowIcon>
-                <RowIconText>&#9995;&#127996;</RowIconText>
+                <StopIcon { ...stylePatterns.tab.item.icon } />
             </RowIcon>
 
             <RowDescr>

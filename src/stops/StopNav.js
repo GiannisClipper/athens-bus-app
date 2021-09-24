@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import styles from '../_commons/stylePatterns';
+import { ArrivalIcon, RouteIcon, MapIcon } from '../_commons/Icons';
 import Arrivals from '../arrivals/Arrivals';
 import StopRoutes from './StopRoutes';
 import Home from '../home/Home';
@@ -31,8 +33,8 @@ const StopNav = props => {
                 name='Arrivals'
                 // component={ Arrivals }
                 options={ {
-                    tabBarIcon: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } }>[]]</Text> ),
-                    tabBarLabel: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } }>Arrivals</Text> ),
+                    tabBarIcon: () => <ArrivalIcon { ...styles.tab.item.icon } />,
+                    tabBarLabel: () => <Text style={ styles.tab.item.text }>Arrivals</Text>,
                 } }
             >
                 { props => (
@@ -47,8 +49,8 @@ const StopNav = props => {
                 name='StopRoutes'
                 // component={ StopRoutes }
                 options={ {
-                    tabBarIcon: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } } >[]</Text> ),
-                    tabBarLabel: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } }>Routes</Text> ),
+                    tabBarIcon: () => <RouteIcon { ...styles.tab.item.icon } />,
+                    tabBarLabel: () => <Text style={ styles.tab.item.text }>Routes</Text>,
                 } }
                 >
                 { props => (
@@ -63,8 +65,8 @@ const StopNav = props => {
                 name='StopMap' 
                 component={ Home } 
                 options={ {
-                    tabBarIcon: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } } >[]</Text> ),
-                    tabBarLabel: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } }>Map</Text> ),
+                    tabBarIcon: () => <MapIcon { ...styles.tab.item.icon } />,
+                    tabBarLabel: () => <Text style={ styles.tab.item.text }>Map</Text>,
                 } }
             />
         </Tab.Navigator>

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
-import { Text } from 'react-native';
 import { MyContext } from '../_commons/MyContext';
+import stylePatterns from '../_commons/stylePatterns';
+import { MySelectedIcon, MyDeselectedIcon } from '../_commons/Icons';
 
 const MyRouteSelector = ( { route } ) => {
     const { myRoutes, createMyRoute, deleteMyRoute } = useContext( MyContext );
@@ -18,8 +19,8 @@ const MyRouteSelector = ( { route } ) => {
 
     return (
         isMyRoute
-            ? <Text onPress={ toggleMyRoute }>&#9745;</Text>
-            : <Text onPress={ toggleMyRoute }>&#9744;</Text>
+            ? <MySelectedIcon { ...stylePatterns.tab.item.icon } onPress={ toggleMyRoute } />
+            : <MyDeselectedIcon { ...stylePatterns.tab.item.icon } onPress={ toggleMyRoute } />
     );
 }
 

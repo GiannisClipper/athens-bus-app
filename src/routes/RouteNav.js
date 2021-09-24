@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import styles from '../_commons/stylePatterns';
+import { StopIcon, ScheduleIcon, MapIcon } from '../_commons/Icons';
 import Stops from '../stops/Stops';
 import RouteSchedule from './RouteSchedule';
 import Home from '../home/Home';
@@ -37,8 +39,8 @@ const RouteNav = props => {
                 name='Stops'
                 // component={ Stops }
                 options={ {
-                    tabBarIcon: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } }>&#9995;&#127996;</Text> ),
-                    tabBarLabel: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } }>Stops</Text> ),
+                    tabBarIcon: () => <StopIcon { ...styles.tab.item.icon } />,
+                    tabBarLabel: () => <Text style={ styles.tab.item.text }>Stops</Text>,
                     tabBarActiveBackgroundColor: 'powderblue',
                     tabBarInactiveBackgroundColor: 'skyblue',
                 } }
@@ -55,8 +57,8 @@ const RouteNav = props => {
                 name='RouteSchedule' 
                 // component={ RouteSchedule } 
                 options={ {
-                    tabBarIcon: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } } >[]</Text> ),
-                    tabBarLabel: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } }>Schedule</Text> ),
+                    tabBarIcon: () => <ScheduleIcon { ...styles.tab.item.icon } />,
+                    tabBarLabel: () => <Text style={ styles.tab.item.text }>Schedule</Text>,
                     tabBarActiveBackgroundColor: 'powderblue',
                     tabBarInactiveBackgroundColor: 'skyblue',
                 } }
@@ -73,8 +75,8 @@ const RouteNav = props => {
                 name='RouteMap' 
                 component={ Home } 
                 options={ {
-                    tabBarIcon: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } } >[]</Text> ),
-                    tabBarLabel: ( { color, size } ) => ( <Text style={ { color, fontSize: size  } }>Map</Text> ),
+                    tabBarIcon: () => <MapIcon { ...styles.tab.item.icon } />,
+                    tabBarLabel: () => <Text style={ styles.tab.item.text }>Map</Text>,
                     tabBarActiveBackgroundColor: 'powderblue',
                     tabBarInactiveBackgroundColor: 'skyblue',
                 } }

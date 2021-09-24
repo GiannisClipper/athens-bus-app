@@ -1,4 +1,6 @@
 import React, { useContext, useEffect } from 'react';
+import { ScheduleIcon } from '../_commons/Icons';
+import stylePatterns from '../_commons/stylePatterns';
 import styles from './styles';
 import { StyledView, StyledScrollView, StyledTouchableOpacity, StyledText } from '../_abstract/Styled';
 import { CacheContext } from '../_commons/CacheContext';
@@ -44,11 +46,6 @@ const RouteSchedule = props => {
             go = go.filter( row => row[ code ] === LineCode && typeof row[ time] === 'string' );
             go = go.map( row => row[ time ] );
 
-            // data = {};
-            // come.forEach( row => data[ row ] = true );
-            // go.forEach( row => data[ row ] = true );
-            // data = Object.keys( data );
-
             data = [];
             come.forEach( row => ! data.includes( row ) ? data.push( row ) : null );
             go.forEach( row => ! data.includes( row ) ? data.push( row ) : null );
@@ -79,7 +76,7 @@ const RouteSchedule = props => {
                     <Row key={ i }>
 
                         <RowIcon>
-                            <RowIconText>!</RowIconText>
+                            <ScheduleIcon { ...stylePatterns.tab.item.icon } />
                         </RowIcon>
 
                         <RowDescr>

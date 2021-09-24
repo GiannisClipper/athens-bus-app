@@ -3,38 +3,11 @@ import { CacheContext } from '../_commons/CacheContext';
 import { NavigationContainer, CommonActions } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { navigationRef } from '../_commons/RootNavigation';
+import styles from '../_commons/stylePatterns';
+import { HomeIcon, LineIcon, MySelectedIcon } from '../_commons/Icons';
 import Home from '../home/Home';
 import LinesNav from '../lines/LinesNav';
 import MyNav from '../my/MyNav';
-// import styles from '../_commons/styles';
-
-const styles = {
-
-    drawer: {
-        backgroundColor: 'powderblue',
-        width: '44%',
-    },
-
-    header: {
-        view: {
-            backgroundColor: 'steelblue',
-        },
-        text: {
-            color: 'skyblue',
-            fontWeight: '600',
-        }    
-    },
-
-    item: {
-        view: {
-        },
-        text: {
-            color: 'steelblue',
-            fontWeight: '600',
-        }    
-    },
-};
-
 
 const Drawer = createDrawerNavigator();
 
@@ -48,16 +21,18 @@ const CustomDrawerContent = props => {
             {/* <DrawerItemList { ...props } /> */}
 
             <DrawerItem
-                style={ styles.item.view }
-                labelStyle={ styles.item.text }
+                style={ styles.drawer.item.view }
+                labelStyle={ styles.drawer.item.text }
+                icon={ () => <HomeIcon { ...styles.drawer.item.icon } /> }
                 label="Home"
                 onPress={ () => navigation.navigate( 'Home' ) }
             />
 
             <DrawerItem
-                style={ styles.item.view }
-                labelStyle={ styles.item.text }
+                style={ styles.drawer.item.view }
+                labelStyle={ styles.drawer.item.text }
                 label="Lines"
+                icon={ () => <LineIcon { ...styles.drawer.item.icon } /> }
                 onPress={ () => { 
                     removeNavigationState( navigation );
                     navigation.navigate( 'Lines' );
@@ -65,9 +40,10 @@ const CustomDrawerContent = props => {
             />
 
             <DrawerItem
-                style={ styles.item.view }
-                labelStyle={ styles.item.text }
+                style={ styles.drawer.item.view }
+                labelStyle={ styles.drawer.item.text }
                 label="Favourites"
+                icon={ () => <MySelectedIcon { ...styles.drawer.item.icon } /> }
                 onPress={ () => { 
                     removeNavigationState( navigation );
                     navigation.navigate( 'Favourites' );
@@ -115,10 +91,10 @@ const AppNav = () => {
                 initialRouteName='Home'
 
                 screenOptions={ { 
-                    drawerStyle: styles.drawer,
-                    headerStyle: styles.header.view,
-                    headerTintColor: styles.header.text,
-                    headerTitleStyle: styles.header.text,
+                    drawerStyle: styles.drawer.drawer,
+                    headerStyle: styles.drawer.header.view,
+                    headerTintColor: styles.drawer.header.text,
+                    headerTitleStyle: styles.drawer.header.text,
                 } }
             > 
 
