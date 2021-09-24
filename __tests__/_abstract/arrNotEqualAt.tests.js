@@ -1,6 +1,6 @@
-const { sameListItemsFromTop } = require( '../../src/_abstract/sameListItemsFromTop' );
+const { arrNotEqualAt } = require( '../../src/_abstract/arrNotEqualAt' );
 
-describe( 'sameListItemsFromTop', () => {
+describe( 'arrNotEqualAt', () => {
 
     test( 'three common items', async () => {
         const arr = [
@@ -9,7 +9,7 @@ describe( 'sameListItemsFromTop', () => {
             [ 'Someones', 'name', 'is', 'Diana' ],
         ];
 
-        const result = sameListItemsFromTop( arr );
+        const result = arrNotEqualAt( arr );
         expect( result ).toBe( 3 );
 
     } );
@@ -21,7 +21,7 @@ describe( 'sameListItemsFromTop', () => {
             [ 'Someones', 'name', 'is', 'Diana' ],
         ];
 
-        const result = sameListItemsFromTop( arr );
+        const result = arrNotEqualAt( arr );
         expect( result ).toBe( 0 );
 
     } );
@@ -33,7 +33,7 @@ describe( 'sameListItemsFromTop', () => {
             [ 'Someones', 'name', 'is', 'Diana' ],
         ];
 
-        const result = sameListItemsFromTop( arr );
+        const result = arrNotEqualAt( arr );
         expect( result ).toBe( 0 );
 
     } );
@@ -46,7 +46,7 @@ describe( 'sameListItemsFromTop', () => {
             [ 'Someones', 'name', 'is', 'Diana' ],
         ];
 
-        const result = sameListItemsFromTop( arr );
+        const result = arrNotEqualAt( arr );
         expect( result ).toBe( 0 );
 
     } );
@@ -56,7 +56,7 @@ describe( 'sameListItemsFromTop', () => {
             [ 'Someones', 'name', 'is', 'Giannis', 'Clipper' ],
         ];
 
-        const result = sameListItemsFromTop( arr );
+        const result = arrNotEqualAt( arr );
         expect( result ).toBe( 5 );
 
     } );
