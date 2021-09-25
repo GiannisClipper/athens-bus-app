@@ -11,11 +11,11 @@ export const LineIcon = props => <Icon { ...props } name='bus' />
 
 export const RouteIcon = props => <Icon { ...props } name='swap-horizontal' />
 
-export const ScheduleIcon = props => <Icon { ...props } name='calendar-clock' />
-
 export const StopIcon = props => <Icon { ...props } name='bus-stop' />
 
 export const ArrivalIcon = props => <Icon { ...props } name='bus-clock' />
+
+export const ScheduleIcon = props => <Icon { ...props } name='calendar-clock' />
 
 export const MapIcon = props => <Icon { ...props } name='map-marker' />
 

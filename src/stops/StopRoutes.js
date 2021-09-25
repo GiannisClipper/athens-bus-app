@@ -59,9 +59,10 @@ const normalizeStopRoutes = data => {
 
     data = data.map( row => ( {
         LineID: row.LineID,
+        LineCode: row.LineCode,
+        LineDescr: linesDescr[ row.LineCode ][ row.RouteCode ],
         RouteCode: row.RouteCode,
         RouteDescr: row.RouteDescr,
-        LineDescr: linesDescr[ row.LineCode ][ row.RouteCode ],
         RouteType: row.RouteType,
         stops: {},
         schedule: {},

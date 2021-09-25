@@ -23,6 +23,7 @@ const RouteSchedule = props => {
     const { cache } = useContext( CacheContext );
     const { lines } = cache;
 
+    // is still usefull ????????
     if ( ! route.LineCode ) {
         const matchLines = lines.data.filter( line => line.LineID === route.LineID );
         route.LineCode = matchLines.length > 0 ? matchLines[ 0 ].LineCode : '';

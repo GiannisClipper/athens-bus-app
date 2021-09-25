@@ -5,7 +5,7 @@ import styles from '../_commons/stylePatterns';
 import { StopIcon, ScheduleIcon, MapIcon } from '../_commons/Icons';
 import Stops from '../stops/Stops';
 import RouteSchedule from './RouteSchedule';
-import Home from '../home/Home';
+import RouteMap from './RouteMap';
 import MyRouteSelector from '../my/MyRouteSelector';
 
 const Tab = createBottomTabNavigator();
@@ -73,14 +73,22 @@ const RouteNav = props => {
 
             <Tab.Screen 
                 name='RouteMap' 
-                component={ Home } 
+                // component={ RouteMap } 
                 options={ {
                     tabBarIcon: () => <MapIcon { ...styles.tab.item.icon } />,
                     tabBarLabel: () => <Text style={ styles.tab.item.text }>Map</Text>,
                     tabBarActiveBackgroundColor: 'powderblue',
                     tabBarInactiveBackgroundColor: 'skyblue',
                 } }
-            />
+            >
+                { props => (
+                    <RouteMap
+                        { ...props }
+                        data={ { route } }
+                    /> 
+                ) }
+
+            </Tab.Screen>
         </Tab.Navigator>
         </>
     );

@@ -20,11 +20,14 @@ const Routes = props => {
         normalize: data => data
             .map( row => ( {
                 LineID: line.LineID,
+                LineCode: row.LineCode,
                 RouteCode: row.RouteCode,
                 RouteDescr: row.RouteDescr,
                 RouteType: row.RouteType,
                 stops: {},
                 schedule: {},
+                coords: {},
+                map: {},
             } ) )
             .sort( ( row1, row2 ) => row1.RouteType < row2.RouteType ? -1 : 1 ),
 

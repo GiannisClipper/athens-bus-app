@@ -23,6 +23,8 @@ const Stops = props => {
             .map( row => ( {
                 StopCode: row.StopCode,
                 StopDescr: row.StopDescr,
+                latitude: parseFloat( row.StopLat ),
+                longitude: parseFloat( row.StopLng ),
                 arrivals: {},
                 routes: {},
             } ) ),
