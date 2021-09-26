@@ -11,6 +11,24 @@ import MyNav from '../my/MyNav';
 
 const Drawer = createDrawerNavigator();
 
+const removeNavigationState = navigation => {
+    // remove navigation state to have a initial render
+ 
+    return navigation.dispatch( state => {
+
+        const routes = state.routes.map( route => {
+            const { state, ...rest } = route;
+            return { ...rest };
+        } );
+
+        return CommonActions.reset( {
+            ...state,
+            routes,
+            index: 0,
+        } );
+    } );
+}
+
 const CustomDrawerContent = props => {
 
     const { navigation } = props;
@@ -44,7 +62,7 @@ const CustomDrawerContent = props => {
                 labelStyle={ styles.drawer.item.text }
                 label="Favourites"
                 icon={ () => <MySelectedIcon { ...styles.drawer.item.icon } /> }
-                onPress={ () => { 
+                onPress={ () => {
                     removeNavigationState( navigation );
                     navigation.navigate( 'Favourites' );
                 } }
@@ -52,25 +70,6 @@ const CustomDrawerContent = props => {
 
         </DrawerContentScrollView>
     );
-}
-
-const removeNavigationState = navigation => {
-    // remove navigation state to have a initial render
- 
-    return navigation.dispatch( state => {
-
-        const routes = state.routes.map( route => {
-            const { state, ...rest } = route;
-            return { ...rest };
-        } );
-
-        return CommonActions.reset( {
-            ...state,
-            routes,
-            index: 0,
-        } );
-    } );
-
 }
 
 const AppNav = () => {

@@ -1,8 +1,12 @@
 import React from 'react';
-import styles from './styles';
+
 import { StyledView, StyledScrollView } from '../_abstract/Styled';
-import useRequest from '../_abstract/useRequest';
+import styles from './styles';
+
 import { URI } from '../_commons/constants';
+import { useRequest, initRequestStatus } from '../_abstract/useRequest';
+import { stopsResponseHandler } from './logic/responseHandlers';
+
 import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
 import Stop from './Stop';
 
@@ -16,20 +20,9 @@ const Stops = props => {
     const { stops } = route;
 
     const { status } = useRequest( {
-
         uri: URI.STOPS_OF_ROUTE + route.RouteCode,
-
-        normalize: data => data
-            .map( row => ( {
-                StopCode: row.StopCode,
-                StopDescr: row.StopDescr,
-                latitude: parseFloat( row.StopLat ),
-                longitude: parseFloat( row.StopLng ),
-                arrivals: {},
-                routes: {},
-            } ) ),
-
-        store: stops,
+        requestStatus: initRequestStatus( stops ),
+        responseHandler: response => stopsResponseHandler( stops, response ),
     } );
     
     return (

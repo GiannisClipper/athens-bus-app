@@ -8,8 +8,6 @@ const Stack = createNativeStackNavigator();
 
 const LinesNav = props => {
 
-    const { navigation } = props;
-
     return (
         <Stack.Navigator 
             initialRouteName='LineGroups' 

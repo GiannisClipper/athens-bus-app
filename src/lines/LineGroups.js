@@ -1,9 +1,13 @@
 import React, { useContext, useEffect } from 'react';
+
 import { StyledView, StyledScrollView } from '../_abstract/Styled';
 import { lineGroupStyles as styles } from './styles';
+
 import { CacheContext } from '../_commons/CacheContext';
-import useRequest from '../_abstract/useRequest';
 import { URI } from '../_commons/constants';
+import { useRequest, initRequestStatus } from '../_abstract/useRequest';
+import { linesResponseHandler } from './logic/responseHandlers';
+
 import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
 import LineSearch from './LineSearch';
 import LineGroup from './LineGroup';
@@ -11,37 +15,15 @@ import LineGroup from './LineGroup';
 const Main = StyledView( { style: styles.main } );
 const List = StyledScrollView( { style: styles.list } );
 
-const parseGroups = data => {
-    const groups = {};
-
-    for ( const row of data ) {
-        const group = row.LineID.substr( 0, 1 );
-        groups[ group ] = true;
-    }
-
-    return Object.keys( groups );
-}
-
 const LineGroups = () => {
 
     const { cache } = useContext( CacheContext );
     const { lines } = cache;
 
     const { status } = useRequest( {
-
         uri: URI.LINES,
-
-        normalize: data => {
-            lines.groups = parseGroups( data );
-            return data.map( row => ( {
-                LineCode: row.LineCode,
-                LineID: row.LineID,
-                LineDescr: row.LineDescr,
-                routes: {},
-            } ) );
-        },
-
-        store: lines,
+        requestStatus: initRequestStatus( lines ),
+        responseHandler: response => linesResponseHandler( lines, response ),
     } );
     
     return (

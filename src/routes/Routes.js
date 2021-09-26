@@ -1,8 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import useRequest from '../_abstract/useRequest';
+
 import { URI } from '../_commons/constants';
+import { useRequest, initRequestStatus } from '../_abstract/useRequest';
+import { routesResponseHandler } from './logic/responseHandlers';
+
 import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
 import Route from './Route';
 
@@ -11,27 +13,10 @@ const Routes = props => {
     const { line } = props;
     const { routes } = line;
 
-    const navigation = useNavigation();
-
     const { status } = useRequest( {
-
         uri: URI.ROUTES_OF_LINE + line.LineCode,
-
-        normalize: data => data
-            .map( row => ( {
-                LineID: line.LineID,
-                LineCode: row.LineCode,
-                RouteCode: row.RouteCode,
-                RouteDescr: row.RouteDescr,
-                RouteType: row.RouteType,
-                stops: {},
-                schedule: {},
-                coords: {},
-                map: {},
-            } ) )
-            .sort( ( row1, row2 ) => row1.RouteType < row2.RouteType ? -1 : 1 ),
-
-        store: routes,
+        requestStatus: initRequestStatus( routes ),
+        responseHandler: response => routesResponseHandler( routes, response, line.LineID ),
     } );
  
     return (

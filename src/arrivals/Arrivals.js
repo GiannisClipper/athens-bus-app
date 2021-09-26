@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import styles from './styles';
+
 import { StyledView, StyledScrollView } from '../_abstract/Styled';
-import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
-import Arrival from './Arrival';
-import { normalizeStopRoutes } from '../stops/StopRoutes';
-import useRequest from '../_abstract/useRequest';
+import styles from './styles';
+
 import { URI } from '../_commons/constants';
+import { useRequest, initRequestStatus } from '../_abstract/useRequest';
+import { stopRoutesResponseHandler, stopArrivalsResponseHandler } from '../stops/logic/responseHandlers';
+
+import { WorkingIndicator, InfoMessage, ErrorMessage } from '../_commons/Messages';
+import Arrival from './Arrival';
 
 const Main = StyledView( { style: styles.main } );
 const List = StyledScrollView( { style: styles.list } );
@@ -20,7 +23,6 @@ const Arrivals = props => {
     useEffect( () => {
         const unsubscribe = navigation.addListener( 'focus', () => {
             setRefreshTime( 20000 );
-            // console.log( 'setRefreshTime( 20000 )', routes )
         } );
         return unsubscribe;
     }, [ navigation ]);
@@ -28,43 +30,21 @@ const Arrivals = props => {
     useEffect( () => {
         const unsubscribe = navigation.addListener( 'blur', () => {
             setRefreshTime( null );
-            // console.log( 'setRefreshTime( null )' )
         } );
         return unsubscribe;
     }, [ navigation ]);
 
     const routesRequest = useRequest( {
-
         uri: URI.ROUTES_OF_STOP + stop.StopCode,
-
-        normalize: normalizeStopRoutes,
-
-        store: routes,
-
+        requestStatus: initRequestStatus( routes ),
+        responseHandler: response => stopRoutesResponseHandler( routes, response ),
     } );
 
     const arrivalsRequest = useRequest( {
-
         uri: URI.ARRIVALS_OF_STOP + stop.StopCode,
-
-        normalize: data => {
-            return data === null ? // data is null when there are no arrivals
-                [ {
-                    RouteCode: 'No arrivals found.',
-                    minutes: '',
-                } ]
-            :
-                data.map( row => ( {
-                    RouteCode: row.route_code,
-                    minutes: row.btime2,
-                } ) );
-
-        },
-
-        store: arrivals,
-
-        refreshTime,  // 20000 milliseconds
-    
+        requestStatus: initRequestStatus( arrivals ),
+        responseHandler: response => stopArrivalsResponseHandler( arrivals, response ),
+        refreshTime, // 20000 milliseconds
     } );
 
     const routesStatus = routesRequest.status;
@@ -75,6 +55,9 @@ const Arrivals = props => {
 
             { arrivalsStatus.isRequesting || routesStatus.isRequesting ?
                 <WorkingIndicator />
+
+            : arrivalsStatus.hasData && routesStatus.hasData && arrivals.data.length === 0 ?
+                <InfoMessage>{ 'No arrivals found.' }</InfoMessage>
 
             : arrivalsStatus.hasData && routesStatus.hasData ?
                 <List>
