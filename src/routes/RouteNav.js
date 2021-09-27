@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import styles from '../_commons/stylePatterns';
+import * as style from '../_commons/style/nav';
 import { StopIcon, ScheduleIcon, MapIcon } from '../_commons/Icons';
 import Stops from '../stops/Stops';
 import RouteSchedule from './RouteSchedule';
@@ -27,22 +27,18 @@ const RouteNav = props => {
 
     return (
         <>
-        <Tab.Navigator 
-            initialRouteName='Stops' 
-            screenOptions={ { 
-                headerShown: false,
-                tabBarItemStyle: {
-                },
-            } }
+        <Tab.Navigator
+            initialRouteName='Stops'
+            screenOptions={ { headerShown: false } }
         >
             <Tab.Screen 
                 name='Stops'
                 // component={ Stops }
                 options={ {
-                    tabBarIcon: () => <StopIcon { ...styles.tab.item.icon } />,
-                    tabBarLabel: () => <Text style={ styles.tab.item.text }>Stops</Text>,
-                    tabBarActiveBackgroundColor: 'powderblue',
-                    tabBarInactiveBackgroundColor: 'skyblue',
+                    tabBarIcon: () => <StopIcon { ...style.icon } />,
+                    tabBarLabel: () => <Text style={ style.tab.item.text }>Stops</Text>,
+                    tabBarInactiveBackgroundColor: style.tab.item.view.inactiveBackgroundColor,
+                    tabBarActiveBackgroundColor: style.tab.item.view.activeBackgroundColor,
                 } }
             >
                 { props => (
@@ -57,10 +53,10 @@ const RouteNav = props => {
                 name='RouteSchedule' 
                 // component={ RouteSchedule } 
                 options={ {
-                    tabBarIcon: () => <ScheduleIcon { ...styles.tab.item.icon } />,
-                    tabBarLabel: () => <Text style={ styles.tab.item.text }>Schedule</Text>,
-                    tabBarActiveBackgroundColor: 'powderblue',
-                    tabBarInactiveBackgroundColor: 'skyblue',
+                    tabBarIcon: () => <ScheduleIcon { ...style.icon } />,
+                    tabBarLabel: () => <Text style={ style.tab.item.text }>Schedule</Text>,
+                    tabBarInactiveBackgroundColor: style.tab.item.view.inactiveBackgroundColor,
+                    tabBarActiveBackgroundColor: style.tab.item.view.activeBackgroundColor,
                 } }
             >
                 { props => (
@@ -75,10 +71,10 @@ const RouteNav = props => {
                 name='RouteMap' 
                 // component={ RouteMap } 
                 options={ {
-                    tabBarIcon: () => <MapIcon { ...styles.tab.item.icon } />,
-                    tabBarLabel: () => <Text style={ styles.tab.item.text }>Map</Text>,
-                    tabBarActiveBackgroundColor: 'powderblue',
-                    tabBarInactiveBackgroundColor: 'skyblue',
+                    tabBarIcon: () => <MapIcon { ...style.icon } />,
+                    tabBarLabel: () => <Text style={ style.tab.item.text }>Map</Text>,
+                    tabBarInactiveBackgroundColor: style.tab.item.view.inactiveBackgroundColor,
+                    tabBarActiveBackgroundColor: style.tab.item.view.activeBackgroundColor,
                 } }
             >
                 { props => (

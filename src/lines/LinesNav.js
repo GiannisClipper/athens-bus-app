@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import * as style from '../_commons/style/nav';
 import LineGroups from '../lines/LineGroups';
 import RouteNav from '../routes/RouteNav';
 import StopNav from '../stops/StopNav';
@@ -14,14 +15,7 @@ const LinesNav = props => {
 
             screenOptions={ { 
                 headerShown: false,
-                headerStyle: {
-                    backgroundColor: 'powderblue',
-                },
-                headerTintColor: 'steelblue',
-                headerTitleStyle: {
-                    color: 'steelblue',
-                    fontSize: 13,
-                },
+                ...style.stack,
             } }
         >
 

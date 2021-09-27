@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { MyContext } from '../_commons/MyContext';
-import stylePatterns from '../_commons/stylePatterns';
+import * as style from './style/my';
 import { MySelectedIcon, MyDeselectedIcon } from '../_commons/Icons';
 
 const MyStopSelector = ( { stop } ) => {
@@ -19,8 +19,8 @@ const MyStopSelector = ( { stop } ) => {
 
     return (
        isMyStop
-            ? <MySelectedIcon { ...stylePatterns.tab.item.icon } onPress={ toggleMyStop } />
-            : <MyDeselectedIcon { ...stylePatterns.tab.item.icon } onPress={ toggleMyStop } />
+            ? <MySelectedIcon { ...style.icon } onPress={ toggleMyStop } />
+            : <MyDeselectedIcon { ...style.icon } onPress={ toggleMyStop } />
     );
 }
 

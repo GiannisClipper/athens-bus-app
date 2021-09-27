@@ -1,19 +1,19 @@
 import React, { useContext } from 'react';
 import { StyledView, StyledScrollView } from '../_abstract/Styled';
-import styles from './styles';
+import * as style from './style/my';
 import { MyContext } from '../_commons/MyContext';
 import { InfoMessage } from '../_commons/Messages';
 import Route from '../routes/Route';
 
-const Main = StyledView( { style: styles.main } );
-const List = StyledScrollView( { style: styles.list } );
+const Container = StyledView( { style: style.container } );
+const List = StyledScrollView( { style: style.list } );
 
 const MyRoutes = props => {
 
     const { myRoutes } = useContext( MyContext );
 
     return ( 
-        <Main testID='routes'>
+        <Container testID='routes'>
 
         { myRoutes.length === 0 
         ?
@@ -29,7 +29,7 @@ const MyRoutes = props => {
             </List>
         }
 
-        </Main>
+        </Container>
     );
 }
 

@@ -2,13 +2,12 @@ import React from 'react';
 import * as RootNavigation from '../_commons/RootNavigation';
 import { StyledView, StyledTouchableOpacity, StyledText } from '../_abstract/Styled';
 import { RouteIcon } from '../_commons/Icons';
-import stylePatterns from '../_commons/stylePatterns';
-import styles from './styles';
+import * as style from './style/routes';
 
-const Row = StyledTouchableOpacity( { style: styles.row } );
-const RowIcon = StyledView( { style: styles.rowIcon } );
-const RowDescr = StyledView( { style: styles.rowDescr } );
-const RowDescrText = StyledText( { style: styles.rowDescrText } );
+const Row = StyledTouchableOpacity( { style: style.row } );
+const Col1 = StyledView( { style: style.col1.view } );
+const Col2 = StyledView( { style: style.col2.view } );
+const Col2Text = StyledText( { style: style.col2.text } );
 
 const Route = props => {
 
@@ -33,13 +32,13 @@ const Route = props => {
             onPress={ onPress }
         >
 
-            <RowIcon>
-                <RouteIcon { ...stylePatterns.tab.item.icon } />
-            </RowIcon>
+            <Col1>
+                <RouteIcon { ...style.icon } />
+            </Col1>
 
-            <RowDescr>
-                <RowDescrText>{ `[${ route.LineID }]   ${ route.RouteDescr } ${ route.LineDescr || '' }` }</RowDescrText>
-            </RowDescr>
+            <Col2>
+                <Col2Text>{ `[${ route.LineID }]   ${ route.RouteDescr } ${ route.LineDescr || '' }` }</Col2Text>
+            </Col2>
 
         </Row>
         </>

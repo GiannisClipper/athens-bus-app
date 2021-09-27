@@ -1,24 +1,23 @@
 import React from 'react';
 import { StyledView, StyledText } from '../_abstract/Styled';
-import { portraitStyles, landscapeStyles } from './styles';
+import * as style from './style/home';
 import useOrientation from '../_abstract/logic/useOrientation';
+
+const Container = StyledView( { style: style.container } );
+const NameBox = StyledView( { style: style.nameBox } );
+const BigText = StyledText( { style: style.bigText } );
+const SmallText = StyledText( { style: style.smallText } );
+const VerySmallText = StyledText( { style: style.verySmallText } );
+const Separator = StyledView( { style: style.separator } );
 
 const Home = () => {
 
     const orientation = useOrientation();
 
-    const styles = orientation === 'PORTRAIT' ? portraitStyles : landscapeStyles;
-
-    const Main = StyledView( { style: styles.main } );
-    const Box = StyledView( { style: styles.box } );
-    const NameBox = StyledView( { style: styles.nameBox } );
-    const BigText = StyledText( { style: styles.bigText } );
-    const SmallText = StyledText( { style: styles.smallText } );
-    const VerySmallText = StyledText( { style: styles.verySmallText } );
-    const Separator = StyledView( { style: styles.separator } );
+    const Box = StyledView( { style: style.box[ orientation === 'PORTRAIT' ? 'portrait' : 'landscape' ] } );
 
     return (
-        <Main>
+        <Container>
             <Box testID='home-box'>
                 <NameBox>
                     <BigText testID='home-title'>ATHENS BUS</BigText>
@@ -29,11 +28,11 @@ const Home = () => {
                 <SmallText>code written in React Native and data</SmallText>
                 <SmallText>powered by OASA telematics API.</SmallText>
                 <SmallText></SmallText>
-                <SmallText>An indypendent initiative, not associated</SmallText>
+                <SmallText>An independent initiative, not associated</SmallText>
                 <SmallText>with OASA organization, for practicing</SmallText>
                 <SmallText>and demonstration purposes.</SmallText>
             </Box>
-        </Main>
+        </Container>
     );
 }
 

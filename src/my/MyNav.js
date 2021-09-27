@@ -1,5 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import * as style from '../_commons/style/nav';
 import MyListsNav from './MyListsNav';
 import RouteNav from '../routes/RouteNav';
 import StopNav from '../stops/StopNav';
@@ -8,22 +9,13 @@ const Stack = createNativeStackNavigator();
 
 const MyNav = ( props ) => {
 
-    const { navigation } = props;
-
     return (
         <Stack.Navigator 
             initialRouteName='MyListsNav' 
 
             screenOptions={ { 
-                headerShown: false ,
-                headerStyle: {
-                    backgroundColor: 'powderblue',
-                },
-                headerTintColor: 'steelblue',
-                headerTitleStyle: {
-                    color: 'steelblue',
-                    fontSize: 13,
-                },
+                headerShown: false,
+                ...style.stack,
             } }
         >
 

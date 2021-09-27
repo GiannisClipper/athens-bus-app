@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { MyContext } from '../_commons/MyContext';
-import stylePatterns from '../_commons/stylePatterns';
+import * as style from './style/my';
 import { MySelectedIcon, MyDeselectedIcon } from '../_commons/Icons';
 
 const MyRouteSelector = ( { route } ) => {
@@ -19,8 +19,8 @@ const MyRouteSelector = ( { route } ) => {
 
     return (
         isMyRoute
-            ? <MySelectedIcon { ...stylePatterns.tab.item.icon } onPress={ toggleMyRoute } />
-            : <MyDeselectedIcon { ...stylePatterns.tab.item.icon } onPress={ toggleMyRoute } />
+            ? <MySelectedIcon { ...style.icon } onPress={ toggleMyRoute } />
+            : <MyDeselectedIcon { ...style.icon } onPress={ toggleMyRoute } />
     );
 }
 

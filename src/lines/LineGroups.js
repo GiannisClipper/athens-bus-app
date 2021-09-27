@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 
 import { StyledView, StyledScrollView } from '../_abstract/Styled';
-import { lineGroupStyles as styles } from './styles';
+import * as style from './style/lineGroups';
 
 import { CacheContext } from '../_commons/CacheContext';
 import { URI } from '../_commons/logic/constants';
@@ -12,8 +12,8 @@ import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
 import LineSearch from './LineSearch';
 import LineGroup from './LineGroup';
 
-const Main = StyledView( { style: styles.main } );
-const List = StyledScrollView( { style: styles.list } );
+const Container = StyledView( { style: style.container } );
+const List = StyledScrollView( { style: style.list } );
 
 const LineGroups = () => {
 
@@ -27,7 +27,7 @@ const LineGroups = () => {
     } );
     
     return (
-        <Main testID='groups'>
+        <Container testID='groups'>
 
         { status.isRequesting ?
             <WorkingIndicator />
@@ -53,7 +53,7 @@ const LineGroups = () => {
 
         : null }
 
-        </Main>
+        </Container>
     );
 }
 

@@ -14,7 +14,7 @@ const customFetch = uri => {
             }
 
             const txt = await res.text();
-            throw { message: txt };
+            throw { message: `REQUEST ERROR: ${ txt }` };
 
         } )
 

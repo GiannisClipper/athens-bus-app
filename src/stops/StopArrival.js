@@ -1,6 +1,12 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import styles from './styles';
+import { StyledView, StyledText } from '../_abstract/Styled';
+import * as style from './style/stopArrivals';
+
+const Row = StyledView( { style: style.row } );
+const Col1 = StyledView( { style: style.col1.view } );
+const Col1Text = StyledText( { style: style.col1.text } );
+const Col2 = StyledView( { style: style.col2.view } );
+const Col2Text = StyledText( { style: style.col2.text } );
 
 const StopArrival = props => {
 
@@ -13,20 +19,17 @@ const StopArrival = props => {
     const RouteDescr = result.length > 0 ? result[ 0 ].RouteDescr : arrival.RouteCode;
 
     return (
-        <View 
-            testID='arrival-row'
-            style={ styles.row }
-        >
+        <Row testID='arrival-row'>
 
-            <View style={ styles.rowIcon }>
-                <Text style={ styles.rowIconText }>{ minutes }</Text>
-            </View>
+            <Col1>
+                <Col1Text>{ minutes }</Col1Text>
+            </Col1>
 
-            <View style={ styles.rowDescr }>
-                <Text style={ styles.rowDescrText }>{ `${ LineID } ${ RouteDescr }` }</Text>
-            </View>
+            <Col2>
+                <Col2Text>{ `${ LineID } ${ RouteDescr }` }</Col2Text>
+            </Col2>
 
-        </View>
+        </Row>
     );
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import styles from '../_commons/stylePatterns';
+import * as style from '../_commons/style/nav';
 import { StopIcon, RouteIcon } from '../_commons/Icons';
 import MyStops from './MyStops';
 import MyRoutes from './MyRoutes';
@@ -15,11 +15,6 @@ const MyListsNav = props => {
     return (
         <>
         <Tab.Navigator 
-            tabBarOptions={ {
-                tabStyle: {
-                    ...styles.tab.item.view
-                },
-            } }
             initialRouteName='MyStops'
             screenOptions={ { headerShown: false } }
         >
@@ -27,8 +22,10 @@ const MyListsNav = props => {
                 name='MyStops'
                 component={ MyStops } 
                 options={ {
-                    tabBarIcon: () => <StopIcon { ...styles.tab.item.icon } />,
-                    tabBarLabel: () => <Text style={ styles.tab.item.text }>Stops</Text>,
+                    tabBarIcon: () => <StopIcon { ...style.icon } />,
+                    tabBarLabel: () => <Text style={ style.tab.item.text }>Stops</Text>,
+                    tabBarInactiveBackgroundColor: style.tab.item.view.inactiveBackgroundColor,
+                    tabBarActiveBackgroundColor: style.tab.item.view.activeBackgroundColor,
                 } }
             />
 
@@ -36,8 +33,10 @@ const MyListsNav = props => {
                 name='MyRoutes' 
                 component={ MyRoutes } 
                 options={ {
-                    tabBarIcon: () => <RouteIcon { ...styles.tab.item.icon } />,
-                    tabBarLabel: () => <Text style={ styles.tab.item.text }>Routes</Text>,
+                    tabBarIcon: () => <RouteIcon { ...style.icon } />,
+                    tabBarLabel: () => <Text style={ style.tab.item.text }>Routes</Text>,
+                    tabBarInactiveBackgroundColor: style.tab.item.view.inactiveBackgroundColor,
+                    tabBarActiveBackgroundColor: style.tab.item.view.activeBackgroundColor,
                 } }
             />
 

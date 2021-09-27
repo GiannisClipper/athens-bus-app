@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';  
 
 import { StyledView } from '../_abstract/Styled';
-import stylePatterns from '../_commons/stylePatterns';
-import styles from './styles';
+import * as style from './style/routes';
 
 import { URI } from '../_commons/logic/constants';
 import { useRequest, initRequestStatus } from '../_abstract/logic/useRequest';
@@ -13,16 +12,7 @@ import { routeMapResponseHandler } from './logic/responseHandlers';
 import { WorkingIndicator, InfoMessage, ErrorMessage } from '../_commons/Messages';
 import { MapIcon } from '../_commons/Icons';
 
-const Main = StyledView( { style: styles.main } );
-
-const mapStyles = StyleSheet.create( {
-    container: {
-        ...stylePatterns.map.container
-    },
-    map: {
-        ...stylePatterns.map.container
-    },
-} );
+const Container = StyledView( { style: style.container } );
 
 const RouteMap = props => {
 
@@ -37,7 +27,7 @@ const RouteMap = props => {
     } );
 
     return ( 
-        <Main testID='routeMap'>
+        <Container testID='routeMap'>
 
         { status.isRequesting ?
             <WorkingIndicator />
@@ -46,10 +36,10 @@ const RouteMap = props => {
             <InfoMessage>{ 'No route coords found.' }</InfoMessage>
 
         : status.hasData ?
-            <View style={ mapStyles.container }>
+            <View style={ style.map.container }>
 
                 <MapView
-                    style={ mapStyles.map }
+                    style={ style.map.map }
                     showsUserLocation={ false }
                     zoomEnabled={ true }
                     zoomControlEnabled={ true }
@@ -62,19 +52,18 @@ const RouteMap = props => {
 
                     <Polyline 
                         coordinates={ coords.data } 
-                        strokeWidth={ 2 }
-                        strokeColor='blue'
+                        { ...style.map.polyline }
                     />
 
                     { stops.data.map( ( stop, i ) => 
                         <Marker
-                            { ...stylePatterns.map.marker }
+                            { ...style.map.marker }
                             key={ i }
                             coordinate={ { latitude: stop.latitude, longitude: stop.longitude } }
                             title={ `${ stop.StopDescr }` }
                             description={ `(${ stop.StopCode })` }
                         >
-                            <MapIcon { ...stylePatterns.map.marker.icon } />
+                            <MapIcon { ...style.map.marker.icon } />
                         </Marker>
                     ) }
 
@@ -87,7 +76,7 @@ const RouteMap = props => {
 
         : null }
 
-        </Main>
+        </Container>
     );
 }
 

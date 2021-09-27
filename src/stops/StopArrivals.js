@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { StyledView, StyledScrollView } from '../_abstract/Styled';
-import styles from './styles';
+import * as style from './style/stopArrivals';
 
 import { URI } from '../_commons/logic/constants';
 import { useRequest, initRequestStatus } from '../_abstract/logic/useRequest';
@@ -10,8 +10,8 @@ import { stopRoutesResponseHandler, stopArrivalsResponseHandler } from '../stops
 import { WorkingIndicator, InfoMessage, ErrorMessage } from '../_commons/Messages';
 import StopArrival from './StopArrival';
 
-const Main = StyledView( { style: styles.main } );
-const List = StyledScrollView( { style: styles.list } );
+const Container = StyledView( { style: style.container } );
+const List = StyledScrollView( { style: style.list } );
 
 const StopArrivals = props => {
 
@@ -51,7 +51,7 @@ const StopArrivals = props => {
     const arrivalsStatus = arrivalsRequest.status;
 
     return (
-        <Main testID='arrivals'>
+        <Container testID='arrivals'>
 
             { arrivalsStatus.isRequesting || routesStatus.isRequesting ?
                 <WorkingIndicator />
@@ -75,7 +75,7 @@ const StopArrivals = props => {
 
             : null }
 
-        </Main>
+        </Container>
     );
 }
 

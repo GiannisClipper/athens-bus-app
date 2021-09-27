@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { StyledView, StyledScrollView } from '../_abstract/Styled';
-import styles from './styles';
+import * as style from './style/stops';
 
 import { URI } from '../_commons/logic/constants';
 import { useRequest, initRequestStatus } from '../_abstract/logic/useRequest';
@@ -10,8 +10,8 @@ import { stopsResponseHandler } from './logic/responseHandlers';
 import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
 import Stop from './Stop';
 
-const Main = StyledView( { style: styles.main } );
-const List = StyledScrollView( { style: styles.list } );
+const Container = StyledView( { style: style.container } );
+const List = StyledScrollView( { style: style.list } );
 
 const Stops = props => {
 
@@ -26,7 +26,7 @@ const Stops = props => {
     } );
     
     return (
-        <Main testID='stops'>
+        <Container testID='stops'>
 
         { status.isRequesting ?
             <WorkingIndicator />
@@ -46,7 +46,7 @@ const Stops = props => {
 
         : null }
 
-        </Main>
+        </Container>
     );
 }
 

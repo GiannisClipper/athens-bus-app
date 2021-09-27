@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { StyledView, StyledTouchableOpacity, StyledText } from '../_abstract/Styled';
-import { lineGroupStyles as styles } from './styles';
+import * as style from './style/lineGroups';
 import Lines from './Lines';
 
-const Row = StyledTouchableOpacity( { style: styles.row } );
-const RowIcon = StyledView( { style: styles.rowIcon } );
-const RowIconText = StyledText( { style: styles.rowIconText } );
-const RowDescr = StyledView( { style: styles.rowDescr } );
+const Row = StyledTouchableOpacity( { style: style.row } );
+const Col1 = StyledView( { style: style.col1.view } );
+const Col1Text = StyledText( { style: style.col1.text } );
+const Col2 = StyledView( { style: style.col2.view } );
 
 const LineGroup= props => {
 
@@ -27,11 +27,11 @@ const LineGroup= props => {
             onPress={ onPress }
         >
 
-            <RowIcon>
-                <RowIconText>{ group }</RowIconText>
-            </RowIcon>
+            <Col1>
+                <Col1Text>{ group }</Col1Text>
+            </Col1>
 
-            <RowDescr />
+            <Col2 />
 
         </Row>
 

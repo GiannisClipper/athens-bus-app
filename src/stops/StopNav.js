@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import styles from '../_commons/stylePatterns';
+import * as style from '../_commons/style/nav';
 import { ArrivalIcon, RouteIcon, MapIcon } from '../_commons/Icons';
 import StopArrivals from './StopArrivals';
 import StopRoutes from './StopRoutes';
@@ -33,8 +33,10 @@ const StopNav = props => {
                 name='StopArrivals'
                 // component={ StopArrivals }
                 options={ {
-                    tabBarIcon: () => <ArrivalIcon { ...styles.tab.item.icon } />,
-                    tabBarLabel: () => <Text style={ styles.tab.item.text }>Arrivals</Text>,
+                    tabBarIcon: () => <ArrivalIcon { ...style.icon } />,
+                    tabBarLabel: () => <Text style={ style.tab.item.text }>Arrivals</Text>,
+                    tabBarInactiveBackgroundColor: style.tab.item.view.inactiveBackgroundColor,
+                    tabBarActiveBackgroundColor: style.tab.item.view.activeBackgroundColor,
                 } }
             >
                 { props => (
@@ -49,8 +51,10 @@ const StopNav = props => {
                 name='StopRoutes'
                 // component={ StopRoutes }
                 options={ {
-                    tabBarIcon: () => <RouteIcon { ...styles.tab.item.icon } />,
-                    tabBarLabel: () => <Text style={ styles.tab.item.text }>Routes</Text>,
+                    tabBarIcon: () => <RouteIcon { ...style.icon } />,
+                    tabBarLabel: () => <Text style={ style.tab.item.text }>Routes</Text>,
+                    tabBarInactiveBackgroundColor: style.tab.item.view.inactiveBackgroundColor,
+                    tabBarActiveBackgroundColor: style.tab.item.view.activeBackgroundColor,
                 } }
                 >
                 { props => (
@@ -65,8 +69,10 @@ const StopNav = props => {
                 name='StopMap' 
                 component={ Home } 
                 options={ {
-                    tabBarIcon: () => <MapIcon { ...styles.tab.item.icon } />,
-                    tabBarLabel: () => <Text style={ styles.tab.item.text }>Map</Text>,
+                    tabBarIcon: () => <MapIcon { ...style.icon } />,
+                    tabBarLabel: () => <Text style={ style.tab.item.text }>Map</Text>,
+                    tabBarInactiveBackgroundColor: style.tab.item.view.inactiveBackgroundColor,
+                    tabBarActiveBackgroundColor: style.tab.item.view.activeBackgroundColor,
                 } }
             />
         </Tab.Navigator>

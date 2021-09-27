@@ -1,8 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 
 import { StyledView, StyledScrollView, StyledTouchableOpacity, StyledText } from '../_abstract/Styled';
-import stylePatterns from '../_commons/stylePatterns';
-import styles from './styles';
+import * as style from './style/routes';
 
 import { CacheContext } from '../_commons/CacheContext';
 import { URI } from '../_commons/logic/constants';
@@ -12,12 +11,12 @@ import { routeScheduleResponseHandler } from './logic/responseHandlers';
 import { WorkingIndicator, InfoMessage, ErrorMessage } from '../_commons/Messages';
 import { ScheduleIcon } from '../_commons/Icons';
 
-const Main = StyledView( { style: styles.main } );
-const List = StyledScrollView( { style: styles.list } );
-const Row = StyledTouchableOpacity( { style: styles.row } );
-const RowIcon = StyledView( { style: styles.rowIcon } );
-const RowDescr = StyledView( { style: styles.rowDescr } );
-const RowDescrText = StyledText( { style: styles.rowDescrText } );
+const Container = StyledView( { style: style.container } );
+const List = StyledScrollView( { style: style.list } );
+const Row = StyledTouchableOpacity( { style: style.row } );
+const Col1 = StyledView( { style: style.col1.view } );
+const Col2 = StyledView( { style: style.col2.view } );
+const Col2Text = StyledText( { style: style.col2.text } );
 
 const RouteSchedule = props => {
 
@@ -26,7 +25,6 @@ const RouteSchedule = props => {
     const { cache } = useContext( CacheContext );
     const { lines } = cache;
 
-    // is still usefull ????????
     if ( ! route.LineCode ) {
         const matchLines = lines.data.filter( line => line.LineID === route.LineID );
         route.LineCode = matchLines.length > 0 ? matchLines[ 0 ].LineCode : '';
@@ -43,7 +41,7 @@ const RouteSchedule = props => {
     // useEffect( () => console.log( 'route', route ) );
 
     return ( 
-        <Main testID='routeSchedule'>
+        <Container testID='routeSchedule'>
 
             { status.isRequesting ?
                 <WorkingIndicator />
@@ -56,13 +54,13 @@ const RouteSchedule = props => {
                 { schedule.data.map( ( time, i ) => (
                     <Row key={ i }>
 
-                        <RowIcon>
-                            <ScheduleIcon { ...stylePatterns.tab.item.icon } />
-                        </RowIcon>
+                        <Col1>
+                            <ScheduleIcon { ...style.icon } />
+                        </Col1>
 
-                        <RowDescr>
-                            <RowDescrText>{ time }</RowDescrText>
-                        </RowDescr>
+                        <Col2>
+                            <Col2Text>{ time }</Col2Text>
+                        </Col2>
 
                     </Row>
                 ) ) } 
@@ -73,7 +71,7 @@ const RouteSchedule = props => {
 
             : null }
 
-        </Main>
+        </Container>
     );
 }
 
