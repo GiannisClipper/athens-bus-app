@@ -1,5 +1,5 @@
-import { createUniquesArr } from '../../_abstract/uniquesArr';
-import { arrNotEqualAt } from '../../_abstract/arrNotEqualAt';
+import { createUniquesArr } from '../../_abstract/logic/uniquesArr';
+import { arrNotEqualAt } from '../../_abstract/logic/arrNotEqualAt';
 import { routeParser } from '../../routes/logic/parsers';
 
 const stopParser = row => ( {

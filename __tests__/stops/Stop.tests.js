@@ -5,7 +5,7 @@ import { CacheContext } from '../../src/_commons/CacheContext';
 import Stop from '../../src/stops/Stop';
 import { act } from 'react-test-renderer';
 
-jest.mock( '../../src/_abstract/useRequest', () => {
+jest.mock( '../../src/_abstract/logic/useRequest', () => {
     const useRequest = jest.fn( () => ( { status: { isRequesting: true } } ) );
     return { __esModule: true, default: useRequest, useRequest };
 } );

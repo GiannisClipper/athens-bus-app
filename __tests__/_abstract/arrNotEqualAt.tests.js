@@ -1,4 +1,4 @@
-const { arrNotEqualAt } = require( '../../src/_abstract/arrNotEqualAt' );
+const { arrNotEqualAt } = require( '../../src/_abstract/logic/arrNotEqualAt' );
 
 describe( 'arrNotEqualAt', () => {
 

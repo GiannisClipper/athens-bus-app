@@ -1,4 +1,4 @@
-import { calcPointsFrame } from '../../_abstract/calcPointsFrame';
+import { calcPointsFrame } from '../../_abstract/logic/calcPointsFrame';
 
 const routeParser = row => ( {
     LineID: null,

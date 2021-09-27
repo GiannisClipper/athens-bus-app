@@ -3,7 +3,7 @@ import { render, fireEvent } from '@testing-library/react-native';
 import Line from '../../src/lines/Line';
 import { act } from 'react-test-renderer';
 
-jest.mock( '../../src/_abstract/useRequest', () => {
+jest.mock( '../../src/_abstract/logic/useRequest', () => {
     const useRequest = jest.fn( () => ( { status: { isRequesting: true } } ) );
     return { __esModule: true, default: useRequest, useRequest };
 } );

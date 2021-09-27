@@ -3,8 +3,8 @@ import React, { useEffect } from 'react';
 import { StyledView, StyledScrollView } from '../_abstract/Styled';
 import styles from './styles';
 
-import { URI } from '../_commons/constants';
-import { useRequest, initRequestStatus } from '../_abstract/useRequest';
+import { URI } from '../_commons/logic/constants';
+import { useRequest, initRequestStatus } from '../_abstract/logic/useRequest';
 import { stopRoutesResponseHandler } from './logic/responseHandlers';
 
 import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';

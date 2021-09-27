@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyledView, StyledText } from '../_abstract/Styled';
 import { portraitStyles, landscapeStyles } from './styles';
-import useOrientation from '../_abstract/useOrientation';
+import useOrientation from '../_abstract/logic/useOrientation';
 
 const Home = () => {
 

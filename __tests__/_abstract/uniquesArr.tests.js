@@ -1,4 +1,4 @@
-const { createUniquesArr } = require( '../../src/_abstract/uniquesArr' );
+const { createUniquesArr } = require( '../../src/_abstract/logic/uniquesArr' );
 
 describe( 'uniquesArr', () => {
 

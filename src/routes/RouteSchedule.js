@@ -5,8 +5,8 @@ import stylePatterns from '../_commons/stylePatterns';
 import styles from './styles';
 
 import { CacheContext } from '../_commons/CacheContext';
-import { URI } from '../_commons/constants';
-import { useRequest, initRequestStatus } from '../_abstract/useRequest';
+import { URI } from '../_commons/logic/constants';
+import { useRequest, initRequestStatus } from '../_abstract/logic/useRequest';
 import { routeScheduleResponseHandler } from './logic/responseHandlers';
 
 import { WorkingIndicator, InfoMessage, ErrorMessage } from '../_commons/Messages';

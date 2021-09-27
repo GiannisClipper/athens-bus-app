@@ -4,8 +4,8 @@ import { StyledView, StyledScrollView } from '../_abstract/Styled';
 import { lineGroupStyles as styles } from './styles';
 
 import { CacheContext } from '../_commons/CacheContext';
-import { URI } from '../_commons/constants';
-import { useRequest, initRequestStatus } from '../_abstract/useRequest';
+import { URI } from '../_commons/logic/constants';
+import { useRequest, initRequestStatus } from '../_abstract/logic/useRequest';
 import { linesResponseHandler } from './logic/responseHandlers';
 
 import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';

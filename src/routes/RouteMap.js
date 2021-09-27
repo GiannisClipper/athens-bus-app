@@ -6,8 +6,8 @@ import { StyledView } from '../_abstract/Styled';
 import stylePatterns from '../_commons/stylePatterns';
 import styles from './styles';
 
-import { URI } from '../_commons/constants';
-import { useRequest, initRequestStatus } from '../_abstract/useRequest';
+import { URI } from '../_commons/logic/constants';
+import { useRequest, initRequestStatus } from '../_abstract/logic/useRequest';
 import { routeMapResponseHandler } from './logic/responseHandlers';
 
 import { WorkingIndicator, InfoMessage, ErrorMessage } from '../_commons/Messages';

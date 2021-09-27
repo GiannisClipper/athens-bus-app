@@ -1,4 +1,4 @@
-const { createBroadcaster } = require( '../../src/_abstract/broadcaster' );
+const { createBroadcaster } = require( '../../src/_abstract/logic/broadcaster' );
 
 describe( 'broadcaster', () => {
 
