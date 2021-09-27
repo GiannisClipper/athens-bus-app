@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
-import Arrival from '../../src/arrivals/Arrival';
+import StopArrival from '../../src/stops/StopArrival';
 
-describe( '<Arrival />', () => {
+describe( '<StopArrival />', () => {
 
     const mockProps = {
         arrival: {
@@ -19,7 +19,7 @@ describe( '<Arrival />', () => {
     };
 
     test( 'render component', () => {
-        const { queryByTestId, queryByText } = render( <Arrival { ...mockProps } /> );
+        const { queryByTestId, queryByText } = render( <StopArrival { ...mockProps } /> );
 
         expect( queryByTestId( 'arrival-row' ) ).not.toBeNull();
 

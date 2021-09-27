@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import styles from '../_commons/stylePatterns';
 import { ArrivalIcon, RouteIcon, MapIcon } from '../_commons/Icons';
-import Arrivals from '../arrivals/Arrivals';
+import StopArrivals from './StopArrivals';
 import StopRoutes from './StopRoutes';
 import Home from '../home/Home';
 import MyStopSelector from '../my/MyStopSelector';
@@ -30,15 +30,15 @@ const StopNav = props => {
             screenOptions={ { headerShown: false } }
         >
             <Tab.Screen 
-                name='Arrivals'
-                // component={ Arrivals }
+                name='StopArrivals'
+                // component={ StopArrivals }
                 options={ {
                     tabBarIcon: () => <ArrivalIcon { ...styles.tab.item.icon } />,
                     tabBarLabel: () => <Text style={ styles.tab.item.text }>Arrivals</Text>,
                 } }
             >
                 { props => (
-                    <Arrivals
+                    <StopArrivals
                         { ...props }
                         stop={ stop }
                     /> 

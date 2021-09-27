@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
-import Arrivals from '../../src/arrivals/Arrivals';
+import StopArrivals from '../../src/stops/StopArrivals';
 
-describe( '<Arrivals />', () => {
+describe( '<StopArrivals />', () => {
 
     const DATA = [];
     const ERROR = 'An error message...';
@@ -19,7 +19,7 @@ describe( '<Arrivals />', () => {
     test( 'render component with data', () => {
         mockProps.stop.arrivals = { data: DATA, error: null };
         mockProps.stop.routes = { data: DATA, error: null };
-        const { queryByTestId } = render( <Arrivals { ...mockProps } /> );
+        const { queryByTestId } = render( <StopArrivals { ...mockProps } /> );
 
         expect( queryByTestId( 'arrivals-nav' ) ).not.toBeNull();
         expect( queryByTestId( 'arrivals' ) ).not.toBeNull();
@@ -28,7 +28,7 @@ describe( '<Arrivals />', () => {
     test( 'render component with error', () => {        
         mockProps.stop.arrivals = { data: null, error: ERROR };
         mockProps.stop.routes = { data: null, error: ERROR };
-        const { queryByTestId, queryByText } = render( <Arrivals { ...mockProps } /> );
+        const { queryByTestId, queryByText } = render( <StopArrivals { ...mockProps } /> );
 
         expect( queryByTestId( 'arrivals-nav' ) ).not.toBeNull();
         expect( queryByTestId( 'arrivals' ) ).not.toBeNull();

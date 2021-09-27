@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import styles from './styles';
 
-const Arrival = props => {
+const StopArrival = props => {
 
     const { arrival, routes } = props;
 
@@ -30,4 +30,4 @@ const Arrival = props => {
     );
 }
 
-export default Arrival;
+export default StopArrival;

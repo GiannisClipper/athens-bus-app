@@ -8,12 +8,12 @@ import { useRequest, initRequestStatus } from '../_abstract/logic/useRequest';
 import { stopRoutesResponseHandler, stopArrivalsResponseHandler } from '../stops/logic/responseHandlers';
 
 import { WorkingIndicator, InfoMessage, ErrorMessage } from '../_commons/Messages';
-import Arrival from './Arrival';
+import StopArrival from './StopArrival';
 
 const Main = StyledView( { style: styles.main } );
 const List = StyledScrollView( { style: styles.list } );
 
-const Arrivals = props => {
+const StopArrivals = props => {
 
     const { navigation, stop } = props;
     const { arrivals, routes } = stop;
@@ -62,7 +62,7 @@ const Arrivals = props => {
             : arrivalsStatus.hasData && routesStatus.hasData ?
                 <List>
                     { arrivals.data.map( ( arrival, i ) => (
-                        <Arrival
+                        <StopArrival
                             key={ i }
                             arrival={ arrival }
                             routes={ routes }
@@ -79,4 +79,4 @@ const Arrivals = props => {
     );
 }
 
-export default Arrivals;
+export default StopArrivals;
