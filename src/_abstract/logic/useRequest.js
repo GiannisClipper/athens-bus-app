@@ -14,11 +14,13 @@ const customFetch = uri => {
             }
 
             const txt = await res.text();
-            throw { message: `REQUEST ERROR: ${ txt }` };
+            throw `REQUEST ERROR: ${ txt }`;
 
         } )
 
-        .catch( err => { throw err } );
+        .catch( err => {
+            throw `REQUEST ERROR: ${ err }`;
+        } );
 }
 
 const useRequest = ( { fetchFunc, uri, requestStatus, responseHandler, refreshTime } ) => {

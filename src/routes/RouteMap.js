@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
-import { View } from 'react-native';
-import MapView, { Marker, Polyline } from 'react-native-maps';  
+import React, { useEffect, useState } from 'react';
+import { Map, MapPolyline, MapMarker } from '../_commons/Map';
 
 import { StyledView } from '../_abstract/Styled';
 import * as style from './style/routes';
@@ -10,7 +9,7 @@ import { useRequest, initRequestStatus } from '../_abstract/logic/useRequest';
 import { routeMapResponseHandler } from './logic/responseHandlers';
 
 import { WorkingIndicator, InfoMessage, ErrorMessage } from '../_commons/Messages';
-import { MapIcon } from '../_commons/Icons';
+import { MapIcon, StopIcon } from '../_commons/Icons';
 
 const Container = StyledView( { style: style.container } );
 
@@ -26,6 +25,19 @@ const RouteMap = props => {
         responseHandler: response => routeMapResponseHandler( coords, response ),
     } );
 
+    // TODO: use the zoom value to rescale marker icons on the map
+    const [ zoom, setZoom ] = useState( null );
+    useEffect( () => console.log( 'Rerender map with zoom:', zoom ) );
+
+    const onRegionChangeComplete = region => {
+        const newZoom = Math.round( Math.log( 360 / region.longitudeDelta ) / Math.LN2 );
+        // https://stackoverflow.com/questions/46568465/convert-a-region-latitudedelta-longitudedelta-into-an-approximate-zoomlevel
+        
+        if ( zoom !== newZoom ) {
+            setZoom( newZoom );
+        }
+    }
+
     return ( 
         <Container testID='routeMap'>
 
@@ -36,40 +48,28 @@ const RouteMap = props => {
             <InfoMessage>{ 'No route coords found.' }</InfoMessage>
 
         : status.hasData ?
-            <View style={ style.map.container }>
+            <Map 
+                initialRegion={ {
+                    latitude: coords.map.latitude, 
+                    longitude: coords.map.longitude,
+                    latitudeDelta: coords.map.latitudeDelta,
+                    longitudeDelta: coords.map.longitudeDelta,
+                } }
+                onRegionChangeComplete={ onRegionChangeComplete }
+            >
+                <MapPolyline coordinates={ coords.data } />
 
-                <MapView
-                    style={ style.map.map }
-                    showsUserLocation={ false }
-                    zoomEnabled={ true }
-                    zoomControlEnabled={ true }
-                    initialRegion={ {
-                        latitude: coords.map.latitude, 
-                        longitude: coords.map.longitude,
-                        latitudeDelta: coords.map.latitudeDelta,
-                        longitudeDelta: coords.map.longitudeDelta,
-                    } }>
-
-                    <Polyline 
-                        coordinates={ coords.data } 
-                        { ...style.map.polyline }
+                { stops.data.map( ( stop, i ) => 
+                    <MapMarker
+                        key={ i }
+                        coordinate={ { latitude: stop.latitude, longitude: stop.longitude } }
+                        title={ `${ stop.StopDescr }` }
+                        description={ `(${ stop.StopCode })` }
+                        // Icon={ zoom < 15 ? MapIcon : StopIcon }  // lower performance
                     />
+                ) }
 
-                    { stops.data.map( ( stop, i ) => 
-                        <Marker
-                            { ...style.map.marker }
-                            key={ i }
-                            coordinate={ { latitude: stop.latitude, longitude: stop.longitude } }
-                            title={ `${ stop.StopDescr }` }
-                            description={ `(${ stop.StopCode })` }
-                        >
-                            <MapIcon { ...style.map.marker.icon } />
-                        </Marker>
-                    ) }
-
-                </MapView>
-
-            </View>
+            </Map>
 
         : status.hasError ?
             <ErrorMessage>{ coords.error }</ErrorMessage>

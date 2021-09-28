@@ -11,4 +11,7 @@ const error = 'tomato';
 const bus = 'blue';
 const trolley = 'yellow';
 
-export { sharper, sharp, canvas, smooth, smoother, info, warning, error, bus, trolley };
+const polyline = 'green';
+const marker = 'orange';
+
+export { sharper, sharp, canvas, smooth, smoother, info, warning, error, bus, trolley, polyline, marker };
