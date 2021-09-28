@@ -52,33 +52,7 @@ const useRequest = ( { fetchFunc, uri, requestStatus, responseHandler, refreshTi
 
     } );
 
-    const intervalRef = useRef( { id: null, hasCleared: false } );
-
-    useEffect( () => {
-        const interval = intervalRef.current;
-
-        if ( interval.id ) { 
-            // to clear a previous setup if exists 
-            clearInterval( interval.id );
-            interval.id = null;
-            interval.hasCleared = true;
-        }
-
-        if ( refreshTime && interval.hasCleared ) { 
-            // to perform instant request prior to a new setup
-            setStatus( { toRequest: true } );
-            interval.hasCleared = false;
-        }
-
-        if ( refreshTime ) { 
-            // to setup the interval process
-            interval.id = setInterval( () => setStatus( { toRequest: true } ), refreshTime );
-            return () => clearInterval( interval.id );
-        }
-    
-    }, [ refreshTime ] );
-
-    return { status };
+    return { status, setStatus };
 }
 
 const initRequestStatus = namespace =>

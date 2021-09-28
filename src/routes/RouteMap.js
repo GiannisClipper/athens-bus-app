@@ -9,7 +9,7 @@ import { useRequest, initRequestStatus } from '../_abstract/logic/useRequest';
 import { routeMapResponseHandler } from './logic/responseHandlers';
 
 import { WorkingIndicator, InfoMessage, ErrorMessage } from '../_commons/Messages';
-import { MapIcon, StopIcon } from '../_commons/Icons';
+// import { MapIcon, StopIcon } from '../_commons/Icons';
 
 const Container = StyledView( { style: style.container } );
 
@@ -25,9 +25,7 @@ const RouteMap = props => {
         responseHandler: response => routeMapResponseHandler( coords, response ),
     } );
 
-    // TODO: use the zoom value to rescale marker icons on the map
     const [ zoom, setZoom ] = useState( null );
-    useEffect( () => console.log( 'Rerender map with zoom:', zoom ) );
 
     const onRegionChangeComplete = region => {
         const newZoom = Math.round( Math.log( 360 / region.longitudeDelta ) / Math.LN2 );
@@ -37,6 +35,9 @@ const RouteMap = props => {
             setZoom( newZoom );
         }
     }
+
+    // useEffect( () => console.log( 'Rerender map with zoom:', zoom ) );
+    // TODO: using the zoom value to rescale marker icons on the map
 
     return ( 
         <Container testID='routeMap'>
