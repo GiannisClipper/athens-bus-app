@@ -10,7 +10,8 @@ import { URI } from '../_commons/logic/constants';
 import { useRequest, initRequestStatus } from '../_abstract/logic/useRequest';
 import { routeMapResponseHandler } from './logic/responseHandlers';
 
-import { WorkingIndicator, InfoMessage, ErrorMessage } from '../_commons/Messages';
+import { WorkingIndicator, InfoMessage, Dialogue, ErrorMessage } from '../_commons/Messages';
+import { ErrorButton } from '../_commons/Buttons';
 // import { MapIcon, StopIcon } from '../_commons/Icons';
 
 const Container = StyledView( { style: style.container } );
@@ -23,7 +24,7 @@ const RouteMap = props => {
     const { stopCodes, map } = route;
     const { stops } = useContext( StopsContext );
 
-    const { status } = useRequest( {
+    const { status, setStatus } = useRequest( {
         uri: URI.MAP_OF_ROUTE + routeCode,
         requestStatus: initRequestStatus( map ),
         responseHandler: response => routeMapResponseHandler( {
@@ -77,7 +78,13 @@ const RouteMap = props => {
             </Map>
 
         : status.hasError ?
-            <ErrorMessage>{ map.error }</ErrorMessage>
+            <Dialogue>
+                <ErrorMessage>{ map.error }</ErrorMessage>
+                <ErrorButton 
+                    label='Retry'
+                    onPress={ () => setStatus( { toRequest: true } ) }
+                />
+            </Dialogue>
 
         : null }
 

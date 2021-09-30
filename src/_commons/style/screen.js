@@ -4,7 +4,7 @@ const container = {
     color: colors.sharp,
     backgroundColor: colors.smoother,
     flex: 10,
-    justifyContent: 'space-evenly',
+    justifyContent: 'center', //'space-evenly',
     alignItems: 'center',
     width: '100%',
 };

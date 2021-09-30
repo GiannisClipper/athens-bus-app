@@ -10,7 +10,8 @@ import { useRequest, initRequestStatus } from '../_abstract/logic/useRequest';
 import { stopRoutesResponseHandler, stopArrivalsResponseHandler } from '../stops/logic/responseHandlers';
 import useInterval from '../_abstract/logic/useInterval';
 
-import { WorkingIndicator, InfoMessage, ErrorMessage } from '../_commons/Messages';
+import { WorkingIndicator, InfoMessage, Dialogue, ErrorMessage } from '../_commons/Messages';
+import { ErrorButton } from '../_commons/Buttons';
 import StopArrival from './StopArrival';
 
 const Container = StyledView( { style: style.container } );
@@ -43,6 +44,7 @@ const StopArrivals = props => {
     } );
 
     const routesStatus = routesRequest.status;
+    const routesSetStatus = routesRequest.setStatus;
     const arrivalsStatus = arrivalsRequest.status;
     const arrivalsSetStatus = arrivalsRequest.setStatus;
 
@@ -92,7 +94,21 @@ const StopArrivals = props => {
                 </List>
 
             : arrivalsStatus.hasError || routesStatus.hasError ?
-                <ErrorMessage>{ arrivals.error + ' ' + routes.error }</ErrorMessage>
+                <Dialogue>
+                    { routeCodes.error ? <ErrorMessage>{ routeCodes.error }</ErrorMessage> : null }
+                    { arrivals.error ? <ErrorMessage>{ arrivals.error }</ErrorMessage> : null }
+                    <ErrorButton 
+                        label='Retry'
+                        onPress={ () => {
+                            if ( routeCodes.error ) {
+                                routesSetStatus( { toRequest: true } ) 
+                            }
+                            if ( arrivals.error ) {
+                                arrivalsSetStatus( { toRequest: true } ) 
+                            }
+                        } }
+                    />
+                </Dialogue>
 
             : null }
 

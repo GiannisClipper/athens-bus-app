@@ -7,7 +7,8 @@ import { URI } from '../_commons/logic/constants';
 import { useRequest, initRequestStatus } from '../_abstract/logic/useRequest';
 import { routesResponseHandler } from './logic/responseHandlers';
 
-import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
+import { WorkingIndicator, Dialogue, ErrorMessage } from '../_commons/Messages';
+import { ErrorButton } from '../_commons/Buttons';
 import Route from './Route';
 
 const Routes = props => {
@@ -19,7 +20,7 @@ const Routes = props => {
 
     const { routes, saveRoutes } = useContext( RoutesContext );
 
-    const { status } = useRequest( {
+    const { status, setStatus } = useRequest( {
         uri: URI.ROUTES_OF_LINE + lineCode,
         requestStatus: initRequestStatus( routeCodes ),
         responseHandler: response => routesResponseHandler( {
@@ -44,8 +45,13 @@ const Routes = props => {
                 </>
 
             : status.hasError ?
-                <ErrorMessage>{ routeCodes.error }</ErrorMessage>
-
+                <Dialogue>
+                    <ErrorMessage>{ routeCodes.error }</ErrorMessage>
+                    <ErrorButton 
+                        label='Retry'
+                        onPress={ () => setStatus( { toRequest: true } ) }
+                    />
+                </Dialogue>
             : null }
 
         </View>

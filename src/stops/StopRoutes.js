@@ -9,7 +9,8 @@ import { URI } from '../_commons/logic/constants';
 import { useRequest, initRequestStatus } from '../_abstract/logic/useRequest';
 import { stopRoutesResponseHandler } from './logic/responseHandlers';
 
-import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
+import { WorkingIndicator, Dialogue, ErrorMessage } from '../_commons/Messages';
+import { ErrorButton } from '../_commons/Buttons';
 import Route from '../routes/Route';
 
 const Container = StyledView( { style: style.container } );
@@ -23,7 +24,7 @@ const StopRoutes = props => {
     const { routeCodes } = stop;
     const { routes, saveRoutes } = useContext( RoutesContext );
 
-    const { status } = useRequest( {
+    const { status, setStatus } = useRequest( {
         uri: URI.ROUTES_OF_STOP + stop.StopCode,
         requestStatus: initRequestStatus( routes ),
         responseHandler: response => stopRoutesResponseHandler( {
@@ -50,7 +51,13 @@ const StopRoutes = props => {
             </List>
 
         : status.hasError ?
-            <ErrorMessage>{ routeCodes.error }</ErrorMessage>
+            <Dialogue>
+                <ErrorMessage>{ routeCodes.error }</ErrorMessage>
+                <ErrorButton 
+                    label='Retry'
+                    onPress={ () => setStatus( { toRequest: true } ) }
+                />
+            </Dialogue>
 
         : null }
 

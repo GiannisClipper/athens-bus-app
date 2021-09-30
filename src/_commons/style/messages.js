@@ -20,4 +20,8 @@ const workingIndicator = {
     size: 'large',
 };
 
-export { info, warning, error, workingIndicator };
+const dialogue = {
+    alignItems: 'center',
+}
+
+export { info, warning, error, workingIndicator, dialogue };

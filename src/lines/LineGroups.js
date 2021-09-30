@@ -9,7 +9,8 @@ import { URI } from '../_commons/logic/constants';
 import { useRequest, initRequestStatus } from '../_abstract/logic/useRequest';
 import { linesResponseHandler } from './logic/responseHandlers';
 
-import { WorkingIndicator, ErrorMessage } from '../_commons/Messages';
+import { WorkingIndicator, Dialogue, ErrorMessage } from '../_commons/Messages';
+import { ErrorButton } from '../_commons/Buttons';
 import LineSearch from './LineSearch';
 import LineGroup from './LineGroup';
 
@@ -21,7 +22,7 @@ const LineGroups = () => {
     const { lineGroups, saveLineGroups } = useContext( LineGroupsContext );
     const { lines, saveLines } = useContext( LinesContext );
 
-    const { status } = useRequest( {
+    const { status, setStatus } = useRequest( {
         uri: URI.LINES,
         requestStatus: initRequestStatus( lineGroups ),
         responseHandler: response => linesResponseHandler( { saveLineGroups, saveLines, response } ),
@@ -49,7 +50,13 @@ const LineGroups = () => {
             </List>
 
         : status.hasError ?
-            <ErrorMessage>{ lineGroups.error }</ErrorMessage>
+            <Dialogue>
+                <ErrorMessage>{ lineGroups.error }</ErrorMessage>
+                <ErrorButton 
+                    label='Retry'
+                    onPress={ () => setStatus( { toRequest: true } ) }
+                />
+            </Dialogue>
 
         : null }
 

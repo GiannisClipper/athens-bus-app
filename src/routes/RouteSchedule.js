@@ -8,7 +8,8 @@ import { URI } from '../_commons/logic/constants';
 import { useRequest, initRequestStatus } from '../_abstract/logic/useRequest';
 import { routeScheduleResponseHandler } from './logic/responseHandlers';
 
-import { WorkingIndicator, InfoMessage, ErrorMessage } from '../_commons/Messages';
+import { WorkingIndicator, InfoMessage, Dialogue, ErrorMessage } from '../_commons/Messages';
+import { ErrorButton } from '../_commons/Buttons';
 import { ScheduleIcon } from '../_commons/Icons';
 
 const Container = StyledView( { style: style.container } );
@@ -31,7 +32,7 @@ const RouteSchedule = props => {
 
     const { LineCode, RouteType, schedule } = route;
 
-    const { status } = useRequest( {
+    const { status, setStatus } = useRequest( {
         uri: URI.SCHEDULE_OF_LINE + LineCode,
         requestStatus: initRequestStatus( schedule ),
         responseHandler: response => routeScheduleResponseHandler( { 
@@ -68,7 +69,13 @@ const RouteSchedule = props => {
                 </List>
 
             : status.hasError ?
-                <ErrorMessage>{ schedule.error }</ErrorMessage>
+                <Dialogue>
+                    <ErrorMessage>{ schedule.error }</ErrorMessage>
+                    <ErrorButton 
+                        label='Retry'
+                        onPress={ () => setStatus( { toRequest: true } ) }
+                    />
+                </Dialogue>
 
             : null }
 
