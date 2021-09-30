@@ -10,15 +10,13 @@ const Col2 = StyledView( { style: style.col2.view } );
 
 const LineGroup= props => {
 
-    const { lines, group} = props;
+    const { lineGroup } = props;
 
     const [ isOpen, setIsOpen ] = useState( false );
 
     const onPress = () => setIsOpen( ! isOpen );
 
-    const isMatch = line => line.LineID.substr( 0, 1 ) === group;
-
-    useEffect( () => console.log( 'Rendering LineGroup:' + group ) );
+    // useEffect( () => console.log( 'Rendering LineGroup:' + lineGroup.lineGroup ) );
 
     return (
         <>
@@ -28,14 +26,14 @@ const LineGroup= props => {
         >
 
             <Col1>
-                <Col1Text>{ group }</Col1Text>
+                <Col1Text>{ lineGroup.lineGroup }</Col1Text>
             </Col1>
 
             <Col2 />
 
         </Row>
 
-        { isOpen ? <Lines lines={ lines } isMatch={ isMatch } /> : null }
+        { isOpen ? <Lines lineCodes={ lineGroup.lineCodes } /> : null }
         </>
     );
 }

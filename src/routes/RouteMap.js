@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Map, MapPolyline, MapMarker } from '../_commons/Map';
 
 import { StyledView } from '../_abstract/Styled';
 import * as style from './style/routes';
 
+import { RoutesContext } from './RoutesContext';
+import { StopsContext } from '../stops/StopsContext';
 import { URI } from '../_commons/logic/constants';
 import { useRequest, initRequestStatus } from '../_abstract/logic/useRequest';
 import { routeMapResponseHandler } from './logic/responseHandlers';
@@ -15,16 +17,20 @@ const Container = StyledView( { style: style.container } );
 
 const RouteMap = props => {
 
-    const { data } = props;
-    const { route } = data;
-    const { RouteCode, stops, coords } = route;
+    const { routeCode } = props;
+    const { routes, saveRoutes } = useContext( RoutesContext );
+    const route = routes[ routeCode ];
+    const { stopCodes, map } = route;
+    const { stops } = useContext( StopsContext );
 
     const { status } = useRequest( {
-        uri: URI.COORDS_OF_ROUTE + RouteCode,
-        requestStatus: initRequestStatus( coords ),
-        responseHandler: response => routeMapResponseHandler( coords, response ),
+        uri: URI.MAP_OF_ROUTE + routeCode,
+        requestStatus: initRequestStatus( map ),
+        responseHandler: response => routeMapResponseHandler( {
+            routes, routeCode, routes, saveRoutes, response 
+        } ),
     } );
-
+    
     const [ zoom, setZoom ] = useState( null );
 
     const onRegionChangeComplete = region => {
@@ -45,35 +51,33 @@ const RouteMap = props => {
         { status.isRequesting ?
             <WorkingIndicator />
 
-        : status.hasData && coords.data.length === 0 ?
+        : status.hasData && map.data.polyline === 0 ?
             <InfoMessage>{ 'No route coords found.' }</InfoMessage>
 
         : status.hasData ?
             <Map 
-                initialRegion={ {
-                    latitude: coords.map.latitude, 
-                    longitude: coords.map.longitude,
-                    latitudeDelta: coords.map.latitudeDelta,
-                    longitudeDelta: coords.map.longitudeDelta,
-                } }
+                initialRegion={ map.data.initialRegion }
                 onRegionChangeComplete={ onRegionChangeComplete }
             >
-                <MapPolyline coordinates={ coords.data } />
+                <MapPolyline coordinates={ map.data.polyline } />
 
-                { stops.data.map( ( stop, i ) => 
-                    <MapMarker
-                        key={ i }
-                        coordinate={ { latitude: stop.latitude, longitude: stop.longitude } }
-                        title={ `${ stop.StopDescr }` }
-                        description={ `(${ stop.StopCode })` }
-                        // Icon={ zoom < 15 ? MapIcon : StopIcon }  // lower performance
-                    />
-                ) }
+                { stopCodes.data.map( ( stopCode, i ) => { 
+                    const stop = stops[ stopCode ];
+                    return (
+                        <MapMarker
+                            key={ i }
+                            coordinate={ { latitude: stop.StopLat, longitude: stop.StopLng } }
+                            title={ `${ stop.StopDescr }` }
+                            description={ `(${ stop.StopCode })` }
+                            // Icon={ zoom < 15 ? MapIcon : StopIcon }  // lower performance
+                        />
+                    );
+                } ) }
 
             </Map>
 
         : status.hasError ?
-            <ErrorMessage>{ coords.error }</ErrorMessage>
+            <ErrorMessage>{ map.error }</ErrorMessage>
 
         : null }
 

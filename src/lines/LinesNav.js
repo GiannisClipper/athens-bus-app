@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as style from '../_commons/style/nav';
 import LineGroups from '../lines/LineGroups';
@@ -34,9 +34,7 @@ const LinesNav = props => {
             <Stack.Screen 
                 name='StopNav'
                 component={ StopNav }
-                options={ { 
-                    headerShown: true,
-                } }
+                options={ { headerShown: true } }
             />
 
         </Stack.Navigator>

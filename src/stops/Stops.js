@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { StyledView, StyledScrollView } from '../_abstract/Styled';
 import * as style from './style/stops';
 
+import { RoutesContext } from '../routes/RoutesContext';
+import { StopsContext } from './StopsContext';
 import { URI } from '../_commons/logic/constants';
 import { useRequest, initRequestStatus } from '../_abstract/logic/useRequest';
 import { stopsResponseHandler } from './logic/responseHandlers';
@@ -15,14 +17,19 @@ const List = StyledScrollView( { style: style.list } );
 
 const Stops = props => {
 
-    const { data } = props;
-    const { route } = data;
-    const { stops } = route;
+    const { routeCode } = props;
+    const { routes, saveRoutes } = useContext( RoutesContext );
+    const route = routes[ routeCode ];
+    const { stopCodes } = route;
+
+    const { stops, saveStops } = useContext( StopsContext );
 
     const { status } = useRequest( {
-        uri: URI.STOPS_OF_ROUTE + route.RouteCode,
-        requestStatus: initRequestStatus( stops ),
-        responseHandler: response => stopsResponseHandler( stops, response ),
+        uri: URI.STOPS_OF_ROUTE + routeCode,
+        requestStatus: initRequestStatus( stopCodes ),
+        responseHandler: response => stopsResponseHandler( {
+            routes, routeCode, saveRoutes, stops, saveStops, response 
+        } ),
     } );
     
     return (
@@ -33,16 +40,16 @@ const Stops = props => {
 
         : status.hasData ?
             <List>
-            { stops.data.map( ( stop, i ) => (
+            { stopCodes.data.map( ( stopCode, i ) => (
                 <Stop 
                     key={ i }
-                    stop={ stop }
+                    stopCode={ stopCode }
                 />
             ) ) } 
             </List>
 
         : status.hasError ?
-            <ErrorMessage>{ stops.error }</ErrorMessage>
+            <ErrorMessage>{ stopCodes.error }</ErrorMessage>
 
         : null }
 

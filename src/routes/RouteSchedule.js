@@ -3,7 +3,7 @@ import React, { useContext, useEffect } from 'react';
 import { StyledView, StyledScrollView, StyledTouchableOpacity, StyledText } from '../_abstract/Styled';
 import * as style from './style/routes';
 
-import { CacheContext } from '../_commons/CacheContext';
+import { RoutesContext } from './RoutesContext';
 import { URI } from '../_commons/logic/constants';
 import { useRequest, initRequestStatus } from '../_abstract/logic/useRequest';
 import { routeScheduleResponseHandler } from './logic/responseHandlers';
@@ -20,22 +20,23 @@ const Col2Text = StyledText( { style: style.col2.text } );
 
 const RouteSchedule = props => {
 
-    const { data } = props;
-    const { route } = data;
-    const { cache } = useContext( CacheContext );
-    const { lines } = cache;
+    const { routeCode } = props;
+    const { routes, saveRoutes } = useContext( RoutesContext );
+    const route = routes[ routeCode ];
 
-    if ( ! route.LineCode ) {
-        const matchLines = lines.data.filter( line => line.LineID === route.LineID );
-        route.LineCode = matchLines.length > 0 ? matchLines[ 0 ].LineCode : '';
-    }
+    // if ( ! route.LineCode ) {
+    //     const matchLines = lines.data.filter( line => line.LineID === route.LineID );
+    //     route.LineCode = matchLines.length > 0 ? matchLines[ 0 ].LineCode : '';
+    // }
 
     const { LineCode, RouteType, schedule } = route;
 
     const { status } = useRequest( {
         uri: URI.SCHEDULE_OF_LINE + LineCode,
         requestStatus: initRequestStatus( schedule ),
-        responseHandler: response => routeScheduleResponseHandler( schedule, response, LineCode, RouteType ),
+        responseHandler: response => routeScheduleResponseHandler( { 
+            routes, routeCode, saveRoutes, response, LineCode, RouteType 
+        } ),
     } );
 
     // useEffect( () => console.log( 'route', route ) );

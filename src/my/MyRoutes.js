@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { StyledView, StyledScrollView } from '../_abstract/Styled';
 import * as style from './style/my';
-import { MyContext } from '../_commons/MyContext';
+import { MyContext } from '../my/MyContext';
 import { InfoMessage } from '../_commons/Messages';
 import Route from '../routes/Route';
 
@@ -23,7 +23,7 @@ const MyRoutes = props => {
             { myRoutes.map( ( route, i ) => (
                 <Route 
                     key={ i }
-                    route={ route }
+                    routeCode={ route.RouteCode }
                 />
             ) ) } 
             </List>

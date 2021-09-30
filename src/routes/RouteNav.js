@@ -44,7 +44,7 @@ const RouteNav = props => {
                 { props => (
                     <Stops
                         { ...props }
-                        data={ { route } }
+                        routeCode={ route.RouteCode }
                     /> 
                 ) }
             </Tab.Screen>
@@ -62,7 +62,7 @@ const RouteNav = props => {
                 { props => (
                     <RouteSchedule
                         { ...props }
-                        data={ { route } }
+                        routeCode={ route.RouteCode }
                     /> 
                 ) }
             </Tab.Screen>
@@ -80,7 +80,7 @@ const RouteNav = props => {
                 { props => (
                     <RouteMap
                         { ...props }
-                        data={ { route } }
+                        routeCode={ route.RouteCode }
                     /> 
                 ) }
 

@@ -9,6 +9,15 @@ const Col1Text = StyledText( { style: style.col1.text } );
 const Col2 = StyledView( { style: style.col2.view } );
 const Col2TextInput = StyledTextInput( { style: style.col2.text } );
 
+const searchLines = ( lines, searchText ) => 
+    searchText !== ''
+        ? 
+        Object.keys( lines ).filter( lineCode => 
+            lines[ lineCode ].LineID.includes( searchText ) || lines[ lineCode ].LineDescr.includes( searchText ) 
+        )
+        : 
+        [];
+
 const LineSearch= props => {
 
     const { lines } = props;
@@ -18,8 +27,6 @@ const LineSearch= props => {
     const [ isOpen, setIsOpen ] = useState( false );
 
     const onPress = () => setIsOpen( ! isOpen );
-
-    const isMatch = line => searchText !== '' && ( line.LineID.includes( searchText ) || line.LineDescr.includes( searchText ) );
 
     // useEffect( () => console.log( 'Rendering LineSearch' ) );
 
@@ -46,7 +53,7 @@ const LineSearch= props => {
 
         </Row>
 
-        { isOpen ? <Lines lines={ lines } isMatch={ isMatch } /> : null }
+        { isOpen ? <Lines lineCodes={ searchLines( lines, searchText ) } /> : null }
         </>
     );
 }

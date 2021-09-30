@@ -3,7 +3,8 @@ import React, { useContext, useEffect } from 'react';
 import { StyledView, StyledScrollView } from '../_abstract/Styled';
 import * as style from './style/lineGroups';
 
-import { CacheContext } from '../_commons/CacheContext';
+import { LineGroupsContext } from './LineGroupsContext';
+import { LinesContext } from './LinesContext';
 import { URI } from '../_commons/logic/constants';
 import { useRequest, initRequestStatus } from '../_abstract/logic/useRequest';
 import { linesResponseHandler } from './logic/responseHandlers';
@@ -17,13 +18,13 @@ const List = StyledScrollView( { style: style.list } );
 
 const LineGroups = () => {
 
-    const { cache } = useContext( CacheContext );
-    const { lines } = cache;
+    const { lineGroups, saveLineGroups } = useContext( LineGroupsContext );
+    const { lines, saveLines } = useContext( LinesContext );
 
     const { status } = useRequest( {
         uri: URI.LINES,
-        requestStatus: initRequestStatus( lines ),
-        responseHandler: response => linesResponseHandler( lines, response ),
+        requestStatus: initRequestStatus( lineGroups ),
+        responseHandler: response => linesResponseHandler( { saveLineGroups, saveLines, response } ),
     } );
     
     return (
@@ -39,17 +40,16 @@ const LineGroups = () => {
                     lines={ lines }
                 />
 
-                { lines.groups.map( ( group, i ) => (
+                { lineGroups.data.map( ( lineGroup, i ) => (
                     <LineGroup 
                         key={ i }
-                        lines={ lines }
-                        group={ group }
+                        lineGroup={ lineGroup }
                     />
                 ) ) }
             </List>
 
         : status.hasError ?
-            <ErrorMessage>{ lines.error }</ErrorMessage>
+            <ErrorMessage>{ lineGroups.error }</ErrorMessage>
 
         : null }
 

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import * as RootNavigation from '../_commons/RootNavigation';
 import { StyledView, StyledTouchableOpacity, StyledText } from '../_abstract/Styled';
 import { RouteIcon } from '../_commons/Icons';
 import * as style from './style/routes';
+import { RoutesContext } from './RoutesContext';
 
 const Row = StyledTouchableOpacity( { style: style.row } );
 const Col1 = StyledView( { style: style.col1.view } );
@@ -11,13 +12,15 @@ const Col2Text = StyledText( { style: style.col2.text } );
 
 const Route = props => {
 
-    const { route } = props;
+    const { routeCode } = props;
+    const { routes } = useContext( RoutesContext );
+    const route = routes[ routeCode ];
 
     const onPress = () => {
-        if ( route.stops && route.stops.error ) { 
-            route.stops = {};  // clear cache in case of error to request again
-        }
-        route.schedule = {};  // clear cache due to always request up to date values
+        // if ( route.stops && route.stops.error ) { 
+        //     route.stops = {};  // clear cache in case of error to request again
+        // }
+        // route.schedule = {};  // clear cache due to always request up to date values
 
         RootNavigation.navigate( 'RouteNav', { route } );  
         // navigation.navigate() passes the parameters to the component throught 

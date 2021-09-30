@@ -1,50 +1,84 @@
-import { stopsParser, stopRoutesParser, stopArrivalsParser } from './parsers';
+import { 
+    stopsParser, stopCodesParser, stopRoutesParser, stopRouteCodesParser, stopArrivalsParser 
+} from './parsers';
 
-const stopsResponseHandler = ( namespace, response ) => {
+import { routesParser } from '../../routes/logic/parsers';
 
-    let { data, error } = response;
 
-    if ( data ) {
-        namespace.data = stopsParser( data );
-        namespace.error = null;
-
-    } else if ( error ) {
-        namespace.data = null;
-        namespace.error = error;
-
-    }
-}
-
-const stopRoutesResponseHandler = ( namespace, response ) => {
+const stopsResponseHandler = ( { 
+    routes, routeCode, saveRoutes, stops, saveStops, response 
+} ) => {
 
     let { data, error } = response;
 
     if ( data ) {
-        namespace.data = stopRoutesParser( data );
-        namespace.error = null;
+        const route = routes[ routeCode ];
+        route.stopCodes.data = stopCodesParser( data );
+        route.stopCodes.error = null;
+        saveRoutes( { ...routes, [ routeCode ]: route } );
+
+        data = stopsParser( data );
+        saveStops( { ...data, ...stops } );
 
     } else if ( error ) {
-        namespace.data = null;
-        namespace.error = error;
+        const route = routes[ routeCode ];
+        route.stopCodes.data = null;
+        route.stopCodes.error = error;
+        saveRoutes( { ...routes, [ routeCode ]: route } );
 
     }
 }
 
-const stopArrivalsResponseHandler = ( namespace, response ) => {
+const stopRoutesResponseHandler = ( { 
+    stops, stopCode, saveStops, routes, saveRoutes, response 
+} ) => {
+
+    let { data, error } = response;
+
+    if ( data ) {
+        data = stopRoutesParser( data );
+
+        const stop = stops[ stopCode ];
+        stop.routeCodes.data = stopRouteCodesParser( data );
+        stop.routeCodes.error = null;
+        saveStops( { ...stops, [ stopCode ]: stop } );
+
+        saveRoutes( { ...routesParser( data ), ...routes } );
+
+    } else if ( error ) {
+        const stop = stops[ stopCode ];
+        stop.routeCodes.data = null;
+        stop.routeCodes.error = error;
+        saveStops( { ...stops, [ stopCode ]: stop } );
+
+    }
+}
+
+
+const stopArrivalsResponseHandler = ( {
+    stops, stopCode, saveStops, response 
+} ) => {
 
     let { data, error } = response;
 
     if ( error ) {
-        namespace.data = null;
-        namespace.error = error;
+        const stop = stops[ stopCode ];
+        stop.arrivals.data = null;
+        stop.arrivals.error = error;
+        saveStops( { ...stops, [ stopCode ]: stop } );
 
     } else { 
         // data could be null (api returns null whenever there are no arrivals)
-        // but handler replaces null to an empty array      
-        namespace.data = stopArrivalsParser( data );
-        namespace.error = null;
+        // but handler replaces null to an empty array
+        const stop = stops[ stopCode ];
+        stop.arrivals.data = stopArrivalsParser( data );
+        stop.arrivals.error = null;
+        saveStops( { ...stops, [ stopCode ]: stop } );
 
     }
 }
 
-export { stopsResponseHandler, stopRoutesResponseHandler, stopArrivalsResponseHandler };
+
+export { 
+    stopsResponseHandler, stopRoutesResponseHandler, stopArrivalsResponseHandler 
+};

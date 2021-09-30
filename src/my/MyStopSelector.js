@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
-import { MyContext } from '../_commons/MyContext';
+import { MyContext } from '../my/MyContext';
 import * as style from './style/my';
 import { MySelectedIcon, MyDeselectedIcon } from '../_commons/Icons';
+import { stopParser } from '../stops/logic/parsers';
 
 const MyStopSelector = ( { stop } ) => {
     const { myStops, createMyStop, deleteMyStop } = useContext( MyContext );
@@ -13,7 +14,9 @@ const MyStopSelector = ( { stop } ) => {
 
     const toggleMyStop = () => {
         const newIsMyStop = ! isMyStop;
-        newIsMyStop ? createMyStop( stop ) : deleteMyStop( stop );
+        newIsMyStop 
+            ? createMyStop( stopParser( stop ) ) 
+            : deleteMyStop( stopParser( stop ) );
         setIsMyStop( newIsMyStop );
     }
 

@@ -5,7 +5,7 @@ const URI = {
     ARRIVALS_OF_STOP: 'https://telematics.oasa.gr/api/?act=getStopArrivals&p1=',
     ROUTES_OF_STOP: 'https://telematics.oasa.gr/api/?act=webRoutesForStop&p1=',
     SCHEDULE_OF_LINE: 'http://telematics.oasa.gr/api/?act=getDailySchedule&line_code=',
-    COORDS_OF_ROUTE: 'http://telematics.oasa.gr/api/?act=webRouteDetails&p1=',
+    MAP_OF_ROUTE: 'http://telematics.oasa.gr/api/?act=webRouteDetails&p1=',
 }
 
 export { URI };

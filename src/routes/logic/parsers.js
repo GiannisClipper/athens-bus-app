@@ -1,23 +1,30 @@
 import { calcPointsFrame } from '../../_abstract/logic/calcPointsFrame';
 
 const routeParser = row => ( {
-    LineID: null,
+    LineID: row.LineID,
     LineCode: row.LineCode,
     RouteCode: row.RouteCode,
     RouteDescr: row.RouteDescr,
     RouteType: row.RouteType,
-    stops: {},
-    schedule: {},
-    coords: {
-        map: null,
-    },
+    stopCodes: { data: null, error: null },
+    schedule: { data: null, error: null },
+    map: { data: null, error: null },
 } );
 
 const routesParser = ( data, LineID ) => {
-    data = data.map( row => ( { ...routeParser( row ), LineID } ) );
-    data.sort( ( row1, row2 ) => row1.RouteType < row2.RouteType ? -1 : 1 );
-    return data;
+    data = LineID
+        ? data.map( row => ( { ...routeParser( row ), LineID } ) )
+        : data.map( row => ( { ...routeParser( row ) } ) );
+
+    const routes = {};
+    data.map( row => routes[ row.RouteCode ] = row );
+    return routes;
 }
+
+const routeCodesParser = data => {
+    data.sort( ( row1, row2 ) => row1.RouteType < row2.RouteType ? -1 : 1 );
+    return data.map( route => route.RouteCode )
+};
 
 const routeScheduleParser = ( data, LineCode, RouteType ) => {
 
@@ -42,43 +49,53 @@ const routeScheduleParser = ( data, LineCode, RouteType ) => {
     return data;
 }
 
-const routeCoordParser = row => ( {
+const coordParser = row => ( {
     latitude: parseFloat( row.routed_y ),
     longitude: parseFloat( row.routed_x ),
     order: parseInt( row.routed_order ),
-} )
+} );
 
-const routeCoordsParser = data => {
-    data = data.map( row => routeCoordParser( row ) );
+const coordsParser = data => {
+    data = data.map( row => coordParser( row ) );
     data.sort( ( row1, row2 ) => row1.order < row2.order ? -1 : 1 );
 
     return data;
 }
 
-const routeMapParser = data => {
+const initialRegionParser = data => {
+
+    if ( data.length === 0 ) {
+        return {};
+    }
 
     const frame = calcPointsFrame( data.map( point => [ point.latitude, point.longitude ] ) );
-
     const [ left, top ] = frame[ 0 ];
     const [ right, bottom ] = frame[ 1 ];
     const width = right - left;
     const height = bottom - top;  
 
-    const map = {
+    const initialRegion = {
         latitude: left + width / 2,
         longitude: top + height / 2,
         latitudeDelta: width * 1.1,
         longitudeDelta: height * 1.1,
     };
 
-    return map;
+    return initialRegion;
+}
+
+const routeMapParser = data => {
+    data = coordsParser( data );
+    const polyline = data;
+    const initialRegion = initialRegionParser( data );
+
+    return { polyline, initialRegion };
 }
 
 export { 
     routeParser, 
     routesParser, 
+    routeCodesParser, 
     routeScheduleParser, 
-    routeCoordParser, 
-    routeCoordsParser, 
-    routeMapParser 
+    routeMapParser,
 };

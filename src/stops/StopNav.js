@@ -42,7 +42,7 @@ const StopNav = props => {
                 { props => (
                     <StopArrivals
                         { ...props }
-                        stop={ stop }
+                        stopCode={ stop.StopCode }
                     /> 
                 ) }
             </Tab.Screen>
@@ -60,7 +60,7 @@ const StopNav = props => {
                 { props => (
                     <StopRoutes
                         { ...props }
-                        stop={ stop }
+                        stopCode={ stop.StopCode }
                     /> 
                 ) }
             </Tab.Screen>

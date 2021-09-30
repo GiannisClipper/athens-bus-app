@@ -5,14 +5,14 @@ const MyContext = createContext();
 
 const MyContextProvider = props => {
 
-    const { storage, setMyStops, getMyStops, setMyRoutes, getMyRoutes } = useContext( StorageContext );
-
     const initialState = {
         myStops: [],
         myRoutes: [],
     };
 
     const [ myState, setMyState ] = useState( initialState );
+
+    const { storage, setMyStops, getMyStops, setMyRoutes, getMyRoutes } = useContext( StorageContext );
 
     const _createItem = ( key, setStorage ) =>
         item => {

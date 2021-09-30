@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { StyledView, StyledScrollView } from '../_abstract/Styled';
 import * as style from './style/my';
-import { MyContext } from '../_commons/MyContext';
+import { MyContext } from '../my/MyContext';
 import { InfoMessage } from '../_commons/Messages';
 import Stop from '../stops/Stop';
 
@@ -23,7 +23,7 @@ const MyStops = props => {
                 { myStops.map( ( stop, i ) => (
                     <Stop 
                         key={ i }
-                        stop={ stop }
+                        stopCode={ stop.StopCode }
                     />
                 ) ) } 
             </List>

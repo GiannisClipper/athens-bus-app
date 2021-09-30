@@ -12,11 +12,11 @@ const StopArrival = props => {
 
     const { arrival, routes } = props;
 
-    const result = routes.data.filter( route => route.RouteCode === arrival.RouteCode );
+    const route = routes[ arrival.RouteCode ];
 
     const minutes = arrival.minutes ? `${ arrival.minutes }'` : '';
-    const LineID = result.length > 0 ? `[ ${ result[ 0 ].LineID } ]` : '';
-    const RouteDescr = result.length > 0 ? result[ 0 ].RouteDescr : arrival.RouteCode;
+    const LineID = route ? `[ ${ route.LineID } ]` : '';
+    const RouteDescr = route ? route.RouteDescr : arrival.RouteCode;
 
     return (
         <Row testID='arrival-row'>

@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 
 import { StyledView, StyledScrollView } from '../_abstract/Styled';
 import * as style from './style/stopArrivals';
 
+import { StopsContext } from './StopsContext';
+import { RoutesContext } from '../routes/RoutesContext';
 import { URI } from '../_commons/logic/constants';
 import { useRequest, initRequestStatus } from '../_abstract/logic/useRequest';
 import { stopRoutesResponseHandler, stopArrivalsResponseHandler } from '../stops/logic/responseHandlers';
@@ -18,19 +20,26 @@ const REFRESH_TIME = 20000;  // milliseconds
 
 const StopArrivals = props => {
 
-    const { navigation, stop } = props;
-    const { arrivals, routes } = stop;
+    const { navigation, stopCode } = props;
+    const { stops, saveStops } = useContext( StopsContext );
+    const stop = stops[ stopCode ];
+    const { routeCodes, arrivals } = stop;
+    const { routes, saveRoutes } = useContext( RoutesContext );
 
     const routesRequest = useRequest( {
-        uri: URI.ROUTES_OF_STOP + stop.StopCode,
-        requestStatus: initRequestStatus( routes ),
-        responseHandler: response => stopRoutesResponseHandler( routes, response ),
+        uri: URI.ROUTES_OF_STOP + stopCode,
+        requestStatus: initRequestStatus( routeCodes ),
+        responseHandler: response => stopRoutesResponseHandler( {
+            stops, stopCode, saveStops, routes, saveRoutes, response 
+        } ),
     } );
 
     const arrivalsRequest = useRequest( {
-        uri: URI.ARRIVALS_OF_STOP + stop.StopCode,
+        uri: URI.ARRIVALS_OF_STOP + stopCode,
         requestStatus: initRequestStatus( arrivals ),
-        responseHandler: response => stopArrivalsResponseHandler( arrivals, response ),
+        responseHandler: response => stopArrivalsResponseHandler( {
+            stops, stopCode, saveStops, response 
+        } ),
     } );
 
     const routesStatus = routesRequest.status;

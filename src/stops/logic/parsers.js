@@ -5,13 +5,23 @@ import { routeParser } from '../../routes/logic/parsers';
 const stopParser = row => ( {
     StopCode: row.StopCode,
     StopDescr: row.StopDescr,
-    latitude: parseFloat( row.StopLat ),
-    longitude: parseFloat( row.StopLng ),
-    arrivals: {},
-    routes: {},
+    StopLat: parseFloat( row.StopLat ),
+    StopLng: parseFloat( row.StopLng ),
+    RouteStopOrder: parseInt( row.RouteStopOrder ),
+    routeCodes: { data: null, error: null },
+    arrivals: { data: null, error: null },
 } );
 
-const stopsParser = data => data.map( row => ( { ...stopParser( row ) } ) );
+const stopsParser = data => {
+    data = data.map( row => ( { ...stopParser( row ) } ) );
+    const stops = {};
+    data.map( row => stops[ row.StopCode ] = row );
+    return stops;
+}
+
+const stopCodesParser = data => {
+    return data.map( stop => stop.StopCode );
+};
 
 const stopRoutesParser = data => {
 
@@ -70,6 +80,10 @@ const stopRoutesParser = data => {
     return data;
 }
 
+const stopRouteCodesParser = data => {
+    return data.map( route => route.RouteCode )
+};
+
 const stopArrivalParser = row => ( {
     RouteCode: row.route_code,
     minutes: row.btime2,
@@ -79,4 +93,8 @@ const stopArrivalsParser = data =>
     data ? data.map( row => stopArrivalParser( row ) ) : []; 
     // data could be null (api returns null whenever there are no arrivals)
 
-export { stopParser, stopsParser, stopRoutesParser, stopArrivalParser, stopArrivalsParser };
+export { 
+    stopParser, stopsParser, stopCodesParser, 
+    stopRoutesParser, stopRouteCodesParser, 
+    stopArrivalParser, stopArrivalsParser 
+};

@@ -1,5 +1,4 @@
-import React, { useContext, useRef, useEffect } from 'react';
-import { CacheContext } from '../_commons/CacheContext';
+import React, { useEffect } from 'react';
 import { NavigationContainer, CommonActions } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { navigationRef } from '../_commons/RootNavigation';
@@ -73,13 +72,6 @@ const CustomDrawerContent = props => {
 }
 
 const AppNav = () => {
-
-    const { cache } = useContext( CacheContext );
-    const { lines } = cache;
-
-    if ( lines.error ) { 
-        Object.keys( lines ).forEach( key => delete lines[ key ] ); // clear cache in case of error to request again
-    }
 
     return (
         <NavigationContainer ref={ navigationRef }>

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { StyledView, StyledTouchableOpacity, StyledText } from '../_abstract/Styled';
 import * as style from './style/line';
+import { LinesContext } from './LinesContext';
 import Routes from '../routes/Routes';
 
 const Row = StyledTouchableOpacity( { style: style.row } );
@@ -9,14 +10,18 @@ const Col2Text = StyledText( { style: style.col2.text } );
 
 const Line = props => {
 
-    const { line } = props;
+    const { lineCode } = props;
+    const { lines } = useContext( LinesContext );
+    const line = lines[ lineCode ];
 
     const [ isOpen, setIsOpen ] = useState( false );
+    // const [ toRequest, setToRequest ] = useState( false );
 
     const onPress = () => {
-        if ( ! isOpen && line.routes.error ) { 
-            line.routes = {};  // clear cache in case of error to request again
-        }
+        // if ( ! isOpen && line.routeCodes.error ) { 
+        //     line.routeCodes.error = null;  // clear cache in case of error to request again
+        // }
+        // setToRequest( line.routeCodes.error || false );
         setIsOpen( ! isOpen );
     }
 
@@ -42,7 +47,7 @@ const Line = props => {
 
         </Row>
 
-        { isOpen ? <Routes line={ line } /> : null }
+        { isOpen ? <Routes key={ lineCode } lineCode={ lineCode } /> : null }
         </>
     );
 }

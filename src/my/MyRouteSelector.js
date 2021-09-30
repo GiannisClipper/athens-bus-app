@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
-import { MyContext } from '../_commons/MyContext';
+import { MyContext } from '../my/MyContext';
 import * as style from './style/my';
 import { MySelectedIcon, MyDeselectedIcon } from '../_commons/Icons';
+import { routeParser } from '../routes/logic/parsers';
 
 const MyRouteSelector = ( { route } ) => {
     const { myRoutes, createMyRoute, deleteMyRoute } = useContext( MyContext );
@@ -13,7 +14,9 @@ const MyRouteSelector = ( { route } ) => {
 
     const toggleMyRoute = () => {
         const newIsMyRoute = ! isMyRoute;
-        newIsMyRoute ? createMyRoute( route ) : deleteMyRoute( route );
+        newIsMyRoute 
+            ? createMyRoute( routeParser( route ) ) 
+            : deleteMyRoute( routeParser( route ) );
         setIsMyRoute( newIsMyRoute );
     }
 

@@ -1,18 +1,24 @@
 import { linesParser, lineGroupsParser } from './parsers';
 
-const linesResponseHandler = ( namespace, response ) => {
+const linesResponseHandler = ( { saveLineGroups, saveLines, response } ) => {
 
     const { data, error } = response;
 
     if ( data ) {
-        namespace.data = linesParser( data );
-        namespace.groups = lineGroupsParser( data );
-        namespace.error = null;
+        saveLineGroups( {
+            data: lineGroupsParser( data ),
+            error: null,
+        } );
+
+        saveLines( linesParser( data ) );
 
     } else if ( error ) {
-        namespace.data = null;
-        namespace.groups = null;
-        namespace.error = error;
+        saveLineGroups( {
+            data: null,
+            error: error,
+        } );
+
+        saveLines( {} );
 
     }
 }
