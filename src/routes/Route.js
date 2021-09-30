@@ -13,14 +13,15 @@ const Col2Text = StyledText( { style: style.col2.text } );
 const Route = props => {
 
     const { routeCode } = props;
-    const { routes } = useContext( RoutesContext );
+    const { routes, saveRoutes } = useContext( RoutesContext );
     const route = routes[ routeCode ];
 
     const onPress = () => {
-        // if ( route.stops && route.stops.error ) { 
-        //     route.stops = {};  // clear cache in case of error to request again
-        // }
-        // route.schedule = {};  // clear cache due to always request up to date values
+        if ( route.schedule.data ) {
+            // remove current data due to force request and get the most recent schedule
+            route.schedule = { data: null, error: null };
+            saveRoutes( { ...routes, [ route.RouteCode ]: route } );
+        }
 
         RootNavigation.navigate( 'RouteNav', { route } );  
         // navigation.navigate() passes the parameters to the component throught 

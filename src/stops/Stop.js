@@ -13,14 +13,15 @@ const Col2Text = StyledText( { style: style.col2.text } );
 const Stop = props => {
 
     const { stopCode } = props;
-    const { stops } = useContext( StopsContext );
+    const { stops, saveStops } = useContext( StopsContext );
     const stop = stops[ stopCode ];
 
     const onPress = () => {
-        // if ( stop.routes.error ) { 
-        //     stop.routes = {};  // clear cache in case of error to request again
-        // }
-        // stop.arrivals = {};  // clear cache due to always request up to date values
+        if ( stop.arrivals.data ) {
+            // remove current data due to force request and get the most recent arrivals
+            stop.arrivals = { data: null, error: null };
+            saveStops( { ...stops, [ stop.StopCode ]: stop } );
+        }
 
         RootNavigation.navigate( 'StopNav', { stop } );  
         // navigation.navigate() passes the parameters to the component throught `props.route.params`
