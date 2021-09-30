@@ -1,6 +1,6 @@
 import React from 'react';
 import { StorageContextProvider } from '../_commons/StorageContext';
-//import { SettingsContextProvider } from '../_commons/SettingsContext';
+import { SettingsContextProvider } from '../settings/SettingsContext';
 import { LineGroupsContextProvider } from '../lines/LineGroupsContext';
 import { LinesContextProvider } from '../lines/LinesContext';
 import { RoutesContextProvider } from '../routes/RoutesContext';
@@ -12,7 +12,7 @@ const App = () => {
 
     return (
         <StorageContextProvider>
-            {/* <SettingsContextProvider> */}
+            <SettingsContextProvider>
             <LineGroupsContextProvider>
             <LinesContextProvider>
             <RoutesContextProvider>
@@ -24,7 +24,7 @@ const App = () => {
             </RoutesContextProvider>
             </LinesContextProvider>
             </LineGroupsContextProvider>
-            {/* </SettingsContextProvider> */}
+            </SettingsContextProvider>
         </StorageContextProvider>
     );
 };

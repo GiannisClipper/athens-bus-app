@@ -39,7 +39,7 @@ const StorageContextProvider = props => {
     const setMyStops = _setItem( 'myStops' );
     const getMyStops = _getItem( 'myStops', [] );
 
-    // useEffect( () => console.log( 'StorageContext rendering.' ) );
+    useEffect( () => console.log( 'StorageContext rendering.' ) );
 
     return (
         <StorageContext.Provider 

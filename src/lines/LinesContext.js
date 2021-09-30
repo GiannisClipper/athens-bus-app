@@ -25,7 +25,7 @@ const LinesContextProvider = props => {
         }
     }, [ storage ] );
 
-    // useEffect( () => console.log( 'LinesContext rendering.' ) );
+    useEffect( () => console.log( 'LinesContext rendering.' ) );
 
     return (
         <LinesContext.Provider 

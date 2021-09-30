@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { StorageContext } from '../_commons/StorageContext';
+import { RoutesContext } from '../routes/RoutesContext';
+import { StopsContext } from '../stops/StopsContext';
 
 const MyContext = createContext();
 
@@ -13,6 +15,8 @@ const MyContextProvider = props => {
     const [ myState, setMyState ] = useState( initialState );
 
     const { storage, setMyStops, getMyStops, setMyRoutes, getMyRoutes } = useContext( StorageContext );
+    const { stops, saveStops } = useContext( StopsContext );
+    const { routes, saveRoutes } = useContext( RoutesContext );
 
     const _createItem = ( key, setStorage ) =>
         item => {
@@ -38,15 +42,29 @@ const MyContextProvider = props => {
     const createMyRoute = _createItem( 'myRoutes', setMyRoutes );
     const deleteMyRoute = _deleteItem( 'myRoutes', ( eachRoute, route ) => eachRoute.RouteCode !== route.RouteCode, setMyRoutes );
 
+    const updateCache = ( { myStops, myRoutes } ) => {
+        // Take care to update stops & routes cached data, considering 
+        // cache is automatically removed in specific time periods.
+
+        const myStopsAsObj = {};
+        myStops.forEach( stop => myStopsAsObj[ stop.StopCode ] = stop );
+        saveStops( { ...myStopsAsObj, ...stops } );
+
+        const myRoutesAsObj = {};
+        myRoutes.forEach( route => myRoutesAsObj[ route.RouteCode ] = route );                
+        saveRoutes( { ...myRoutesAsObj, ...routes } );
+    }
+
     useEffect( async () => {
         if ( storage ) {
             const myStops = await getMyStops();
             const myRoutes = await getMyRoutes();
+            updateCache( { myStops, myRoutes } );
             setMyState( { myStops, myRoutes } );
         }
     }, [ storage ] );
 
-    // useEffect( () => console.log( 'MyContext rendering.' ) );
+    useEffect( () => console.log( 'MyContext rendering.' ) );
 
     return (
         <MyContext.Provider 

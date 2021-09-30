@@ -23,7 +23,7 @@ const RoutesContextProvider = props => {
         }
     }, [ storage ] );
 
-    // useEffect( () => console.log( 'RoutesContext rendering.' ) );
+    useEffect( () => console.log( 'RoutesContext rendering.' ) );
 
     return (
         <RoutesContext.Provider 

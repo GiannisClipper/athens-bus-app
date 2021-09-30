@@ -5,7 +5,7 @@ import * as style from './style/stopArrivals';
 
 import { StopsContext } from './StopsContext';
 import { RoutesContext } from '../routes/RoutesContext';
-import { URI } from '../_commons/logic/constants';
+import { URI, ARRIVALS_REFRESH_TIME } from '../_commons/logic/constants';
 import { useRequest, initRequestStatus } from '../_abstract/logic/useRequest';
 import { stopRoutesResponseHandler, stopArrivalsResponseHandler } from '../stops/logic/responseHandlers';
 import useInterval from '../_abstract/logic/useInterval';
@@ -16,8 +16,6 @@ import StopArrival from './StopArrival';
 
 const Container = StyledView( { style: style.container } );
 const List = StyledScrollView( { style: style.list } );
-
-const REFRESH_TIME = 20000;  // milliseconds
 
 const StopArrivals = props => {
 
@@ -49,7 +47,7 @@ const StopArrivals = props => {
     const arrivalsSetStatus = arrivalsRequest.setStatus;
 
 
-    const [ refreshTime, setRefreshTime ] = useState( REFRESH_TIME );
+    const [ refreshTime, setRefreshTime ] = useState( ARRIVALS_REFRESH_TIME );
 
     const intervalId = useInterval( {
         action: () => arrivalsSetStatus( { toRequest: true } ),
@@ -67,7 +65,7 @@ const StopArrivals = props => {
         const unsubscribe = navigation.addListener( 'focus', () => {
             if ( ! refreshTime ) { // when interval is suspended
                 arrivalsSetStatus( { toRequest: true } );
-                setRefreshTime( REFRESH_TIME );
+                setRefreshTime( ARRIVALS_REFRESH_TIME );
             }
         } );
         return unsubscribe;

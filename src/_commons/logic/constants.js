@@ -8,4 +8,12 @@ const URI = {
     MAP_OF_ROUTE: 'http://telematics.oasa.gr/api/?act=webRouteDetails&p1=',
 }
 
-export { URI };
+const ARRIVALS_REFRESH_TIME = 1000 * 20; // 20 secs
+
+const CACHE_REFRESH_TIME = 1000 * 60 * 60 * 12; // 12 hours
+
+export { 
+    URI, 
+    ARRIVALS_REFRESH_TIME,
+    CACHE_REFRESH_TIME,
+};

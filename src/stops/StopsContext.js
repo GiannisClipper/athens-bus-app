@@ -24,7 +24,7 @@ const StopsContextProvider = props => {
         }
     }, [ storage ] );
 
-    // useEffect( () => console.log( 'StopsContext rendering.' ) );
+    useEffect( () => console.log( 'StopsContext rendering.' ) );
 
     return (
         <StopsContext.Provider 

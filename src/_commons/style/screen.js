@@ -7,7 +7,7 @@ const container = {
     justifyContent: 'center', //'space-evenly',
     alignItems: 'center',
     width: '100%',
-};
+}
 
 const list = {
     width: '100%',
@@ -18,6 +18,7 @@ const row = {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     padding: 8,
+    paddingLeft: 4,
 };
 
 const col1 = {
@@ -40,6 +41,7 @@ const col2 = {
     },
     text: {
         padding: 0,
+        paddingLeft: 4,
         fontSize: 13,
         color: colors.sharp,
     },

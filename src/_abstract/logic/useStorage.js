@@ -106,8 +106,9 @@ const setupStorage = async ( { tableName, transaction, createTable, dropTable } 
         const args = [];
         const { result, error } = await transaction( { sql, args } );
         if ( error ) throw error;
-        result.data = result.data.map( row => ( { [ row.name ]: row.value } ) );
-        return result.data;
+        const result2 = {};
+        result.data.forEach( row => result2[ row.name ] = row.value );
+        return result2;
     }
 
     const removeItem = async name => {
@@ -165,6 +166,6 @@ const useStorage = props => {
     }, [] );
  
     return state;
- }
-  
+}
+
 export default useStorage;
