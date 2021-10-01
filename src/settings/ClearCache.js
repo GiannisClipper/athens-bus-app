@@ -1,12 +1,11 @@
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyledView, StyledTouchableOpacity, StyledText } from '../_abstract/Styled';
 import { TrashIcon } from '../_commons/Icons';
 import * as style from './style/settings';
 import { SettingsContext } from './SettingsContext';
-import { WorkingIndicator, Dialogue, WarningMessage } from '../_commons/Messages';
+import { Dialogue, WarningMessage } from '../_commons/Messages';
 import { WarningButton } from '../_commons/Buttons';
-import { useContext } from 'react/cjs/react.development';
 
 const Row = StyledTouchableOpacity( { style: style.row } );
 const Col1 = StyledView( { style: style.col1.view } );
