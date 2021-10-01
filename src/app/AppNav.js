@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { NavigationContainer, CommonActions } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { navigationRef } from '../_commons/RootNavigation';
+import { resetRouteStates } from '../_commons/BranchNavigation';
 import * as style from '../_commons/style/nav';
 import { HomeIcon, LineIcon, MySelectedIcon, SettingsIcon } from '../_commons/Icons';
 import Home from '../home/Home';
@@ -10,24 +11,6 @@ import MyNav from '../my/MyNav';
 import Settings from '../settings/Settings';
 
 const Drawer = createDrawerNavigator();
-
-const removeNavigationState = navigation => {
-    // remove navigation state to have a initial render
- 
-    return navigation.dispatch( state => {
-
-        const routes = state.routes.map( route => {
-            const { state, ...rest } = route;
-            return { ...rest };
-        } );
-
-        return CommonActions.reset( {
-            ...state,
-            routes,
-            index: 0,
-        } );
-    } );
-}
 
 const CustomDrawerContent = props => {
 
@@ -52,7 +35,7 @@ const CustomDrawerContent = props => {
                 label="Lines"
                 icon={ () => <LineIcon { ...style.drawer.item.icon } /> }
                 onPress={ () => { 
-                    removeNavigationState( navigation );
+                    resetRouteStates( navigation );
                     navigation.navigate( 'Lines' );
                 } }
             />
@@ -63,7 +46,7 @@ const CustomDrawerContent = props => {
                 label="Favourites"
                 icon={ () => <MySelectedIcon { ...style.drawer.item.icon } /> }
                 onPress={ () => {
-                    removeNavigationState( navigation );
+                    resetRouteStates( navigation );
                     navigation.navigate( 'Favourites' );
                 } }
             />

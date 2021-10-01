@@ -1,0 +1,21 @@
+import { CommonActions } from '@react-navigation/native';
+
+const resetRouteStates = navigation => {
+    // remove navigation route states to have initial rendering
+ 
+    return navigation.dispatch( state => {
+
+        const routes = state.routes.map( route => {
+            const { state, ...rest } = route;
+            return { ...rest };
+        } );
+
+        return CommonActions.reset( {
+            ...state,
+            routes,
+            index: 0,
+        } );
+    } );
+}
+
+export { resetRouteStates };
