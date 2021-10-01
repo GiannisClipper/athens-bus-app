@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-
 import { StyledView, StyledScrollView } from '../_abstract/Styled';
 import * as style from './style/stops';
 
@@ -39,7 +38,7 @@ const Stops = props => {
         { status.isRequesting ?
             <WorkingIndicator />
 
-        : status.hasData ?
+        : status.hasData && stopCodes.data ?
             <List>
             { stopCodes.data.map( ( stopCode, i ) => (
                 <Stop 
@@ -49,7 +48,7 @@ const Stops = props => {
             ) ) } 
             </List>
 
-        : status.hasError ?
+        : status.hasError?
             <Dialogue>
                 <ErrorMessage>{ stopCodes.error }</ErrorMessage>
                 <ErrorButton 

@@ -53,20 +53,6 @@ const StorageContextProvider = props => {
 
     useEffect( () => console.log( 'StorageContext rendering.' ) );
 
-    // useEffect( async () => {
-    //     if ( storage ) {
-
-    //         const items = await storage.getItems();
-    //         const keys = Object.keys( items );
-
-    //         keys.forEach( key => {
-    //             const subKeys = Object.keys( items[ key ] );
-    //             console.log( key, items[ key ] )
-    //         } );
-
-    //     }
-    // }, [ storage ] );
-
     return (
         storage ?
             <StorageContext.Provider 

@@ -15,7 +15,7 @@ const Route = props => {
     const { routeCode } = props;
     const { routes, saveRoutes } = useContext( RoutesContext );
     const route = routes[ routeCode ];
-
+    
     const onPress = () => {
         if ( route.schedule.data ) {
             // remove current data due to force request and get the most recent schedule

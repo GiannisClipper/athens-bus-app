@@ -6,7 +6,7 @@ const resetRouteStates = navigation => {
     return navigation.dispatch( state => {
 
         const routes = state.routes.map( route => {
-            const { state, ...rest } = route;
+            const { state, key, ...rest } = route;
             return { ...rest };
         } );
 

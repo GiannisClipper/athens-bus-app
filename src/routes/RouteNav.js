@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { resetRouteStates } from '../_commons/BranchNavigation';
+import { AppContext } from '../app/AppContext';
 import * as style from '../_commons/style/nav';
 import { StopIcon, ScheduleIcon, MapIcon } from '../_commons/Icons';
 import Stops from '../stops/Stops';
@@ -18,12 +20,18 @@ const RouteNav = props => {
     // so here `props.route` refers to a navigation property
     // while `props.route.params.route` refers to application data, a bus route
 
+    const appContext = useContext( AppContext );
+
     useEffect( () => {
         navigation.setOptions( { 
             title: `[ ${ route.LineID } ]   ${ route.RouteDescr }`,
             headerRight: () => <MyRouteSelector route={ route } />,
-        } )
-    }, [] );
+        } );
+
+        if ( appContext.routeNavigation ) {
+            resetRouteStates( appContext.routeNavigation );
+        }
+    }, [ route ] );
 
     return (
         <>
@@ -41,16 +49,19 @@ const RouteNav = props => {
                     tabBarActiveBackgroundColor: style.tab.item.view.activeBackgroundColor,
                 } }
             >
-                { props => (
-                    <Stops
+                { props => {
+                    const { navigation } = props;
+                    appContext.routeNavigation = navigation;
+
+                    return <Stops
                         { ...props }
                         routeCode={ route.RouteCode }
                     /> 
-                ) }
+                } }
             </Tab.Screen>
 
             <Tab.Screen 
-                name='RouteSchedule' 
+                name='RouteSchedule'
                 // component={ RouteSchedule } 
                 options={ {
                     tabBarIcon: () => <ScheduleIcon { ...style.icon } />,
