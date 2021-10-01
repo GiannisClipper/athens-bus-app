@@ -5,11 +5,8 @@ const StopsContext = createContext();
 
 const StopsContextProvider = props => {
 
-    const initialState = {};
-
-    const [ state, setState ] = useState( initialState );
-
-    const { storage, setStops, getStops } = useContext( StorageContext );
+    const [ state, setState ] = useState( null );
+    const { setStops, getStops } = useContext( StorageContext );
 
     const saveStops = stops => {
         const newStops = { ...state, ...stops };
@@ -18,23 +15,25 @@ const StopsContextProvider = props => {
     }
 
     useEffect( async () => {
-        if ( storage ) {
-            const stops = await getStops();
-            setState( stops );
-        }
-    }, [ storage ] );
+        const schema = {};
+        const stops = await getStops( schema );
+        setState( stops );
+    }, [] );
 
     useEffect( () => console.log( 'StopsContext rendering.' ) );
 
     return (
-        <StopsContext.Provider 
-            value={ { 
-                stops: state, 
-                saveStops
-            } }
-        >
-            { props.children }
-        </StopsContext.Provider>
+        state ?
+            <StopsContext.Provider 
+                value={ { 
+                    stops: state, 
+                    saveStops
+                } }
+            >
+                { props.children }
+            </StopsContext.Provider>
+
+        : null
     )
 }
 

@@ -5,11 +5,8 @@ const LinesContext = createContext();
 
 const LinesContextProvider = props => {
 
-    const initialState = {};
-
-    const [ state, setState ] = useState( initialState );
-
-    const { storage, setLines, getLines } = useContext( StorageContext );
+    const [ state, setState ] = useState( null );
+    const { setLines, getLines } = useContext( StorageContext );
 
     const saveLines = lines => {
         setLines( lines );
@@ -17,25 +14,25 @@ const LinesContextProvider = props => {
     }
 
     useEffect( async () => {
-        if ( storage ) {
-            const lines = await getLines();
-            if ( ! lines.error ) {
-                setState( lines );
-            }
-        }
-    }, [ storage ] );
+        const schema = {};
+        const lines = await getLines( schema );
+        setState( lines );
+    }, [] );
 
     useEffect( () => console.log( 'LinesContext rendering.' ) );
 
     return (
-        <LinesContext.Provider 
-            value={ { 
-                lines: state, 
-                saveLines 
-            } }
-        >
-            { props.children }
-        </LinesContext.Provider>
+        state ?
+            <LinesContext.Provider 
+                value={ { 
+                    lines: state, 
+                    saveLines 
+                } }
+            >
+                { props.children }
+            </LinesContext.Provider>
+
+        : null
     )
 }
 

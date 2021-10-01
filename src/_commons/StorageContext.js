@@ -1,4 +1,4 @@
-import React, { createContext, useRef, useEffect } from 'react';
+import React, { createContext, useEffect } from 'react';
 import useStorage from '../_abstract/logic/useStorage';
 
 const StorageContext = createContext();
@@ -12,51 +12,84 @@ const StorageContextProvider = props => {
             await storage.setItem( key, JSON.stringify( value ) );
         }
 
-    const _getItem = ( key, defaultValue ) =>
-        async () => {
+    const _getItem = key =>
+        async defaultValue => {
             const value = await storage.getItem( key );
             return ! value ? defaultValue : JSON.parse( value );
        }
 
     const setSettings = _setItem( 'settings' );
-    const getSettings = _getItem( 'settings', { cacheTimestamp: 0 } );
+    const getSettings = _getItem( 'settings' );
    
     const setLineGroups = _setItem( 'lineGroups' );
-    const getLineGroups = _getItem( 'lineGroups', { data: null, error: null } );
+    const getLineGroups = _getItem( 'lineGroups' );
 
     const setLines = _setItem( 'lines' );
-    const getLines = _getItem( 'lines', {} );
+    const getLines = _getItem( 'lines' );
 
     const setRoutes = _setItem( 'routes' );
-    const getRoutes = _getItem( 'routes', {} );
+    const getRoutes = _getItem( 'routes' );
 
     const setStops = _setItem( 'stops' );
-    const getStops = _getItem( 'stops', {} );
+    const getStops = _getItem( 'stops' );
 
     const setMyRoutes = _setItem( 'myRoutes' );
-    const getMyRoutes = _getItem( 'myRoutes', [] );
+    const getMyRoutes = _getItem( 'myRoutes' );
 
     const setMyStops = _setItem( 'myStops' );
-    const getMyStops = _getItem( 'myStops', [] );
+    const getMyStops = _getItem( 'myStops' );
+
+    const noCacheKeys = [ 'settings', 'myRoutes', 'myStops' ];
+
+    const clearStorageCache = async () => {
+        const items = await storage.getItems();
+        const cacheKeys = Object.keys( items ).filter( key => ! noCacheKeys.includes( key ) );
+        cacheKeys.forEach( async cacheKey => await storage.removeItem( cacheKey ) );
+    }
+
+    const clearStorageAll = async () => {
+        await storage.clear();
+    }
 
     useEffect( () => console.log( 'StorageContext rendering.' ) );
 
+    // useEffect( async () => {
+    //     if ( storage ) {
+
+    //         const items = await storage.getItems();
+    //         const keys = Object.keys( items );
+
+    //         keys.forEach( key => {
+    //             const subKeys = Object.keys( items[ key ] );
+    //             console.log( key, items[ key ] )
+    //         } );
+
+    //     }
+    // }, [ storage ] );
+
     return (
-        <StorageContext.Provider 
-            value={ { 
-                storage, error,
-                setSettings, getSettings,
-                setLineGroups, getLineGroups,
-                setLines, getLines,
-                setRoutes, getRoutes,
-                setStops, getStops, 
-                setMyRoutes, getMyRoutes,
-                setMyStops, getMyStops, 
-            } }
-        >
-            { props.children }
-        </StorageContext.Provider>
-    )
+        storage ?
+            <StorageContext.Provider 
+                value={ { 
+                    storage, error,
+                    setSettings, getSettings,
+                    setLineGroups, getLineGroups,
+                    setLines, getLines,
+                    setRoutes, getRoutes,
+                    setStops, getStops, 
+                    setMyRoutes, getMyRoutes,
+                    setMyStops, getMyStops,
+                    clearStorageCache, clearStorageAll,
+                } }
+            >
+                { props.children }
+            </StorageContext.Provider>
+
+        : error ?
+            <Text>{ error }</Text>
+
+        : null
+    );
 }
 
 export { StorageContext, StorageContextProvider };

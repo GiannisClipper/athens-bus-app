@@ -7,34 +7,26 @@ const MyContext = createContext();
 
 const MyContextProvider = props => {
 
-    const initialState = {
-        myStops: [],
-        myRoutes: [],
-    };
-
-    const [ myState, setMyState ] = useState( initialState );
-
-    const { storage, setMyStops, getMyStops, setMyRoutes, getMyRoutes } = useContext( StorageContext );
+    const [ state, setState ] = useState( null );
+    const { setMyStops, getMyStops, setMyRoutes, getMyRoutes } = useContext( StorageContext );
     const { stops, saveStops } = useContext( StopsContext );
     const { routes, saveRoutes } = useContext( RoutesContext );
 
     const _createItem = ( key, setStorage ) =>
         item => {
-            const data = [ ...myState[ key ] ];
+            const data = [ ...state[ key ] ];
             data.push( item );
-            setMyState( { ...myState, [ key ]: data } );
+            setState( { ...state, [ key ]: data } );
             setStorage( data );
         }
 
     const _deleteItem = ( key, setFilter, setStorage ) =>
         item => {
-            let data = [ ...myState[ key ] ];
+            let data = [ ...state[ key ] ];
             data = data.filter( eachItem => setFilter( eachItem, item ) );
-            setMyState( { ...myState, [ key ]: data } );
+            setState( { ...state, [ key ]: data } );
             setStorage( data );
         }
-
-    const { myStops, myRoutes } = myState;
 
     const createMyStop = _createItem( 'myStops', setMyStops );
     const deleteMyStop = _deleteItem( 'myStops', ( eachStop, stop ) => eachStop.StopCode !== stop.StopCode, setMyStops );
@@ -43,8 +35,8 @@ const MyContextProvider = props => {
     const deleteMyRoute = _deleteItem( 'myRoutes', ( eachRoute, route ) => eachRoute.RouteCode !== route.RouteCode, setMyRoutes );
 
     const updateCache = ( { myStops, myRoutes } ) => {
-        // Take care to update stops & routes cached data, considering 
-        // cache is automatically removed in specific time periods.
+        // Copies the permanent favourite data in cache, considering 
+        // cache is getting cleared at specific time periods.
 
         const myStopsAsObj = {};
         myStops.forEach( stop => myStopsAsObj[ stop.StopCode ] = stop );
@@ -56,22 +48,31 @@ const MyContextProvider = props => {
     }
 
     useEffect( async () => {
-        if ( storage ) {
-            const myStops = await getMyStops();
-            const myRoutes = await getMyRoutes();
-            updateCache( { myStops, myRoutes } );
-            setMyState( { myStops, myRoutes } );
-        }
-    }, [ storage ] );
+        const schema = { myStops: [], myRoutes: [] }; 
+        const myStops = await getMyStops( schema.myStops );
+        const myRoutes = await getMyRoutes( schema.myRoutes );
+        updateCache( { myStops, myRoutes } );
+        setState( { myStops, myRoutes } );
+    }, [] );
 
     useEffect( () => console.log( 'MyContext rendering.' ) );
 
     return (
-        <MyContext.Provider 
-            value={ { myStops, createMyStop, deleteMyStop, myRoutes, createMyRoute, deleteMyRoute } }
-        >
-            { props.children }
-        </MyContext.Provider>
+        state ?
+            <MyContext.Provider 
+                value={ { 
+                    myStops: state.myStops,
+                    createMyStop,
+                    deleteMyStop,
+                    myRoutes: state.myRoutes,
+                    createMyRoute,
+                    deleteMyRoute,
+                } }
+            >
+                { props.children }
+            </MyContext.Provider>
+
+        : null
     )
 }
 

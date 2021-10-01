@@ -5,41 +5,37 @@ const LineGroupsContext = createContext();
 
 const LineGroupsContextProvider = props => {
 
-    const initialState = {
-        data: null,
-        error: null,
-    };
-
-    const [ state, setState ] = useState( initialState );
-
-    const { storage, setLineGroups, getLineGroups } = useContext( StorageContext );
-
+    const [ state, setState ] = useState( null );
+    const { setLineGroups, getLineGroups } = useContext( StorageContext );
+    
     const saveLineGroups = lineGroups => {
         setLineGroups( lineGroups );
         setState( lineGroups );
     }
 
     useEffect( async () => {
-        if ( storage ) {
-            const lineGroups = await getLineGroups();
-            if ( ! lineGroups.error ) {
-                setState( lineGroups );
-            }
-        }
-    }, [ storage ] );
+        const schema = { data: null, error: null };    
+        const lineGroups = await getLineGroups( schema );
+        // if ( ! lineGroups.error ) {
+            setState( lineGroups );
+        // }
+    }, [] );
 
     useEffect( () => console.log( 'LineGroupsContext rendering.' ) );
 
     return (
-        <LineGroupsContext.Provider 
-            value={ { 
-                lineGroups: state, 
-                saveLineGroups 
-            } }
-        >
-            { props.children }
-        </LineGroupsContext.Provider>
-    )
+        state ?
+            <LineGroupsContext.Provider 
+                value={ { 
+                    lineGroups: state, 
+                    saveLineGroups 
+                } }
+            >
+                { props.children }
+            </LineGroupsContext.Provider>
+        
+        : null
+    );
 }
 
 export { LineGroupsContext, LineGroupsContextProvider };

@@ -9,10 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Refactor useRequest.
 - Replace custom navigation with @react-navigation (drawer, stack and tab navigators).
 - Update favourite stops feature
+- Restructure source foldrers based on components, style & logic separation.
 
 ### Added
 - Tests (useRequest, Home, ../lines, ../routes, ../stops, ../arrivals).
-- Add favourite routes feature
+- MyRoutes screen, offering instant access to favourite routes.
+- Route Schedule screen, displaying the current schedule of a bus route.
+- Route Map screen, drawing on google maps the bus route and the stops are served by.
+- Stop Routes screen, displaying all the bus routes serving the stop.
+- Caching feature, reducing the API requests.
 
 ## [1.0.1-beta] - 2021-09-08
 

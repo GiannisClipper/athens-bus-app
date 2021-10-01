@@ -5,11 +5,8 @@ const RoutesContext = createContext();
 
 const RoutesContextProvider = props => {
 
-    const initialState = {};
-
-    const [ state, setState ] = useState( initialState );
-
-    const { storage, setRoutes, getRoutes } = useContext( StorageContext );
+    const [ state, setState ] = useState( null );
+    const { setRoutes, getRoutes } = useContext( StorageContext );
 
     const saveRoutes = routes => {
         setRoutes( routes );
@@ -17,23 +14,25 @@ const RoutesContextProvider = props => {
     }
 
     useEffect( async () => {
-        if ( storage ) {
-            const routes = await getRoutes();
-            setState( routes );
-        }
-    }, [ storage ] );
+        const schema = {};
+        const routes = await getRoutes( schema );
+        setState( routes );
+    }, [] );
 
     useEffect( () => console.log( 'RoutesContext rendering.' ) );
 
     return (
-        <RoutesContext.Provider 
-            value={ { 
-                routes: state, 
-                saveRoutes
-            } }
-        >
-            { props.children }
-        </RoutesContext.Provider>
+        state ?
+            <RoutesContext.Provider 
+                value={ { 
+                    routes: state, 
+                    saveRoutes
+                } }
+            >
+                { props.children }
+            </RoutesContext.Provider>
+
+        : null
     )
 }
 
