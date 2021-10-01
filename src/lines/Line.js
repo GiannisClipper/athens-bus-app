@@ -15,15 +15,7 @@ const Line = props => {
     const line = lines[ lineCode ];
 
     const [ isOpen, setIsOpen ] = useState( false );
-    // const [ toRequest, setToRequest ] = useState( false );
-
-    const onPress = () => {
-        // if ( ! isOpen && line.routeCodes.error ) { 
-        //     line.routeCodes.error = null;  // clear cache in case of error to request again
-        // }
-        // setToRequest( line.routeCodes.error || false );
-        setIsOpen( ! isOpen );
-    }
+    const onPress = () => setIsOpen( ! isOpen );
 
     const isDigit = char => '0123456789'.includes( char );
     const isTrolley = LineID => LineID.length <=2 && isDigit( LineID.substr( 0, 1 ) );

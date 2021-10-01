@@ -3,10 +3,11 @@ import { NavigationContainer, CommonActions } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { navigationRef } from '../_commons/RootNavigation';
 import * as style from '../_commons/style/nav';
-import { HomeIcon, LineIcon, MySelectedIcon } from '../_commons/Icons';
+import { HomeIcon, LineIcon, MySelectedIcon, SettingsIcon } from '../_commons/Icons';
 import Home from '../home/Home';
 import LinesNav from '../lines/LinesNav';
 import MyNav from '../my/MyNav';
+import Settings from '../settings/Settings';
 
 const Drawer = createDrawerNavigator();
 
@@ -67,6 +68,14 @@ const CustomDrawerContent = props => {
                 } }
             />
 
+            <DrawerItem
+                style={ style.drawer.item.view }
+                labelStyle={ style.drawer.item.text }
+                icon={ () => <SettingsIcon { ...style.drawer.item.icon } /> }
+                label="Settings"
+                onPress={ () => navigation.navigate( 'Settings' ) }
+            />
+
         </DrawerContentScrollView>
     );
 }
@@ -106,6 +115,11 @@ const AppNav = props => {
                 <Drawer.Screen 
                     name='Favourites' 
                     component={ MyNav } 
+                />
+
+                <Drawer.Screen 
+                    name='Settings' 
+                    component={ Settings } 
                 />
 
             </Drawer.Navigator>

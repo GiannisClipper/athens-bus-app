@@ -1,19 +1,38 @@
 import * as colors from './colors';
 
-const error = {
+const view = {
+    borderWidth: 1,
+    margin: 8,
+    paddingTop: 4,
+    paddingLeft: 32,
+    paddingBottom: 4,
+    paddingRight: 32,
+};
+
+const text = {
+    fontWeight: '600',
+};
+
+const warning = {
     view: {
-        borderWidth: 1,
-        borderColor: colors.error,
-        margin: 8,
-        paddingTop: 4,
-        paddingLeft: 32,
-        paddingBottom: 4,
-        paddingRight: 32,
+        ...view,
+        borderColor: colors.warning,
     },
     text: {
-        color: colors.error,
-        fontWeight: '600',    
+        ...text,
+        color: colors.warning,
     },
 };
 
-export { error };
+const error = {
+    view: {
+        ...view,
+        borderColor: colors.error,
+    },
+    text: {
+        ...text,
+        color: colors.error,
+    },
+};
+
+export { warning, error };

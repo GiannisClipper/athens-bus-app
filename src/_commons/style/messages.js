@@ -1,18 +1,24 @@
 import * as colors from './colors';
 
-const info = {
-    color: colors.info,
+const text = {
+    paddingLeft: 16,
+    paddingRight: 16,
     fontWeight: '600',
+};
+
+const info = {
+    ...text,
+    color: colors.info,
 };
 
 const warning = {
+    ...text,
     color: colors.warning,
-    fontWeight: '600',
 };
 
 const error = {
+    ...text,
     color: colors.error,
-    fontWeight: '600',
 };
 
 const workingIndicator = {

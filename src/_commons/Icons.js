@@ -24,3 +24,7 @@ export const FlagIcon = props => <Icon { ...props } name='flag' />;
 export const MySelectedIcon = props => <Icon { ...props } name='star' />;
 
 export const MyDeselectedIcon = props => <Icon { ...props } name='star-outline' />;
+
+export const TrashIcon = props => <Icon { ...props } name='trash-can-outline' />;
+
+export const SettingsIcon = props => <Icon { ...props } name='cog' />;
