@@ -31,7 +31,7 @@ const removeNavigationState = navigation => {
 
 const CustomDrawerContent = props => {
 
-    const { navigation } = props;
+    const { navigation, setAppStatus } = props;
 
     return (
         <DrawerContentScrollView { ...props }>
@@ -73,8 +73,9 @@ const CustomDrawerContent = props => {
                 labelStyle={ style.drawer.item.text }
                 icon={ () => <SettingsIcon { ...style.drawer.item.icon } /> }
                 label="Settings"
-                onPress={ () => navigation.navigate( 'Settings' ) }
-            />
+                onPress={ () => navigation.navigate( 'Settings', { setAppStatus } ) }
+                // navigation.navigate() passes the parameters to the component throught `props.route.params`
+    />
 
         </DrawerContentScrollView>
     );
@@ -82,15 +83,15 @@ const CustomDrawerContent = props => {
 
 const AppNav = props => {
 
-    const { setIsLoading } = props;
+    const { setAppStatus } = props;
 
-    useEffect( () => setIsLoading( false ), [] );
+    useEffect( () => setAppStatus( { isLoaded: true } ), [] );
 
     return (
         <NavigationContainer ref={ navigationRef }>
             <Drawer.Navigator
     
-                drawerContent={ props => <CustomDrawerContent { ...props } /> }
+                drawerContent={ props => <CustomDrawerContent { ...props } setAppStatus={ setAppStatus } /> }
 
                 initialRouteName='Home'
 

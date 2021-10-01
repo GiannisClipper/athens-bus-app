@@ -17,33 +17,38 @@ const Container = StyledView( { style: style.container } );
 
 const App = () => {
 
-    const [ isLoading, setIsLoading ] = useState( true );
+    const [ status, setStatus ] = useState( { isNotLoaded: true } );
+    // isNotLoaded, isLoading, isLoaded
+
+    useEffect( () => status.isNotLoaded ? setStatus( { isLoading: true } ) : null );
 
     useEffect( () => console.log( 'Rendering App.' ) );
 
     return (
         <>
-        { isLoading ?
+        { status.isLoading ?
             <Container>
                 <InfoMessage>{ 'Loading...' }</InfoMessage>
             </Container>
         : null }
 
-        <StorageContextProvider>
-            <SettingsContextProvider>
-                <LineGroupsContextProvider>
-                <LinesContextProvider>
-                <RoutesContextProvider>
-                <StopsContextProvider>
-                    <MyContextProvider>
-                        <AppNav setIsLoading={ setIsLoading } />
-                    </MyContextProvider>
-                </StopsContextProvider>
-                </RoutesContextProvider>
-                </LinesContextProvider>
-                </LineGroupsContextProvider>
-            </SettingsContextProvider>
-        </StorageContextProvider>
+        { status.isLoading || status.isLoaded ?
+            <StorageContextProvider>
+                <SettingsContextProvider>
+                    <LineGroupsContextProvider>
+                    <LinesContextProvider>
+                    <RoutesContextProvider>
+                    <StopsContextProvider>
+                        <MyContextProvider>
+                            <AppNav setAppStatus={ setStatus } />
+                        </MyContextProvider>
+                    </StopsContextProvider>
+                    </RoutesContextProvider>
+                    </LinesContextProvider>
+                    </LineGroupsContextProvider>
+                </SettingsContextProvider>
+            </StorageContextProvider>
+        : null }
         </>
     );
 };

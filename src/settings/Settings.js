@@ -9,11 +9,13 @@ const List = StyledScrollView( { style: style.list } );
 
 const Settings = props => {
  
+    const { setAppStatus } = props.route.params;
+
     return (
         <Container testID='settings'>
             <List>
-                <ClearCache />
-                <ClearAll />
+                <ClearCache setAppStatus={ setAppStatus } />
+                <ClearAll setAppStatus={ setAppStatus } />
             </List>
         </Container>
     );

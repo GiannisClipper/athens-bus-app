@@ -6,6 +6,7 @@ import * as style from './style/settings';
 import { SettingsContext } from './SettingsContext';
 import { WorkingIndicator, Dialogue, WarningMessage } from '../_commons/Messages';
 import { WarningButton } from '../_commons/Buttons';
+import { useContext } from 'react/cjs/react.development';
 
 const Row = StyledTouchableOpacity( { style: style.row } );
 const Col1 = StyledView( { style: style.col1.view } );
@@ -19,8 +20,17 @@ const setting = {
 
 const ClearCache = props => {
 
+    const { setAppStatus } = props;
+
     const [ isOpen, setIsOpen ] = useState( false );
     const onPress = () => setIsOpen( ! isOpen );
+
+    const { settings, saveSettings } = useContext( SettingsContext );
+
+    const clearCache = () => {
+        saveSettings( { ...settings, cacheTimestamp: 0 } );
+        setAppStatus( { isNotLoaded: true } );
+    };
 
     return (
         <>
@@ -42,7 +52,7 @@ const ClearCache = props => {
                 <WarningMessage>{ setting.message }</WarningMessage>
                 <WarningButton 
                     label='Confirm to continue'
-                    onPress={ () => null }
+                    onPress={ clearCache }
                 />
             </Dialogue>        
 
