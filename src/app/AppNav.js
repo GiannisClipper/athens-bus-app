@@ -71,7 +71,11 @@ const CustomDrawerContent = props => {
     );
 }
 
-const AppNav = () => {
+const AppNav = props => {
+
+    const { setIsLoading } = props;
+
+    useEffect( () => setIsLoading( false ), [] );
 
     return (
         <NavigationContainer ref={ navigationRef }>
