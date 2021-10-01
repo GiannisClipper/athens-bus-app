@@ -3,6 +3,7 @@ import { StyledView } from '../_abstract/Styled';
 import * as style from './style/app';
 import { InfoMessage } from '../_commons/Messages';
 
+import { AppContextProvider } from './AppContext';
 import { StorageContextProvider } from '../_commons/StorageContext';
 import { SettingsContextProvider } from '../settings/SettingsContext';
 import { LineGroupsContextProvider } from '../lines/LineGroupsContext';
@@ -33,6 +34,7 @@ const App = () => {
         : null }
 
         { status.isLoading || status.isLoaded ?
+            <AppContextProvider>
             <StorageContextProvider>
                 <SettingsContextProvider>
                     <LineGroupsContextProvider>
@@ -48,6 +50,7 @@ const App = () => {
                     </LineGroupsContextProvider>
                 </SettingsContextProvider>
             </StorageContextProvider>
+            </AppContextProvider>
         : null }
         </>
     );

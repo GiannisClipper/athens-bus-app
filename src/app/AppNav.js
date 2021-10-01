@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { NavigationContainer, CommonActions } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { navigationRef } from '../_commons/RootNavigation';
 import { resetRouteStates } from '../_commons/BranchNavigation';
