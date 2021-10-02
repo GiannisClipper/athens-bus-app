@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import * as RootNavigation from '../_commons/RootNavigation';
+import * as rootNavigation from '../_commons/logic/rootNavigation';
 import { StyledView, StyledTouchableOpacity, StyledText } from '../_abstract/Styled';
 import { StopIcon } from '../_commons/Icons';
 import * as style from './style/stops';
@@ -23,7 +23,7 @@ const Stop = props => {
             saveStops( { ...stops, [ stop.StopCode ]: stop } );
         }
 
-        RootNavigation.navigate( 'StopNav', { stop } );  
+        rootNavigation.navigate( 'StopNav', { stop } );  
         // navigation.navigate() passes the parameters to the component throught `props.route.params`
     }
 

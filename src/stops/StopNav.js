@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { resetNavigation } from '../_commons/BranchNavigation';
+import { resetNavigation } from '../_commons/logic/branchNavigation';
 import { AppContext } from '../app/AppContext';
 import * as style from '../_commons/style/nav';
 import MyStopSelector from '../my/MyStopSelector';

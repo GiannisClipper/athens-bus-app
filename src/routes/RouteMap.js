@@ -60,6 +60,8 @@ const RouteMap = props => {
                 initialRegion={ map.data.initialRegion }
                 onRegionChangeComplete={ onRegionChangeComplete }
             >
+                <MapPolyline coordinates={ map.data.polyline } />
+
                 { stopCodes.data.map( ( stopCode, i ) => { 
                     const stop = stops[ stopCode ];
                     const isTerminal = i === 0 || i === stopCodes.data.length - 1;

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import * as RootNavigation from '../_commons/RootNavigation';
+import * as rootNavigation from '../_commons/logic/rootNavigation';
 import { StyledView, StyledTouchableOpacity, StyledText } from '../_abstract/Styled';
 import { RouteIcon } from '../_commons/Icons';
 import * as style from './style/routes';
@@ -23,7 +23,7 @@ const Route = props => {
             saveRoutes( { ...routes, [ route.RouteCode ]: route } );
         }
 
-        RootNavigation.navigate( 'RouteNav', { route } );  
+        rootNavigation.navigate( 'RouteNav', { route } );  
         // navigation.navigate() passes the parameters to the component throught 
         //`props.route.params`, so here `props.route` refers to a navigation property,
         // while `props.route.params.route` refers to application data, a bus route

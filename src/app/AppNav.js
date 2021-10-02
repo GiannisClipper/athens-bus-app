@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
-import { navigationRef } from '../_commons/RootNavigation';
-import { resetNavigation } from '../_commons/BranchNavigation';
+import { navigationRef } from '../_commons/logic/rootNavigation';
+import { resetNavigation } from '../_commons/logic/branchNavigation';
 import { AppContext } from './AppContext';
 import * as style from '../_commons/style/nav';
 import { HomeIcon, LineIcon, MySelectedIcon, SettingsIcon } from '../_commons/Icons';
