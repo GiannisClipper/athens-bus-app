@@ -77,10 +77,10 @@ const StopArrivals = props => {
             { arrivalsStatus.isRequesting || routesStatus.isRequesting ?
                 <WorkingIndicator />
 
-            : arrivalsStatus.hasData && routesStatus.hasData && arrivals.data.length === 0 ?
+            : arrivalsStatus.hasData && routesStatus.hasData && arrivals.data && arrivals.data.length === 0 ?
                 <InfoMessage>{ 'No arrivals found.' }</InfoMessage>
 
-            : arrivalsStatus.hasData && routesStatus.hasData ?
+            : arrivalsStatus.hasData && routesStatus.hasData && arrivals.data ?
                 <List>
                     { arrivals.data.map( ( arrival, i ) => (
                         <StopArrival

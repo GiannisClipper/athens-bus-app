@@ -40,7 +40,7 @@ const StopRoutes = props => {
         { status.isRequesting ?
             <WorkingIndicator />
 
-        : status.hasData ?
+        : status.hasData && routeCodes.data ?
             <List>
             { routeCodes.data.map( ( routeCode, i ) => (
                 <Route 
