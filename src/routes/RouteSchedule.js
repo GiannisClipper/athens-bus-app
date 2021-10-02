@@ -48,10 +48,10 @@ const RouteSchedule = props => {
             { status.isRequesting ?
                 <WorkingIndicator />
 
-            : status.hasData && schedule.data.length === 0 ?
+            : status.hasData && schedule.data && schedule.data.length === 0 ?
                 <InfoMessage>{ 'No schedule found.' }</InfoMessage>
 
-            : status.hasData ?
+            : status.hasData && schedule.data ?
                 <List>
                 { schedule.data.map( ( time, i ) => (
                     <Row key={ i }>

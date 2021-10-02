@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { navigationRef } from '../_commons/RootNavigation';
-import { resetRouteStates } from '../_commons/BranchNavigation';
+import { resetNavigation } from '../_commons/BranchNavigation';
 import { AppContext } from './AppContext';
 import * as style from '../_commons/style/nav';
 import { HomeIcon, LineIcon, MySelectedIcon, SettingsIcon } from '../_commons/Icons';
@@ -36,7 +36,7 @@ const CustomDrawerContent = props => {
                 label="Lines"
                 icon={ () => <LineIcon { ...style.drawer.item.icon } /> }
                 onPress={ () => { 
-                    resetRouteStates( navigation );
+                    resetNavigation( navigation );
                     navigation.navigate( 'Lines' );
                 } }
             />
@@ -47,7 +47,7 @@ const CustomDrawerContent = props => {
                 label="Favourites"
                 icon={ () => <MySelectedIcon { ...style.drawer.item.icon } /> }
                 onPress={ () => {
-                    resetRouteStates( navigation );
+                    resetNavigation( navigation );
                     navigation.navigate( 'Favourites' );
                 } }
             />

@@ -1,6 +1,6 @@
 import { CommonActions } from '@react-navigation/native';
 
-const resetRouteStates = navigation => {
+const resetNavigation = navigation => {
     // remove navigation route states to have initial rendering
  
     return navigation.dispatch( state => {
@@ -18,4 +18,4 @@ const resetRouteStates = navigation => {
     } );
 }
 
-export { resetRouteStates };
+export { resetNavigation };

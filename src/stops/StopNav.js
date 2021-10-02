@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { resetRouteStates } from '../_commons/BranchNavigation';
+import { resetNavigation } from '../_commons/BranchNavigation';
 import { AppContext } from '../app/AppContext';
 import * as style from '../_commons/style/nav';
 import MyStopSelector from '../my/MyStopSelector';
@@ -27,7 +27,7 @@ const StopNav = props => {
         } );
 
         if ( appContext.stopNavigation ) {
-            resetRouteStates( appContext.stopNavigation );
+            resetNavigation( appContext.stopNavigation );
         }
     }, [ stop ] );
 
