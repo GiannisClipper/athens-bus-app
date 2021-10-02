@@ -1,34 +1,31 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Map, MapPolyline, MapMarker } from '../_commons/Map';
+import { Map, MapMarker } from '../_commons/Map';
 
 import { StyledView } from '../_abstract/Styled';
-import * as style from './style/routes';
+import * as style from './style/stops';
 
-import { RoutesContext } from './RoutesContext';
 import { StopsContext } from '../stops/StopsContext';
 import { URI } from '../_commons/logic/constants';
 import { useRequest, initRequestStatus } from '../_abstract/logic/useRequest';
-import { routeMapResponseHandler } from './logic/responseHandlers';
+import { stopMapResponseHandler } from './logic/responseHandlers';
 
 import { WorkingIndicator, InfoMessage, Dialogue, ErrorMessage } from '../_commons/Messages';
 import { ErrorButton } from '../_commons/Buttons';
-// import { MapIcon, StopIcon } from '../_commons/Icons';
 
 const Container = StyledView( { style: style.container } );
 
-const RouteMap = props => {
+const StopMap = props => {
 
-    const { routeCode } = props;
-    const { routes, saveRoutes } = useContext( RoutesContext );
-    const route = routes[ routeCode ];
-    const { stopCodes, map } = route;
-    const { stops } = useContext( StopsContext );
+    const { stopCode } = props;
+    const { stops, saveStops } = useContext( StopsContext );
+    const stop = stops[ stopCode ];
+    const { map } = stop;
 
     const { status, setStatus } = useRequest( {
-        uri: URI.MAP_OF_ROUTE + routeCode,
+        uri: URI.MAP_OF_STOP + `&p1=${ stop.StopLat }&p2=${ stop.StopLng }`,
         requestStatus: initRequestStatus( map ),
-        responseHandler: response => routeMapResponseHandler( {
-            routes, routeCode, routes, saveRoutes, response 
+        responseHandler: response => stopMapResponseHandler( {
+            stops, stopCode, stops, saveStops, response 
         } ),
     } );
     
@@ -47,12 +44,12 @@ const RouteMap = props => {
     // TODO: using the zoom value to rescale marker icons on the map
 
     return ( 
-        <Container testID='routeMap'>
+        <Container testID='stopMap'>
 
         { status.isRequesting ?
             <WorkingIndicator />
 
-        : status.hasData && map.data && map.data.polyline === 0 ?
+        : status.hasData && map.data && map.data.closestStops === 0 ?
             <InfoMessage>{ 'No map data found.' }</InfoMessage>
 
         : status.hasData && map.data ?
@@ -60,17 +57,19 @@ const RouteMap = props => {
                 initialRegion={ map.data.initialRegion }
                 onRegionChangeComplete={ onRegionChangeComplete }
             >
-                { stopCodes.data.map( ( stopCode, i ) => { 
-                    const stop = stops[ stopCode ];
-                    const isTerminal = i === 0 || i === stopCodes.data.length - 1;
+                { map.data.closestStops.map( ( closestStop, i ) => { 
+
+                    const isCurrent = 
+                        stop.StopLat === closestStop.StopLat && 
+                        stop.StopLng === closestStop.StopLng;
 
                     return (
                         <MapMarker
                             key={ i }
-                            style={ isTerminal ? style.specialMarker : style.marker }
-                            coordinate={ { latitude: stop.StopLat, longitude: stop.StopLng } }
-                            title={ `${ stop.StopDescr }` }
-                            description={ `(${ stop.StopCode })` }
+                            style={ isCurrent ? style.specialMarker : style.marker }
+                            coordinate={ { latitude: closestStop.StopLat, longitude: closestStop.StopLng } }
+                            title={ `${ closestStop.StopDescr }` }
+                            description={ `(${ closestStop.StopCode })` }
                             // Icon={ zoom < 15 ? MapIcon : StopIcon }  // lower performance
                         />
                     );
@@ -93,4 +92,4 @@ const RouteMap = props => {
     );
 }
 
-export default RouteMap;
+export default StopMap;

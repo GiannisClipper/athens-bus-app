@@ -23,7 +23,7 @@ const customFetch = uri => {
         } );
 }
 
-const useRequest = ( { fetchFunc, uri, requestStatus, responseHandler, refreshTime } ) => {
+const useRequest = ( { fetchFunc, uri, requestStatus, responseHandler } ) => {
 
     fetchFunc = fetchFunc || customFetch;
 

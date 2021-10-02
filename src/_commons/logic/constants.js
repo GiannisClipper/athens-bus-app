@@ -6,6 +6,7 @@ const URI = {
     ROUTES_OF_STOP: 'https://telematics.oasa.gr/api/?act=webRoutesForStop&p1=',
     SCHEDULE_OF_LINE: 'http://telematics.oasa.gr/api/?act=getDailySchedule&line_code=',
     MAP_OF_ROUTE: 'http://telematics.oasa.gr/api/?act=webRouteDetails&p1=',
+    MAP_OF_STOP: 'http://telematics.oasa.gr/api/?act=getClosestStops',
 }
 
 const ARRIVALS_REFRESH_TIME = 1000 * 20; // 20 secs

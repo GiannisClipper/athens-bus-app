@@ -1,4 +1,4 @@
-import { calcPointsFrame } from '../../_abstract/logic/calcPointsFrame';
+import { initialRegionParser } from '../../_commons/logic/parsers';
 
 const routeParser = row => ( {
     LineID: row.LineID,
@@ -49,45 +49,23 @@ const routeScheduleParser = ( data, LineCode, RouteType ) => {
     return data;
 }
 
-const coordParser = row => ( {
+const _coordParser = row => ( {
     latitude: parseFloat( row.routed_y ),
     longitude: parseFloat( row.routed_x ),
     order: parseInt( row.routed_order ),
 } );
 
-const coordsParser = data => {
-    data = data.map( row => coordParser( row ) );
+const _coordsParser = data => {
+    data = data.map( row => _coordParser( row ) );
     data.sort( ( row1, row2 ) => row1.order < row2.order ? -1 : 1 );
 
     return data;
 }
 
-const initialRegionParser = data => {
-
-    if ( data.length === 0 ) {
-        return {};
-    }
-
-    const frame = calcPointsFrame( data.map( point => [ point.latitude, point.longitude ] ) );
-    const [ left, top ] = frame[ 0 ];
-    const [ right, bottom ] = frame[ 1 ];
-    const width = right - left;
-    const height = bottom - top;  
-
-    const initialRegion = {
-        latitude: left + width / 2,
-        longitude: top + height / 2,
-        latitudeDelta: width * 1.1,
-        longitudeDelta: height * 1.1,
-    };
-
-    return initialRegion;
-}
-
 const routeMapParser = data => {
-    data = coordsParser( data );
+    data = _coordsParser( data );
     const polyline = data;
-    const initialRegion = initialRegionParser( data );
+    const initialRegion = initialRegionParser( data.map( point => [ point.latitude, point.longitude ] ) );
 
     return { polyline, initialRegion };
 }

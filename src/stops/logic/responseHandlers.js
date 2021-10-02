@@ -1,5 +1,5 @@
 import { 
-    stopsParser, stopCodesParser, stopRoutesParser, stopRouteCodesParser, stopArrivalsParser 
+    stopsParser, stopCodesParser, stopRoutesParser, stopRouteCodesParser, stopArrivalsParser, stopMapParser
 } from './parsers';
 
 import { routesParser } from '../../routes/logic/parsers';
@@ -79,6 +79,28 @@ const stopArrivalsResponseHandler = ( {
 }
 
 
+const stopMapResponseHandler = ( { 
+    stops, stopCode, saveStops, response 
+} ) => {
+
+    let { data, error } = response;
+
+    if ( data ) {
+        const stop = stops[ stopCode ];
+        stop.map.data = stopMapParser( data );
+        stop.map.error = null;
+        saveStops( { ...stops, [ stop.StopCode ]: stop } );
+
+    } else if ( error ) {
+        const stop = stops[ stopCode ];
+        stop.map.data = null;
+        stop.map.error = error;
+        saveStops( { ...stops, [ stop.StopCode ]: stop } );
+
+    }
+}
+
+
 export { 
-    stopsResponseHandler, stopRoutesResponseHandler, stopArrivalsResponseHandler 
+    stopsResponseHandler, stopRoutesResponseHandler, stopArrivalsResponseHandler, stopMapResponseHandler
 };

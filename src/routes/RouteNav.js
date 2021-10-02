@@ -4,11 +4,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { resetRouteStates } from '../_commons/BranchNavigation';
 import { AppContext } from '../app/AppContext';
 import * as style from '../_commons/style/nav';
+import MyRouteSelector from '../my/MyRouteSelector';
 import { StopIcon, ScheduleIcon, MapIcon } from '../_commons/Icons';
 import Stops from '../stops/Stops';
 import RouteSchedule from './RouteSchedule';
 import RouteMap from './RouteMap';
-import MyRouteSelector from '../my/MyRouteSelector';
 
 const Tab = createBottomTabNavigator();
 

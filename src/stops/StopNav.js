@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as style from '../_commons/style/nav';
+import MyStopSelector from '../my/MyStopSelector';
 import { ArrivalIcon, RouteIcon, MapIcon } from '../_commons/Icons';
 import StopArrivals from './StopArrivals';
 import StopRoutes from './StopRoutes';
-import Home from '../home/Home';
-import MyStopSelector from '../my/MyStopSelector';
+import StopMap from './StopMap';
 
 const Tab = createBottomTabNavigator();
 
@@ -56,7 +56,7 @@ const StopNav = props => {
                     tabBarInactiveBackgroundColor: style.tab.item.view.inactiveBackgroundColor,
                     tabBarActiveBackgroundColor: style.tab.item.view.activeBackgroundColor,
                 } }
-                >
+            >
                 { props => (
                     <StopRoutes
                         { ...props }
@@ -66,15 +66,22 @@ const StopNav = props => {
             </Tab.Screen>
 
             <Tab.Screen 
-                name='StopMap' 
-                component={ Home } 
+                name='StopMap'
+                // component={ Home } 
                 options={ {
                     tabBarIcon: () => <MapIcon { ...style.icon } />,
                     tabBarLabel: () => <Text style={ style.tab.item.text }>Map</Text>,
                     tabBarInactiveBackgroundColor: style.tab.item.view.inactiveBackgroundColor,
                     tabBarActiveBackgroundColor: style.tab.item.view.activeBackgroundColor,
                 } }
-            />
+            >
+                { props => (
+                    <StopMap
+                        { ...props }
+                        stopCode={ stop.StopCode }
+                    /> 
+                ) }
+            </Tab.Screen>
         </Tab.Navigator>
         </>
     );

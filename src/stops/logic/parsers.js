@@ -1,6 +1,7 @@
 import { createUniquesArr } from '../../_abstract/logic/uniquesArr';
 import { arrNotEqualAt } from '../../_abstract/logic/arrNotEqualAt';
 import { routeParser } from '../../routes/logic/parsers';
+import { initialRegionParser } from '../../_commons/logic/parsers';
 
 const stopParser = row => ( {
     StopCode: row.StopCode,
@@ -10,6 +11,7 @@ const stopParser = row => ( {
     RouteStopOrder: parseInt( row.RouteStopOrder ),
     routeCodes: { data: null, error: null },
     arrivals: { data: null, error: null },
+    map: { data: null, error: null },
 } );
 
 const stopsParser = data => {
@@ -93,8 +95,26 @@ const stopArrivalsParser = data =>
     data ? data.map( row => stopArrivalParser( row ) ) : []; 
     // data could be null (api returns null whenever there are no arrivals)
 
+const _closestStopParser = row => ( {
+    StopCode: row.StopCode,
+    StopDescr: row.StopDescr,
+    StopLat: parseFloat( row.StopLat ),
+    StopLng: parseFloat( row.StopLng ),
+} );
+
+const _closestStopsParser = data => data.map( row => _closestStopParser( row ) );
+    
+const stopMapParser = data => {
+    data = _closestStopsParser( data );
+    const closestStops = data;
+    const initialRegion = initialRegionParser( data.map( point => [ point.StopLat, point.StopLng ] ) );
+
+    return { closestStops, initialRegion };
+}
+    
 export { 
     stopParser, stopsParser, stopCodesParser, 
     stopRoutesParser, stopRouteCodesParser, 
-    stopArrivalParser, stopArrivalsParser 
+    stopArrivalParser, stopArrivalsParser,
+    stopMapParser
 };
