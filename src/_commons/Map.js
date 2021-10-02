@@ -49,12 +49,11 @@ const MapMarker = ( { style, Icon, coordinate, title, description } ) => {
 
     return (
         <Marker
-            { ...style.marker.marker }
             coordinate={ { latitude: coordinate.latitude, longitude: coordinate.longitude } }
             title={ title }
             description={ description }
         >
-            <Icon { ...style.marker.icon } />
+            <Icon { ...style } />
         </Marker>
     );
 }

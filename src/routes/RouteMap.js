@@ -64,9 +64,12 @@ const RouteMap = props => {
 
                 { stopCodes.data.map( ( stopCode, i ) => { 
                     const stop = stops[ stopCode ];
+                    const isTerminal = i === 0 || i === stopCodes.data.length - 1;
+
                     return (
                         <MapMarker
                             key={ i }
+                            style={ isTerminal ? style.specialMarker : style.marker }
                             coordinate={ { latitude: stop.StopLat, longitude: stop.StopLng } }
                             title={ `${ stop.StopDescr }` }
                             description={ `(${ stop.StopCode })` }

@@ -13,5 +13,11 @@ const trolley = 'yellow';
 
 const polyline = 'green';
 const marker = 'orange';
+const specialMarker = 'tomato';
 
-export { sharper, sharp, canvas, smooth, smoother, info, warning, error, bus, trolley, polyline, marker };
+export { 
+    sharper, sharp, canvas, smooth, smoother, 
+    info, warning, error, 
+    bus, trolley, 
+    polyline, marker, specialMarker 
+};
