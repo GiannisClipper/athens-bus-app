@@ -1,22 +1,21 @@
 import 'react-native';import React from 'react';
 import { render } from '@testing-library/react-native';
+import { LinesContext } from '../../src/lines/LinesContext';
 import Lines from '../../src/lines/Lines';
+import { lineGroups, lines } from '../data';
 
-describe('<Lines />', () => {
+const { lineCodes } = lineGroups.data[ 0 ];
 
-    const LINES = {
-        data: [
-            { LineID: '1', LineDescr: 'First' },
-            { LineID: '2', LineDescr: 'Second' }
-        ],
-    };
-
-    const IS_MATCH = () => true;
+describe( '<Lines />', () => {
 
     let rendered;
 
     beforeEach( () => {
-        rendered = render( <Lines lines={ LINES } isMatch={ IS_MATCH }/> );
+        rendered = render(
+            <LinesContext.Provider value={ { lines } } >
+                <Lines lineCodes={ lineCodes } /> 
+            </LinesContext.Provider>
+        );
     } );
 
     test( 'render component with data', () => {
@@ -26,6 +25,6 @@ describe('<Lines />', () => {
         expect( lines ).not.toBeNull();
 
         const rows = queryAllByTestId( 'line-row' );
-        expect( rows.length ).toBe( LINES.data.length );
+        expect( rows.length ).toBe( lineCodes.length );
     } );
 } );

@@ -1,17 +1,21 @@
 import 'react-native';import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
+import { LinesContext } from '../../src/lines/LinesContext';
 import LineGroup from '../../src/lines/LineGroup';
 import { act } from 'react-test-renderer';
+import { lineGroups, lines } from '../data';
 
-describe('<LineGroup />', () => {
+describe( '<LineGroup />', () => {
 
-    const LINES = { data: [] };
-    const GROUP = '0';
-
-    let rendered;
+    let rendered, lineGroup;
 
     beforeEach( () => {
-        rendered = render( <LineGroup lines={ LINES } group={ GROUP } /> );
+        lineGroup = lineGroups.data[ 0 ];
+        rendered = render(
+            <LinesContext.Provider value={ { lines } } >
+                <LineGroup lineGroup={ lineGroup } /> 
+            </LinesContext.Provider>
+        );
     } );
 
     test( 'render component', () => {
@@ -20,7 +24,7 @@ describe('<LineGroup />', () => {
         const row = queryByTestId( 'group-row' );
         expect( row ).not.toBeNull();
 
-        expect( queryByText( GROUP ) ).not.toBeNull();
+        expect( queryByText( lineGroup.lineGroup ) ).not.toBeNull();
     } );
 
     test( 'when is pressed should toggle Lines component', async () => {
@@ -28,15 +32,12 @@ describe('<LineGroup />', () => {
 
         const row = queryByTestId( 'group-row' );
         expect( row ).not.toBeNull();
-
         expect( queryByTestId( 'lines' ) ).toBeNull();
 
         act( () => fireEvent.press( row ) );
-
         expect( queryByTestId( 'lines' ) ).not.toBeNull();
 
         act( () => fireEvent.press( row ) );
-
         expect( queryByTestId( 'lines' ) ).toBeNull();
     } );
 

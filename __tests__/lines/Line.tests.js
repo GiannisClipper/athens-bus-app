@@ -1,40 +1,50 @@
 import 'react-native';import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
+import { LinesContext } from '../../src/lines/LinesContext';
+import { RoutesContext } from '../../src/routes/RoutesContext';
 import Line from '../../src/lines/Line';
 import { act } from 'react-test-renderer';
+import { lineGroups, lines, routes } from '../data';
 
-jest.mock( '../../src/_abstract/logic/useRequest', () => {
-    const useRequest = jest.fn( () => ( { status: { isRequesting: true } } ) );
-    return { __esModule: true, default: useRequest, useRequest };
-} );
+const { lineCodes } = lineGroups.data[ 0 ];
 
-describe('<Line />', () => {
+// jest.mock( '../../src/_abstract/logic/useRequest', () => {
+//     const useRequest = jest.fn( () => ( { status: { isRequesting: true } } ) );
+//     return { __esModule: true, default: useRequest, useRequest };
+// } );
 
-    const LINE = {
-        LineID: 'An ID of a line',
-        LineDescr: 'A description of a line',
-        routes: {},
-    }
+describe( '<Line />', () => {
 
     let rendered;
 
     beforeEach( () => {
-        rendered = render( <Line line={ LINE } /> );
+        rendered = render(
+            <LinesContext.Provider value={ { lines } } >
+                <RoutesContext.Provider value={ { routes } } >
+                    <Line lineCode={ lineCodes[ 0 ] } /> 
+                </RoutesContext.Provider>
+            </LinesContext.Provider>
+        );
     } );
 
     test( 'render component', () => {
         const { queryByTestId, queryByText } = rendered;
 
         expect( queryByTestId( 'line-row' ) ).not.toBeNull();
-        expect( queryByText( LINE.LineID ) ).not.toBeNull();
-        expect( queryByText( LINE.LineDescr ) ).not.toBeNull();
+        expect( queryByText( lines[ lineCodes[ 0 ] ].LineID ) ).not.toBeNull();
+        expect( queryByText( lines[ lineCodes[ 0 ] ].LineDescr ) ).not.toBeNull();
     } );
 
     test( 'bus LineID should have blue background', () => {
         const { rerender, queryByTestId } = rendered;
 
-        LINE.LineID = '900';
-        rerender( <Line line={ LINE } /> );
+        rerender( 
+            <LinesContext.Provider value={ { lines } } >
+                <RoutesContext.Provider value={ { routes } } >
+                    <Line lineCode={ lineCodes[ 1 ] } /> 
+                </RoutesContext.Provider>
+            </LinesContext.Provider>
+        );
 
         const icon = queryByTestId( 'line-icon' );
         expect( icon ).not.toBeNull();
@@ -44,8 +54,13 @@ describe('<Line />', () => {
     test( 'trolley LineID should have yellow background', () => {
         const { rerender, queryByTestId } = rendered;
 
-        LINE.LineID = '20';
-        rerender( <Line line={ LINE } /> );
+        rerender( 
+            <LinesContext.Provider value={ { lines } } >
+                <RoutesContext.Provider value={ { routes } } >
+                    <Line lineCode={ lineCodes[ 0 ] } /> 
+                </RoutesContext.Provider>
+            </LinesContext.Provider>
+        );
 
         const icon = queryByTestId( 'line-icon' );
         expect( icon ).not.toBeNull();
@@ -57,15 +72,12 @@ describe('<Line />', () => {
 
         const row = queryByTestId( 'line-row' );
         expect( row ).not.toBeNull();
-
         expect( queryByTestId( 'routes' ) ).toBeNull();
 
         act( () => fireEvent.press( row ) );
-
         expect( queryByTestId( 'routes' ) ).not.toBeNull();
 
         act( () => fireEvent.press( row ) );
-
         expect( queryByTestId( 'routes' ) ).toBeNull();
     } );
 

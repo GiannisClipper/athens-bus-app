@@ -2,14 +2,13 @@ import 'react-native';import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 import LineSearch from '../../src/lines/LineSearch';
 import { act } from 'react-test-renderer';
+import { lines } from '../data';
 
 const SEARCH_ICON = ' ? ';
 const SEARCH_PLACEHOLDER ='to search...';
 const SEARCH_TEXT = 'a string to search';
 
-describe('<LineSearch />', () => {
-
-    const lines = { data: [] };
+describe( '<LineSearch />', () => {
 
     let rendered;
 
