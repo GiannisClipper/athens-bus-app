@@ -1,4 +1,4 @@
-const { calcPointsFrame } = require( '../../src/_abstract/calcPointsFrame' );
+const { calcPointsFrame } = require( '../../../src/_abstract/logic/calcPointsFrame' );
 
 describe( 'calcPointsFrame', () => {
 

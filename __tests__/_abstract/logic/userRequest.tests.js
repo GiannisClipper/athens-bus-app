@@ -1,4 +1,4 @@
-const { customFetch } = require( '../../src/_abstract/logic/useRequest' );
+const { customFetch } = require( '../../../src/_abstract/logic/useRequest' );
 
 test( 'invalid protocol', async () => {
     try {
