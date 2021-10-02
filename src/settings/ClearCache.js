@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 import { StyledView, StyledTouchableOpacity, StyledText } from '../_abstract/Styled';
 import { TrashIcon } from '../_commons/Icons';
 import * as style from './style/settings';
+import { AppContext } from '../app/AppContext';
 import { SettingsContext } from './SettingsContext';
 import { Dialogue, WarningMessage } from '../_commons/Messages';
 import { WarningButton } from '../_commons/Buttons';
@@ -19,16 +20,15 @@ const setting = {
 
 const ClearCache = props => {
 
-    const { setAppStatus } = props;
-
     const [ isOpen, setIsOpen ] = useState( false );
     const onPress = () => setIsOpen( ! isOpen );
 
+    const { setLoadStatus } = useContext( AppContext );
     const { settings, saveSettings } = useContext( SettingsContext );
 
     const clearCache = () => {
         saveSettings( { ...settings, cacheTimestamp: 0 } );
-        setAppStatus( { isNotLoaded: true } );
+        setLoadStatus( { isNotLoaded: true } );
     };
 
     return (

@@ -52,10 +52,10 @@ const RouteMap = props => {
         { status.isRequesting ?
             <WorkingIndicator />
 
-        : status.hasData && map.data.polyline === 0 ?
+        : status.hasData && map.data && map.data.polyline === 0 ?
             <InfoMessage>{ 'No route coords found.' }</InfoMessage>
 
-        : status.hasData ?
+        : status.hasData && map.data ?
             <Map 
                 initialRegion={ map.data.initialRegion }
                 onRegionChangeComplete={ onRegionChangeComplete }

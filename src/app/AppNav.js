@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { navigationRef } from '../_commons/RootNavigation';
 import { resetRouteStates } from '../_commons/BranchNavigation';
+import { AppContext } from './AppContext';
 import * as style from '../_commons/style/nav';
 import { HomeIcon, LineIcon, MySelectedIcon, SettingsIcon } from '../_commons/Icons';
 import Home from '../home/Home';
@@ -14,7 +15,7 @@ const Drawer = createDrawerNavigator();
 
 const CustomDrawerContent = props => {
 
-    const { navigation, setAppStatus } = props;
+    const { navigation } = props;
 
     return (
         <DrawerContentScrollView { ...props }>
@@ -56,8 +57,7 @@ const CustomDrawerContent = props => {
                 labelStyle={ style.drawer.item.text }
                 icon={ () => <SettingsIcon { ...style.drawer.item.icon } /> }
                 label="Settings"
-                onPress={ () => navigation.navigate( 'Settings', { setAppStatus } ) }
-                // navigation.navigate() passes the parameters to the component throught `props.route.params`
+                onPress={ () => navigation.navigate( 'Settings' ) }
     />
 
         </DrawerContentScrollView>
@@ -66,15 +66,15 @@ const CustomDrawerContent = props => {
 
 const AppNav = props => {
 
-    const { setAppStatus } = props;
+    const { setLoadStatus } = useContext( AppContext );
 
-    useEffect( () => setAppStatus( { isLoaded: true } ), [] );
+    useEffect( () => setLoadStatus( { isLoaded: true } ), [] );
 
     return (
         <NavigationContainer ref={ navigationRef }>
             <Drawer.Navigator
     
-                drawerContent={ props => <CustomDrawerContent { ...props } setAppStatus={ setAppStatus } /> }
+                drawerContent={ props => <CustomDrawerContent { ...props } /> }
 
                 initialRouteName='Home'
 
