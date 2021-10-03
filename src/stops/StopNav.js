@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { usePrevious } from '../_abstract/logic/usePrevious';
 import { resetNavigation } from '../_commons/logic/branchNavigation';
 import { AppContext } from '../app/AppContext';
 import * as style from '../_commons/style/nav';
@@ -20,13 +21,17 @@ const StopNav = props => {
 
     const appContext = useContext( AppContext );
 
+    const previousRoute = usePrevious( stop );
+    // to prevent reseting navigation when no previous stop exists, 
+    // cause in this case screen rerenders and make same api call twice
+
     useEffect( () => {
         navigation.setOptions( { 
             title: `${ stop.StopDescr } (${ stop.StopCode })`,
             headerRight: () => <MyStopSelector stop={ stop } />,
         } );
 
-        if ( appContext.stopNavigation ) {
+        if ( previousRoute && appContext.stopNavigation ) {
             resetNavigation( appContext.stopNavigation );
         }
     }, [ stop ] );

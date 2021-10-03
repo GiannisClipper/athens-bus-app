@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { usePrevious } from '../_abstract/logic/usePrevious';
 import { resetNavigation } from '../_commons/logic/branchNavigation';
 import { AppContext } from '../app/AppContext';
 import * as style from '../_commons/style/nav';
@@ -22,13 +23,17 @@ const RouteNav = props => {
 
     const appContext = useContext( AppContext );
 
+    const previousRoute = usePrevious( route );
+    // to prevent reseting navigation when no previous route exists, 
+    // cause in this case screen rerenders and make same api call twice
+
     useEffect( () => {
         navigation.setOptions( { 
             title: `[ ${ route.LineID } ]   ${ route.RouteDescr }`,
             headerRight: () => <MyRouteSelector route={ route } />,
         } );
 
-        if ( appContext.routeNavigation ) {
+        if ( previousRoute && appContext.routeNavigation ) {
             resetNavigation( appContext.routeNavigation );
         }
     }, [ route ] );

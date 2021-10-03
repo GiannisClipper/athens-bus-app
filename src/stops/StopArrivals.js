@@ -46,7 +46,6 @@ const StopArrivals = props => {
     const arrivalsStatus = arrivalsRequest.status;
     const arrivalsSetStatus = arrivalsRequest.setStatus;
 
-
     const [ refreshTime, setRefreshTime ] = useState( ARRIVALS_REFRESH_TIME );
 
     const intervalId = useInterval( {

@@ -31,7 +31,7 @@ const Stops = props => {
             routes, routeCode, saveRoutes, stops, saveStops, response 
         } ),
     } );
-    
+
     return (
         <Container testID='stops'>
 

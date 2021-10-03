@@ -9,6 +9,7 @@ import { StopsContext } from '../stops/StopsContext';
 import { URI } from '../_commons/logic/constants';
 import { useRequest, initRequestStatus } from '../_abstract/logic/useRequest';
 import { routeMapResponseHandler } from './logic/responseHandlers';
+import { stopsResponseHandler } from '../stops/logic/responseHandlers';
 
 import { WorkingIndicator, InfoMessage, Dialogue, ErrorMessage } from '../_commons/Messages';
 import { ErrorButton } from '../_commons/Buttons';
@@ -22,16 +23,29 @@ const RouteMap = props => {
     const { routes, saveRoutes } = useContext( RoutesContext );
     const route = routes[ routeCode ];
     const { stopCodes, map } = route;
-    const { stops } = useContext( StopsContext );
+    const { stops, saveStops } = useContext( StopsContext );
 
-    const { status, setStatus } = useRequest( {
+    const mapRequest = useRequest( {
         uri: URI.MAP_OF_ROUTE + routeCode,
         requestStatus: initRequestStatus( map ),
         responseHandler: response => routeMapResponseHandler( {
             routes, routeCode, routes, saveRoutes, response 
         } ),
     } );
-    
+
+    const stopsRequest = useRequest( {
+        uri: URI.STOPS_OF_ROUTE + routeCode,
+        requestStatus: initRequestStatus( stopCodes ),
+        responseHandler: response => stopsResponseHandler( {
+            routes, routeCode, saveRoutes, stops, saveStops, response 
+        } ),
+    } );
+
+    const mapStatus = mapRequest.status;
+    const mapSetStatus = mapRequest.setStatus;
+    const stopsStatus = stopsRequest.status;
+    const stopsSetStatus = stopsRequest.setStatus;
+
     const [ zoom, setZoom ] = useState( null );
 
     const onRegionChangeComplete = region => {
@@ -49,13 +63,13 @@ const RouteMap = props => {
     return ( 
         <Container testID='routeMap'>
 
-        { status.isRequesting ?
+        { mapStatus.isRequesting || stopsStatus.isRequesting ?
             <WorkingIndicator />
 
-        : status.hasData && map.data && map.data.polyline === 0 ?
+        : mapStatus.hasData && stopsStatus.hasData && map.data && map.data.polyline.length === 0 ?
             <InfoMessage>{ 'No map data found.' }</InfoMessage>
 
-        : status.hasData && map.data ?
+        : mapStatus.hasData && stopsStatus.hasData && map.data && stopCodes.data ?
             <Map 
                 initialRegion={ map.data.initialRegion }
                 onRegionChangeComplete={ onRegionChangeComplete }
@@ -80,12 +94,20 @@ const RouteMap = props => {
 
             </Map>
 
-        : status.hasError ?
+        : mapStatus.hasError || stopsStatus.hasError ?
             <Dialogue>
-                <ErrorMessage>{ map.error }</ErrorMessage>
+                { map.error ? <ErrorMessage>{ map.error }</ErrorMessage> : null }
+                { stops.error ? <ErrorMessage>{ stop.error }</ErrorMessage> : null }
                 <ErrorButton 
                     label='Retry'
-                    onPress={ () => setStatus( { toRequest: true } ) }
+                    onPress={ () => {
+                        if ( map.error ) {
+                            mapSetStatus( { toRequest: true } ) 
+                        }
+                        if ( stops.error ) {
+                            stopsSetStatus( { toRequest: true } ) 
+                        }
+                    } }
                 />
             </Dialogue>
 
