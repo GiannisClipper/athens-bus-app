@@ -1,8 +1,10 @@
 import 'react-native';import React from 'react';
 import { render } from '@testing-library/react-native';
+
 import { LinesContext } from '../../src/lines/LinesContext';
-import Lines from '../../src/lines/Lines';
 import { lineGroups, lines } from '../data';
+
+import Lines from '../../src/lines/Lines';
 
 const { lineCodes } = lineGroups.data[ 0 ];
 

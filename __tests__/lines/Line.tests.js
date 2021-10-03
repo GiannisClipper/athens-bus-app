@@ -15,19 +15,16 @@ const { lineCodes } = lineGroups.data[ 0 ];
 
 describe( '<Line />', () => {
 
-    let rendered;
-
-    beforeEach( () => {
-        rendered = render(
-            <LinesContext.Provider value={ { lines } } >
-                <RoutesContext.Provider value={ { routes } } >
-                    <Line lineCode={ lineCodes[ 0 ] } /> 
-                </RoutesContext.Provider>
-            </LinesContext.Provider>
-        );
-    } );
+    const Render = ( { lines, routes, lineCode } ) => (
+        <LinesContext.Provider value={ { lines } } >
+        <RoutesContext.Provider value={ { routes } } >
+            <Line lineCode={ lineCode } /> 
+        </RoutesContext.Provider>
+        </LinesContext.Provider>
+    );
 
     test( 'render component', () => {
+        const rendered = render( Render( { lines, routes, lineCode: lineCodes[ 0 ] } ) );
         const { queryByTestId, queryByText } = rendered;
 
         expect( queryByTestId( 'line-row' ) ).not.toBeNull();
@@ -36,15 +33,9 @@ describe( '<Line />', () => {
     } );
 
     test( 'bus LineID should have blue background', () => {
+        const rendered = render( Render( { lines, routes, lineCode: lineCodes[ 1 ] } ) );
         const { rerender, queryByTestId } = rendered;
-
-        rerender( 
-            <LinesContext.Provider value={ { lines } } >
-                <RoutesContext.Provider value={ { routes } } >
-                    <Line lineCode={ lineCodes[ 1 ] } /> 
-                </RoutesContext.Provider>
-            </LinesContext.Provider>
-        );
+        // rerender( Render( { lines, routes, lineCode: lineCodes[ 1 ] } ) );
 
         const icon = queryByTestId( 'line-icon' );
         expect( icon ).not.toBeNull();
@@ -52,15 +43,9 @@ describe( '<Line />', () => {
     } );
 
     test( 'trolley LineID should have yellow background', () => {
+        const rendered = render( Render( { lines, routes, lineCode: lineCodes[ 0 ] } ) );
         const { rerender, queryByTestId } = rendered;
-
-        rerender( 
-            <LinesContext.Provider value={ { lines } } >
-                <RoutesContext.Provider value={ { routes } } >
-                    <Line lineCode={ lineCodes[ 0 ] } /> 
-                </RoutesContext.Provider>
-            </LinesContext.Provider>
-        );
+        // rerender( Render( { lines, routes, lineCode: lineCodes[ 0 ] } ) );
 
         const icon = queryByTestId( 'line-icon' );
         expect( icon ).not.toBeNull();
@@ -68,6 +53,7 @@ describe( '<Line />', () => {
     } );
 
     test( 'when is pressed should toggle Routes component', async () => {
+        const rendered = render( Render( { lines, routes, lineCode: lineCodes[ 0 ] } ) );
         const { queryByTestId } = rendered;
 
         const row = queryByTestId( 'line-row' );

@@ -1,9 +1,11 @@
 import 'react-native';import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
-import { LinesContext } from '../../src/lines/LinesContext';
-import LineGroup from '../../src/lines/LineGroup';
 import { act } from 'react-test-renderer';
+
+import { LinesContext } from '../../src/lines/LinesContext';
 import { lineGroups, lines } from '../data';
+
+import LineGroup from '../../src/lines/LineGroup';
 
 describe( '<LineGroup />', () => {
 

@@ -1,8 +1,9 @@
 import 'react-native';import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
-import LineSearch from '../../src/lines/LineSearch';
 import { act } from 'react-test-renderer';
+
 import { lines } from '../data';
+import LineSearch from '../../src/lines/LineSearch';
 
 const SEARCH_ICON = ' ? ';
 const SEARCH_PLACEHOLDER ='to search...';
