@@ -19,7 +19,7 @@ const lines = {
         LineCode: '130',
         LineID: '130',
         LineDescr: 'Bus line 130',
-        routeCodes: { data: [ '130a', '130b' ], error },
+        routeCodes: { data: null, error: null },
     },
 }
 
@@ -31,7 +31,7 @@ const routes = {
         RouteDescr: 'Go route of line 16',
         RouteType: '1',
         stopCodes: { data: null, error: null },
-        schedule: { data: null, error: null },
+        schedule: { data: [ '05:00', '05:15', '05:30' ], error: error },
         map: { data: null, error: null },
     },
     '16b': {

@@ -1,31 +1,42 @@
 import React from 'react';
 import 'react-native';
 import { render } from '@testing-library/react-native';
+import { LinesContext } from '../../src/lines/LinesContext';
+import { RoutesContext } from '../../src/routes/RoutesContext';
+import { lines, routes } from '../data';
 import Routes from '../../src/routes/Routes';
+
+const lineCode = Object.keys( lines )[ 0 ];
+const { routeCodes } = lines[ lineCode ];
 
 describe( '<Routes />', () => {
 
-    const DATA = [
-        { routeDescr: 'First route descrption' },
-        { routeDescr: 'Second route descrption' }
-    ];
-
-    const ERROR = 'An error message...';
+    const Render = ( { lines, routes, lineCode } ) => (
+        <LinesContext.Provider value={ { lines } } >
+        <RoutesContext.Provider value={ { routes } } >
+            <Routes lineCode={ lineCode } /> 
+        </RoutesContext.Provider>
+        </LinesContext.Provider>
+    );
 
     test( 'render component with data', () => {
-        const rendered = render( <Routes line={ { routes: { data: DATA, error: null } } } /> );
+        lines[ lineCode ].routeCodes = { ...routeCodes, error: null };
+
+        const rendered = render( Render( { lines, routes, lineCode } ) );
         const { queryByTestId, queryAllByTestId } = rendered;
 
         expect( queryByTestId( 'routes' ) ).not.toBeNull();
-        expect( queryAllByTestId( 'route-row' ).length ).toBe( 2 );
+        expect( queryAllByTestId( 'route-row' ).length ).toBe( routeCodes.data.length );
     } );
 
     test( 'render component with error', () => {        
-        const rendered = render( <Routes line={ { routes: { data: null, error: ERROR } } } /> );
+        lines[ lineCode ].routeCodes = { ...routeCodes, data: null };
+
+        const rendered = render( Render( { lines, routes, lineCode } ) );
         const { queryByTestId, queryAllByTestId, queryByText } = rendered;
     
         expect( queryByTestId( 'routes' ) ).not.toBeNull();
         expect( queryAllByTestId( 'route-row' ).length ).toBe( 0 );
-        expect( queryByText( ERROR ) ).not.toBeNull();
+        expect( queryByText( routeCodes.error ) ).not.toBeNull();
     } );
 } );

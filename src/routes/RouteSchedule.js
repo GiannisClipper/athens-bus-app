@@ -54,7 +54,10 @@ const RouteSchedule = props => {
             : status.hasData && schedule.data ?
                 <List>
                 { schedule.data.map( ( time, i ) => (
-                    <Row key={ i }>
+                    <Row
+                        testID='routeSchedule-row'
+                        key={ i }
+                    >
 
                         <Col1>
                             <ScheduleIcon { ...style.icon } />

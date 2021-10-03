@@ -10,6 +10,8 @@ const Col1 = StyledView( { style: style.col1.view } );
 const Col2 = StyledView( { style: style.col2.view } );
 const Col2Text = StyledText( { style: style.col2.text } );
 
+const routeRepr = route => `[${ route.LineID }]   ${ route.RouteDescr } ${ route.LineDescr || '' }`;
+
 const Route = props => {
 
     const { routeCode } = props;
@@ -41,7 +43,7 @@ const Route = props => {
             </Col1>
 
             <Col2>
-                <Col2Text>{ `[${ route.LineID }]   ${ route.RouteDescr } ${ route.LineDescr || '' }` }</Col2Text>
+                <Col2Text>{ routeRepr( route ) }</Col2Text>
             </Col2>
 
         </Row>
@@ -50,3 +52,4 @@ const Route = props => {
 }
 
 export default Route;
+export { Route, routeRepr };

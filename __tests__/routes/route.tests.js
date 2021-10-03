@@ -1,48 +1,28 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
-import Route from '../../src/routes/Route';
-import { act } from 'react-test-renderer';
+import { render } from '@testing-library/react-native';
+import { RoutesContext } from '../../src/routes/RoutesContext';
+import { routes } from '../data';
+import Route, { routeRepr } from '../../src/routes/Route';
 
-jest.mock( '../../src/_abstract/useRequest', () => {
-    const useRequest = jest.fn( () => ( { status: { isRequesting: true } } ) );
-    return { __esModule: true, default: useRequest, useRequest };
-} );
+const routeCode = Object.keys( routes )[ 0 ];
+
+// jest.mock( '../../src/_abstract/useRequest', () => {
+//     const useRequest = jest.fn( () => ( { status: { isRequesting: true } } ) );
+//     return { __esModule: true, default: useRequest, useRequest };
+// } );
 
 describe( '<Route />', () => {
 
-    const ROUTE = {
-        RouteDescr: 'A description of a route',
-        stops: {},
-    };
-
-    let rendered;
-
-    beforeEach( () => {
-        rendered = render( <Route route={ ROUTE } /> );
-    } );
-
     test( 'render component', () => {
+        const rendered = render( 
+            <RoutesContext.Provider value={ { routes } } >
+                <Route routeCode={ routeCode } /> 
+            </RoutesContext.Provider>
+        );
         const { queryByTestId, queryByText } = rendered;
 
         expect( queryByTestId( 'route-row' ) ).not.toBeNull();
-        expect( queryByText( ROUTE.RouteDescr ) ).not.toBeNull();
-    } );
-
-    test( 'when is pressed should toggle Stops component', async () => {
-        const { queryByTestId } = rendered;
-
-        const row = queryByTestId( 'route-row' );
-        expect( row ).not.toBeNull();
-
-        expect( queryByTestId( 'stops' ) ).toBeNull();
-
-        act( () => fireEvent.press( row ) );
-
-        expect( queryByTestId( 'stops' ) ).not.toBeNull();
-
-        act( () => fireEvent.press( row ) );
-
-        expect( queryByTestId( 'stops' ) ).toBeNull();
+        expect( queryByText( routeRepr( routes[ routeCode ] ) ) ).not.toBeNull();
     } );
 
 } );
