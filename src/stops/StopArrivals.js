@@ -72,7 +72,7 @@ const StopArrivals = props => {
     }, [ navigation, refreshTime ]);
 
     return (
-        <Container testID='arrivals'>
+        <Container testID='stopArrivals'>
 
             { arrivalsStatus.isRequesting || routesStatus.isRequesting ?
                 <WorkingIndicator />

@@ -19,7 +19,7 @@ const StopArrival = props => {
     const RouteDescr = route ? route.RouteDescr : arrival.RouteCode;
 
     return (
-        <Row testID='arrival-row'>
+        <Row testID='stopArrival-row'>
 
             <Col1>
                 <Col1Text>{ minutes }</Col1Text>

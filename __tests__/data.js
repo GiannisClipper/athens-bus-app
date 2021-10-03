@@ -30,7 +30,7 @@ const routes = {
         RouteCode: '16a',
         RouteDescr: 'Go route of line 16',
         RouteType: '1',
-        stopCodes: { data: null, error: null },
+        stopCodes: { data: [ '16a1', '16a2', '16a3' ], error },
         schedule: { data: [ '05:00', '05:15', '05:30' ], error: error },
         map: { data: null, error: null },
     },
@@ -46,5 +46,37 @@ const routes = {
     },
 }
 
-export { lineGroups, lines, routes };
+const stops = {
+    '16a1': {
+        StopCode: '16a1',
+        StopDescr: 'Stop 1 of route 16a',
+        StopLat: 0,
+        StopLng: 0,
+        RouteStopOrder: 1,
+        routeCodes: { data: [ '16a', '16b' ], error },
+        arrivals: { data: [ { RouteCode: '16a', minutes: 1 }, { RouteCode: '16b', minutes: 2 } ], error },
+        map: { data: null, error: null },
+    },
+    '16a2': {
+        StopCode: '16a2',
+        StopDescr: 'Stop 2 of route 16a',
+        StopLat: 0,
+        StopLng: 0,
+        RouteStopOrder: 2,
+        routeCodes: { data: null, error: null },
+        arrivals: { data: null, error: null },
+        map: { data: null, error: null },
+    },
+    '16a3': {
+        StopCode: '16a3',
+        StopDescr: 'Stop 3 of route 16a',
+        StopLat: 0,
+        StopLng: 0,
+        RouteStopOrder: 3,
+        routeCodes: { data: null, error: null },
+        arrivals: { data: null, error: null },
+        map: { data: null, error: null },
+    },
+}
+export { lineGroups, lines, routes, stops };
 

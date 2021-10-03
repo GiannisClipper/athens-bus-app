@@ -10,6 +10,8 @@ const Col1 = StyledView( { style: style.col1.view } );
 const Col2 = StyledView( { style: style.col2.view } );
 const Col2Text = StyledText( { style: style.col2.text } );
 
+const stopRepr = stop => `${ stop.StopDescr } (${ stop.StopCode })`;
+
 const Stop = props => {
 
     const { stopCode } = props;
@@ -39,7 +41,7 @@ const Stop = props => {
             </Col1>
 
             <Col2>
-                <Col2Text>{ `${ stop.StopDescr } (${ stop.StopCode })` }</Col2Text>
+                <Col2Text>{ stopRepr( stop ) }</Col2Text>
             </Col2>
 
         </Row>
@@ -49,3 +51,4 @@ const Stop = props => {
 }
 
 export default Stop;
+export { Stop, stopRepr };
