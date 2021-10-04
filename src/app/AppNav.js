@@ -1,11 +1,21 @@
 import React, { useContext, useEffect } from 'react';
+import { View } from 'react-native';
+
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
+import { 
+    createDrawerNavigator, 
+    DrawerContentScrollView, 
+    DrawerItemList, 
+    DrawerItem
+} from '@react-navigation/drawer';
+
 import { navigationRef } from '../_commons/logic/rootNavigation';
 import { resetNavigation } from '../_commons/logic/branchNavigation';
+
 import { AppContext } from './AppContext';
 import * as style from '../_commons/style/nav';
-import { HomeIcon, LineIcon, MySelectedIcon, SettingsIcon } from '../_commons/Icons';
+import { MenuIcon, HomeIcon, LineIcon, MySelectedIcon, SettingsIcon } from '../_commons/Icons';
+
 import Home from '../home/Home';
 import LinesNav from '../lines/LinesNav';
 import MyNav from '../my/MyNav';
@@ -13,9 +23,22 @@ import Settings from '../settings/Settings';
 
 const Drawer = createDrawerNavigator();
 
+const DrawerHeaderIcon = ( { navigation } ) => (
+    <View style={ style.drawer.header.icon } >
+        <MenuIcon 
+            { ...style.drawer.header.icon }
+            onPress={ () => navigation.toggleDrawer() }
+        />
+    </View>
+);
+
 const CustomDrawerContent = props => {
 
     const { navigation } = props;
+
+    const appContext = useContext( AppContext );
+
+    appContext.appNavigation = navigation;
 
     return (
         <DrawerContentScrollView { ...props }>
@@ -27,7 +50,10 @@ const CustomDrawerContent = props => {
                 labelStyle={ style.drawer.item.text }
                 icon={ () => <HomeIcon { ...style.drawer.item.icon } /> }
                 label="Home"
-                onPress={ () => navigation.navigate( 'Home' ) }
+                onPress={ () => {
+                    appContext.appNavigation = navigation;
+                    navigation.navigate( 'Home' ); 
+                } }
             />
 
             <DrawerItem
@@ -37,6 +63,7 @@ const CustomDrawerContent = props => {
                 icon={ () => <LineIcon { ...style.drawer.item.icon } /> }
                 onPress={ () => { 
                     resetNavigation( navigation );
+                    appContext.appNavigation = navigation;
                     navigation.navigate( 'Lines' );
                 } }
             />
@@ -48,6 +75,7 @@ const CustomDrawerContent = props => {
                 icon={ () => <MySelectedIcon { ...style.drawer.item.icon } /> }
                 onPress={ () => {
                     resetNavigation( navigation );
+                    appContext.appNavigation = navigation;
                     navigation.navigate( 'Favourites' );
                 } }
             />
@@ -57,7 +85,10 @@ const CustomDrawerContent = props => {
                 labelStyle={ style.drawer.item.text }
                 icon={ () => <SettingsIcon { ...style.drawer.item.icon } /> }
                 label="Settings"
-                onPress={ () => navigation.navigate( 'Settings' ) }
+                onPress={ () => {
+                    appContext.appNavigation = navigation;
+                    navigation.navigate( 'Settings' ) 
+                } }
     />
 
         </DrawerContentScrollView>
@@ -66,19 +97,22 @@ const CustomDrawerContent = props => {
 
 const AppNav = props => {
 
-    const { setLoadStatus } = useContext( AppContext );
+    const appContext = useContext( AppContext );
 
-    useEffect( () => setLoadStatus( { isLoaded: true } ), [] );
+    const headerLeft = () => <DrawerHeaderIcon navigation={ appContext.appNavigation } />;
+
+    useEffect( () => appContext.setLoadStatus( { isLoaded: true } ), [] );
 
     return (
         <NavigationContainer ref={ navigationRef }>
             <Drawer.Navigator
-    
+
                 drawerContent={ props => <CustomDrawerContent { ...props } /> }
 
                 initialRouteName='Home'
 
                 screenOptions={ { 
+                    //drawerIcon: () => ,
                     drawerStyle: style.drawer.drawer,
                     headerStyle: style.drawer.header.view,
                     headerTintColor: style.drawer.header.text,
@@ -88,22 +122,26 @@ const AppNav = props => {
 
                 <Drawer.Screen 
                     name='Home' 
-                    component={ Home } 
+                    component={ Home }
+                    options={ { headerLeft } }
                 />
 
                 <Drawer.Screen 
                     name='Lines' 
-                    component={ LinesNav } 
+                    component={ LinesNav }
+                    options={ { headerLeft } }
                 />
 
                 <Drawer.Screen 
                     name='Favourites' 
                     component={ MyNav } 
+                    options={ { headerLeft } }
                 />
 
                 <Drawer.Screen 
                     name='Settings' 
                     component={ Settings } 
+                    options={ { headerLeft } }
                 />
 
             </Drawer.Navigator>

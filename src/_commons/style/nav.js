@@ -14,9 +14,16 @@ const drawer = {
             backgroundColor: colors.sharp,
         },
 
+        icon: {
+            color: colors.smooth,
+            size: 28,
+            marginLeft: 18,
+        },
+
         text: {
             color: colors.smooth,
             fontWeight: '600',
+            marginLeft: 4,
         }    
     },
 

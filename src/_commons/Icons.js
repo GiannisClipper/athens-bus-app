@@ -5,6 +5,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 // https://oblador.github.io/react-native-vector-icons/
 // https://pictogrammers.github.io/@mdi/font/6.1.95/
 
+export const MenuIcon = props => <Icon { ...props } name='menu' />;
+
 export const HomeIcon = props => <Icon { ...props } name='home' />;
 
 export const LineIcon = props => <Icon { ...props } name='bus' />;
