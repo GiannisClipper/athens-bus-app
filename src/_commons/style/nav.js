@@ -54,7 +54,8 @@ const stack = {
 
     headerTitleStyle: {
         color: colors.sharp,
-        fontSize: 13,
+        fontSize: 16,
+        fontWeight: '600',
     },
 }
 

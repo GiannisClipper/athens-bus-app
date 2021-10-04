@@ -25,7 +25,7 @@ const Drawer = createDrawerNavigator();
 
 const DrawerHeaderIcon = ( { navigation } ) => (
     <View style={ style.drawer.header.icon } >
-        <MenuIcon 
+        <MenuIcon
             { ...style.drawer.header.icon }
             onPress={ () => navigation.toggleDrawer() }
         />
@@ -112,7 +112,6 @@ const AppNav = props => {
                 initialRouteName='Home'
 
                 screenOptions={ { 
-                    //drawerIcon: () => ,
                     drawerStyle: style.drawer.drawer,
                     headerStyle: style.drawer.header.view,
                     headerTintColor: style.drawer.header.text,
