@@ -8,8 +8,8 @@ const info = 'green';
 const warning = 'orange';
 const error = 'tomato';
 
-const bus = 'blue';
-const trolley = 'yellow';
+const bus = '#4444ff';
+const trolley = '#ffff44';
 
 const polyline = 'green';
 const marker = 'orange';

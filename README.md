@@ -65,3 +65,8 @@ Now you have 2 solutions to overcome this issue:
 Install SSL on your web server domain to make it https:// (recommended)
 Add android:usesCleartextTraffic="true" in your manifest inside <application> tag
 NOTE: If you go for 2nd option and upload your signed APK to play store it may get rejected due to security issues.
+
+
+-- To fix the issue where the yellow background not displayed in Android 10 (dark theme), add in ../AthensBusApp/android/app/src/main/res/values/styles.xml: <item name="android:forceDarkAllowed">false</item>
+
+More details: https://stackoverflow.com/a/64339016/3156644 (Dark theme is available in Android 10 (API level 29) and higher. And most likely this feature ruined your app design implementation, like SVG, font, and background colors...)

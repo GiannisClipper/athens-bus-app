@@ -132,10 +132,12 @@ android {
         applicationId "com.athensbusapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 2
-        versionName "1.0.1-beta"
         // versionCode 1 
         // versionName "1.0.0-beta"
+        // versionCode 2
+        // versionName "1.0.1-beta"
+        versionCode 3
+        versionName "2.0.0-beta"
     }
     splits {
         abi {
