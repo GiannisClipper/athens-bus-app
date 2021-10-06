@@ -1,3 +1,9 @@
+# AthensBusApp (about)
+
+A mobile application developed by GiannisClipper, written in React Native and powered by OASA telematics API. An independent initiative, not associated with OASA organization, for practicing and demonstration purposes. A presentation (as well as a link to download .apk to install on android devices) can be found here: https://giannisclipper.github.io/athens-bus-app
+
+</br></br>
+
 # AthensBusApp (dev notes)
 
 -- Initialize the project:
