@@ -1,5 +1,4 @@
-# AthensBusApp
-
+# AthensBusApp (dev notes)
 
 -- Initialize the project:
 
