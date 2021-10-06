@@ -14,12 +14,12 @@ const col1 = {
     viewBus: {
         ...screen.col1.view,
         backgroundColor: colors.bus,
-        opacity: 0.75,
+        // opacity: 0.75,
     },
     viewTrolley: {
         ...screen.col1.view,
         backgroundColor: colors.trolley,
-        opacity: 0.75,
+        // opacity: 0.75,
     },
     textBus: {
         ...screen.col1.text,
@@ -28,7 +28,7 @@ const col1 = {
     },
     textTrolley: {
         ...screen.col1.text,
-        color: colors.sharper,
+        color: colors.sharp,
         fontSize: 15,
     },
 };
