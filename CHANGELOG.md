@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Replace custom navigation with @react-navigation (drawer, stack and tab navigators).
+- Replace icons from html symbols to Material Community Icons
 - Restructure source foldrers based on components, style & logic separation.
 - Update favourite stops feature.
 - Refactor useRequest.
